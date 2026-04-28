@@ -3,28 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Service Design Gym — HMW Journey</title>
+<title>Service Design Gym — Biomimicry Journey</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap');
 
   :root {
-    --ink: #1a1612;
-    --paper: #f5f0e8;
-    --cream: #ede8db;
-    --rust: #c4501a;
-    --rust-light: #e8724a;
-    --gold: #c9952a;
-    --sage: #4a6741;
-    --slate: #3d4a5c;
-    --muted: #8a8278;
-    --border: #d4cec4;
-    --stage-1: #c4501a;
-    --stage-2: #b84d3a;
-    --stage-3: #9e4a4e;
-    --stage-4: #7a4862;
-    --stage-5: #574574;
-    --stage-6: #3d4a5c;
-    --stage-7: #4a6741;
+    --soil:    #1a1712;
+    --bark:    #2d2a24;
+    --paper:   #f4f0e6;
+    --parchment: #ede8d8;
+    --moss:    #3d5c35;
+    --moss-light: #5c8a50;
+    --amber:   #c47c1a;
+    --amber-light: #e09a3a;
+    --clay:    #9e4a2a;
+    --clay-light: #c46444;
+    --lichen:  #7a8c5c;
+    --stone:   #5a5a4e;
+    --muted:   #8a8472;
+    --border:  #cdc8b8;
+
+    --s1: #5c8a50; /* Observe  — moss */
+    --s2: #7a8c5c; /* Pattern  — lichen */
+    --s3: #c47c1a; /* Emulate  — amber */
+    --s4: #9e4a2a; /* Prototype — clay */
+    --s5: #6a5c3a; /* Adapt    — bark-amber */
+    --s6: #3d5c35; /* Propagate — deep moss */
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,13 +36,13 @@
   body {
     font-family: 'Instrument Sans', sans-serif;
     background: var(--paper);
-    color: var(--ink);
+    color: var(--soil);
     min-height: 100vh;
   }
 
   /* ── HEADER ── */
   header {
-    background: var(--ink);
+    background: var(--soil);
     color: var(--paper);
     padding: 2rem 3rem;
     display: flex;
@@ -46,23 +50,34 @@
     justify-content: space-between;
     gap: 2rem;
     flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
   }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%233d5c35' stroke-width='0.5' opacity='0.3'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3Ccircle cx='30' cy='30' r='10'/%3E%3Cline x1='30' y1='10' x2='30' y2='50'/%3E%3Cline x1='10' y1='30' x2='50' y2='30'/%3E%3Cline x1='15' y1='15' x2='45' y2='45'/%3E%3Cline x1='45' y1='15' x2='15' y2='45'/%3E%3C/g%3E%3C/svg%3E") repeat;
+    opacity: 0.15;
+    pointer-events: none;
+  }
+
+  .header-left { position: relative; }
 
   .header-left h1 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-size: clamp(2.2rem, 5vw, 4.5rem);
     letter-spacing: 0.04em;
     line-height: 0.9;
     color: var(--paper);
   }
 
-  .header-left h1 span {
-    color: var(--rust-light);
-  }
+  .header-left h1 span { color: var(--moss-light); }
 
   .header-left p {
     font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--muted);
@@ -74,15 +89,16 @@
     gap: 0.5rem;
     align-items: center;
     flex-wrap: wrap;
+    position: relative;
   }
 
   .mode-btn {
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    padding: 0.5rem 1rem;
-    border: 1px solid rgba(255,255,255,0.2);
+    padding: 0.45rem 0.9rem;
+    border: 1px solid rgba(255,255,255,0.15);
     background: transparent;
     color: var(--paper);
     cursor: pointer;
@@ -90,14 +106,14 @@
   }
 
   .mode-btn.active, .mode-btn:hover {
-    background: var(--rust);
-    border-color: var(--rust);
+    background: var(--moss);
+    border-color: var(--moss);
     color: white;
   }
 
   /* ── CONCEPT BAR ── */
   .concept-bar {
-    background: var(--cream);
+    background: var(--parchment);
     border-bottom: 1px solid var(--border);
     padding: 1rem 3rem;
     display: flex;
@@ -108,7 +124,7 @@
 
   .concept-bar label {
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--muted);
@@ -119,27 +135,21 @@
     flex: 1;
     min-width: 200px;
     font-family: 'DM Serif Display', serif;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     background: transparent;
     border: none;
     border-bottom: 1px solid var(--border);
     padding: 0.25rem 0.5rem;
-    color: var(--ink);
+    color: var(--soil);
     outline: none;
   }
 
-  .concept-input:focus {
-    border-bottom-color: var(--rust);
-  }
-
-  .concept-input::placeholder {
-    color: var(--muted);
-    font-style: italic;
-  }
+  .concept-input:focus { border-bottom-color: var(--moss); }
+  .concept-input::placeholder { color: var(--muted); font-style: italic; }
 
   .reset-btn {
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     padding: 0.4rem 0.8rem;
@@ -150,15 +160,15 @@
     transition: all 0.2s;
   }
 
-  .reset-btn:hover { border-color: var(--rust); color: var(--rust); }
+  .reset-btn:hover { border-color: var(--moss); color: var(--moss); }
 
   .generate-btn {
     font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     padding: 0.5rem 1.2rem;
-    background: var(--rust);
+    background: var(--moss);
     border: none;
     color: white;
     cursor: pointer;
@@ -169,14 +179,13 @@
     gap: 0.5rem;
   }
 
-  .generate-btn:hover { background: var(--rust-light); }
+  .generate-btn:hover { background: var(--moss-light); }
   .generate-btn:disabled { background: var(--border); cursor: not-allowed; }
 
   .generating-spinner {
     display: inline-block;
-    width: 10px;
-    height: 10px;
-    border: 2px solid rgba(255,255,255,0.4);
+    width: 10px; height: 10px;
+    border: 2px solid rgba(255,255,255,0.3);
     border-top-color: white;
     border-radius: 50%;
     animation: spin 0.7s linear infinite;
@@ -184,32 +193,25 @@
 
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* AI suggestion badge */
   .ai-badge {
     font-family: 'DM Mono', monospace;
-    font-size: 0.5rem;
+    font-size: 0.48rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    background: rgba(196,80,26,0.1);
-    color: var(--rust);
+    background: rgba(61,92,53,0.1);
+    color: var(--moss);
     padding: 0.15rem 0.4rem;
     border-radius: 2px;
     margin-left: 0.4rem;
     vertical-align: middle;
   }
 
-  .entry-input.ai-suggested {
-    border-color: rgba(196,80,26,0.3);
-    background: rgba(196,80,26,0.02);
-  }
-
-  /* Generation status bar */
   .gen-status {
     display: none;
-    background: var(--ink);
+    background: var(--bark);
     color: var(--paper);
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     letter-spacing: 0.1em;
     padding: 0.5rem 3rem;
     align-items: center;
@@ -219,18 +221,17 @@
   .gen-status.visible { display: flex; }
 
   .gen-status-dot {
-    width: 6px;
-    height: 6px;
+    width: 6px; height: 6px;
     border-radius: 50%;
-    background: var(--rust-light);
+    background: var(--moss-light);
     animation: pulse 1s ease-in-out infinite;
   }
 
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-  /* ── BREADCRUMB TRAIL ── */
+  /* ── BREADCRUMB ── */
   .breadcrumb-trail {
-    background: var(--ink);
+    background: var(--bark);
     padding: 0.75rem 3rem;
     display: flex;
     align-items: center;
@@ -240,7 +241,7 @@
 
   .crumb {
     font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
+    font-size: 0.58rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: rgba(255,255,255,0.3);
@@ -251,43 +252,35 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    position: relative;
   }
 
-  .crumb::after {
-    content: '→';
-    color: rgba(255,255,255,0.15);
-  }
-
+  .crumb::after { content: '→'; color: rgba(255,255,255,0.12); }
   .crumb:last-child::after { display: none; }
-
-  .crumb.active { color: var(--rust-light); }
-  .crumb.done { color: rgba(255,255,255,0.6); }
+  .crumb.active { color: var(--moss-light); }
+  .crumb.done { color: rgba(255,255,255,0.55); }
   .crumb:hover { color: white; }
 
   .crumb-dot {
-    width: 6px;
-    height: 6px;
+    width: 6px; height: 6px;
     border-radius: 50%;
     background: currentColor;
     flex-shrink: 0;
   }
 
-  /* ── MAIN LAYOUT ── */
+  /* ── MAIN ── */
   main {
     max-width: 1400px;
     margin: 0 auto;
     padding: 2rem 3rem 4rem;
   }
 
-  /* ── VIEW MODES ── */
   .view { display: none; }
   .view.active { display: block; }
 
   /* ── JOURNEY VIEW ── */
   .journey-intro {
-    max-width: 600px;
-    margin-bottom: 3rem;
+    max-width: 640px;
+    margin-bottom: 2.5rem;
   }
 
   .journey-intro h2 {
@@ -299,14 +292,17 @@
   .journey-intro p {
     color: var(--muted);
     line-height: 1.7;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
   }
 
-  .stages-list {
+  /* SVG cycle diagram */
+  .cycle-diagram {
+    margin: 2rem 0 3rem;
     display: flex;
-    flex-direction: column;
-    gap: 0;
+    justify-content: center;
   }
+
+  .stages-list { display: flex; flex-direction: column; gap: 0; }
 
   .stage-row {
     display: grid;
@@ -318,12 +314,11 @@
   }
 
   .stage-row:last-child { border-bottom: 1px solid var(--border); }
-
-  .stage-row:hover { background: var(--cream); }
+  .stage-row:hover { background: var(--parchment); }
 
   .stage-num {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 3rem;
+    font-size: 2.8rem;
     line-height: 1;
     padding: 1.5rem 1rem;
     color: var(--border);
@@ -337,27 +332,34 @@
     transition: border-color 0.2s;
   }
 
-  .stage-row:hover .stage-content {
-    border-left-color: var(--rust);
-  }
+  .stage-row:hover .stage-content { border-left-color: var(--moss); }
 
   .stage-tag {
     font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
+    font-size: 0.58rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.35rem;
     display: inline-block;
   }
 
   .stage-title {
     font-family: 'DM Serif Display', serif;
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.35rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .stage-subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
   }
 
   .stage-desc {
-    font-size: 0.88rem;
+    font-size: 0.86rem;
     color: var(--muted);
     line-height: 1.6;
     max-width: 480px;
@@ -374,138 +376,143 @@
 
   .stage-output {
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--muted);
   }
 
-  .stage-output span {
-    color: var(--ink);
-    font-weight: 500;
-  }
-
-  .stage-time {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--muted);
-  }
+  .stage-output span { color: var(--soil); font-weight: 500; }
+  .stage-time { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); }
 
   .go-btn {
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     padding: 0.4rem 0.8rem;
     border: 1px solid var(--border);
     background: transparent;
-    color: var(--ink);
+    color: var(--soil);
     cursor: pointer;
     width: fit-content;
     transition: all 0.2s;
   }
 
-  .go-btn:hover { background: var(--rust); border-color: var(--rust); color: white; }
+  .go-btn:hover { background: var(--moss); border-color: var(--moss); color: white; }
 
-  /* ── WORKSPACE VIEW ── */
+  /* ── WORKSPACE ── */
   .workspace {
     display: grid;
-    grid-template-columns: 240px 1fr;
+    grid-template-columns: 220px 1fr;
     gap: 0;
     min-height: 70vh;
   }
 
-  .stage-nav {
-    border-right: 1px solid var(--border);
-    padding-right: 0;
-  }
+  .stage-nav { border-right: 1px solid var(--border); padding-right: 0; }
 
   .stage-nav-item {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.9rem 1.5rem;
+    padding: 0.85rem 1.25rem;
     cursor: pointer;
     border-left: 3px solid transparent;
     transition: all 0.15s;
-    font-size: 0.85rem;
+    font-size: 0.83rem;
   }
 
-  .stage-nav-item:hover { background: var(--cream); }
+  .stage-nav-item:hover { background: var(--parchment); }
 
   .stage-nav-item.active {
-    border-left-color: var(--rust);
-    background: var(--cream);
+    border-left-color: var(--moss);
+    background: var(--parchment);
     font-weight: 600;
   }
 
   .nav-dot {
-    width: 8px;
-    height: 8px;
+    width: 8px; height: 8px;
     border-radius: 50%;
     flex-shrink: 0;
     border: 2px solid var(--border);
   }
 
-  .nav-dot.done { background: var(--sage); border-color: var(--sage); }
-  .nav-dot.active { background: var(--rust); border-color: var(--rust); }
+  .nav-dot.done { background: var(--moss); border-color: var(--moss); }
+  .nav-dot.active { background: var(--amber); border-color: var(--amber); }
 
-  .stage-panel {
-    display: none;
-    padding: 2rem 3rem;
-  }
-
+  .stage-panel { display: none; padding: 2rem 3rem; }
   .stage-panel.active { display: block; }
 
   .panel-header {
     display: flex;
     align-items: baseline;
-    gap: 1.5rem;
-    margin-bottom: 0.5rem;
+    gap: 1.25rem;
+    margin-bottom: 0.4rem;
   }
 
   .panel-num {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 4rem;
+    font-size: 3.5rem;
     line-height: 1;
     color: var(--border);
   }
 
-  .panel-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 2rem;
+  .panel-title { font-family: 'DM Serif Display', serif; font-size: 1.9rem; }
+
+  .panel-nature-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.25rem;
   }
 
   .panel-tag {
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--muted);
     margin-bottom: 1.5rem;
   }
 
   .panel-instruction {
-    background: var(--cream);
-    border-left: 3px solid var(--rust);
+    background: var(--parchment);
+    border-left: 3px solid var(--moss);
     padding: 1rem 1.5rem;
     margin-bottom: 1.5rem;
-    font-size: 0.88rem;
+    font-size: 0.86rem;
     line-height: 1.7;
-    color: var(--slate);
+    color: var(--stone);
     max-width: 620px;
   }
 
-  .panel-instruction strong {
-    color: var(--rust);
-    font-weight: 600;
+  .panel-instruction strong { color: var(--moss); font-weight: 600; }
+
+  /* Panel export button */
+  .panel-export-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    float: right;
+    margin-top: 0.25rem;
   }
 
-  /* Cards / entries */
+  .panel-export-btn:hover { border-color: var(--moss); color: var(--moss); }
+
+  /* Entries */
   .entries {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.7rem;
     margin-bottom: 1.5rem;
     max-width: 720px;
   }
@@ -518,32 +525,32 @@
 
   .entry-label {
     font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
+    font-size: 0.58rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--muted);
-    min-width: 70px;
+    min-width: 72px;
     padding-top: 0.75rem;
   }
 
   .entry-input {
     flex: 1;
     font-family: 'Instrument Sans', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     background: white;
     border: 1px solid var(--border);
-    padding: 0.6rem 0.9rem;
-    color: var(--ink);
+    padding: 0.55rem 0.85rem;
+    color: var(--soil);
     outline: none;
     resize: vertical;
-    min-height: 42px;
+    min-height: 40px;
     line-height: 1.5;
     transition: border-color 0.2s;
   }
 
-  .entry-input:focus { border-color: var(--rust); }
-
+  .entry-input:focus { border-color: var(--moss); }
   .entry-input::placeholder { color: var(--border); font-style: italic; }
+  .entry-input.ai-suggested { border-color: rgba(61,92,53,0.35); background: rgba(61,92,53,0.02); }
 
   .remove-btn {
     background: none;
@@ -551,17 +558,17 @@
     cursor: pointer;
     color: var(--border);
     font-size: 1.1rem;
-    padding: 0.4rem;
+    padding: 0.35rem;
     transition: color 0.2s;
     line-height: 1;
-    margin-top: 0.35rem;
+    margin-top: 0.3rem;
   }
 
-  .remove-btn:hover { color: var(--rust); }
+  .remove-btn:hover { color: var(--clay); }
 
   .add-btn {
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     padding: 0.5rem 1rem;
@@ -573,25 +580,25 @@
     width: fit-content;
   }
 
-  .add-btn:hover { border-color: var(--rust); color: var(--rust); }
+  .add-btn:hover { border-color: var(--moss); color: var(--moss); }
 
   .next-stage-btn {
     margin-top: 2rem;
     font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    padding: 0.75rem 1.5rem;
-    background: var(--ink);
+    padding: 0.7rem 1.5rem;
+    background: var(--soil);
     border: none;
     color: var(--paper);
     cursor: pointer;
     transition: background 0.2s;
   }
 
-  .next-stage-btn:hover { background: var(--rust); }
+  .next-stage-btn:hover { background: var(--moss); }
 
-  /* HMW specific */
+  /* HMW cards */
   .hmw-card {
     background: white;
     border: 1px solid var(--border);
@@ -602,18 +609,11 @@
 
   .hmw-prefix {
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--rust);
+    color: var(--moss);
     margin-bottom: 0.3rem;
-  }
-
-  .hmw-text {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.15rem;
-    line-height: 1.4;
-    color: var(--ink);
   }
 
   .hmw-quality {
@@ -625,10 +625,10 @@
 
   .quality-check {
     font-family: 'DM Mono', monospace;
-    font-size: 0.55rem;
+    font-size: 0.52rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 0.25rem 0.5rem;
+    padding: 0.22rem 0.5rem;
     border: 1px solid var(--border);
     color: var(--muted);
     cursor: pointer;
@@ -636,182 +636,20 @@
     user-select: none;
   }
 
-  .quality-check.checked {
-    background: var(--sage);
-    border-color: var(--sage);
-    color: white;
-  }
+  .quality-check.checked { background: var(--moss); border-color: var(--moss); color: white; }
 
-  /* ── EXAMPLE VIEW ── */
-  .example-header {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .example-header h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 2rem;
-  }
-
-  .example-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--rust);
-    background: rgba(196,80,26,0.08);
-    padding: 0.3rem 0.6rem;
-  }
-
-  .example-flow {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    max-width: 860px;
-  }
-
-  .ex-stage {
-    display: grid;
-    grid-template-columns: 140px 1fr;
-    gap: 0;
-    border-top: 1px solid var(--border);
-  }
-
-  .ex-stage:last-child { border-bottom: 1px solid var(--border); }
-
-  .ex-label {
-    padding: 1.5rem 1.5rem 1.5rem 0;
-    border-right: 1px solid var(--border);
-  }
-
-  .ex-stage-name {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 0.25rem;
-  }
-
-  .ex-stage-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.5rem;
-    line-height: 1;
-    color: var(--border);
-  }
-
-  .ex-content {
-    padding: 1.5rem 0 1.5rem 1.5rem;
-  }
-
-  .ex-items {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .ex-item {
-    font-size: 0.88rem;
-    line-height: 1.6;
-    color: var(--slate);
-    padding-left: 1rem;
-    position: relative;
-  }
-
-  .ex-item::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: var(--rust);
-    font-size: 0.75rem;
-  }
-
-  .ex-hmw {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.1rem;
-    line-height: 1.5;
-    color: var(--ink);
-    padding-left: 1rem;
-    position: relative;
-    margin-bottom: 0.5rem;
-  }
-
-  .ex-hmw::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--rust);
-  }
-
-  /* ── SUMMARY PANEL ── */
-  .summary-view {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-
-  .summary-card {
-    background: white;
-    border: 1px solid var(--border);
-    padding: 1.25rem;
-  }
-
-  .summary-card-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.55rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 0.5rem;
-  }
-
-  .summary-card-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.1rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .summary-items {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-
-  .summary-item {
-    font-size: 0.82rem;
-    color: var(--slate);
-    line-height: 1.5;
-    padding-left: 0.75rem;
-    position: relative;
-  }
-
-  .summary-item::before {
-    content: '·';
-    position: absolute;
-    left: 0;
-    color: var(--rust);
-  }
-
-  .summary-empty {
-    color: var(--border);
-    font-style: italic;
-    font-size: 0.82rem;
-  }
-
-  /* ── CHECKLIST ── */
+  /* Checklist */
   .checklist {
-    background: var(--cream);
+    background: var(--parchment);
     border: 1px solid var(--border);
-    padding: 1.25rem 1.5rem;
+    padding: 1.1rem 1.4rem;
     max-width: 480px;
     margin-bottom: 1.5rem;
   }
 
   .checklist h4 {
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--muted);
@@ -822,49 +660,18 @@
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    font-size: 0.85rem;
-    color: var(--slate);
+    font-size: 0.83rem;
+    color: var(--stone);
     padding: 0.3rem 0;
     cursor: pointer;
   }
 
-  .check-item input[type="checkbox"] {
-    accent-color: var(--sage);
-    width: 14px;
-    height: 14px;
-  }
+  .check-item input[type="checkbox"] { accent-color: var(--moss); width: 14px; height: 14px; }
 
-  /* ── PRINT / EXPORT ── */
-  .export-bar {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    background: var(--ink);
-    padding: 0.75rem 1.5rem;
-    display: flex;
-    gap: 0.75rem;
-    z-index: 100;
-  }
-
-  .export-btn {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.45rem 0.9rem;
-    border: 1px solid rgba(255,255,255,0.2);
-    background: transparent;
-    color: var(--paper);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .export-btn:hover { background: var(--rust); border-color: var(--rust); }
-
-  /* ── DIVIDER LABEL ── */
+  /* Section label */
   .section-label {
     font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
+    font-size: 0.58rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--muted);
@@ -873,10 +680,10 @@
     border-bottom: 1px solid var(--border);
   }
 
-  /* ── ACTIVITIES ── */
+  /* Activities / Propagation grid */
   .activities-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 1rem;
     max-width: 900px;
   }
@@ -884,31 +691,180 @@
   .activity-card {
     background: white;
     border: 1px solid var(--border);
-    padding: 1.25rem;
+    padding: 1.1rem;
     cursor: pointer;
     transition: all 0.2s;
   }
 
-  .activity-card:hover { border-color: var(--rust); }
-  .activity-card.selected { border-color: var(--rust); background: rgba(196,80,26,0.04); }
+  .activity-card:hover { border-color: var(--moss); }
+  .activity-card.selected { border-color: var(--moss); background: rgba(61,92,53,0.04); }
 
-  .activity-icon {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    display: block;
+  .activity-icon { font-size: 1.4rem; margin-bottom: 0.4rem; display: block; }
+  .activity-name { font-family: 'DM Serif Display', serif; font-size: 0.95rem; margin-bottom: 0.25rem; }
+  .activity-desc { font-size: 0.76rem; color: var(--muted); line-height: 1.5; }
+  .activity-nature { font-family: 'DM Mono', monospace; font-size: 0.52rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--moss); margin-bottom: 0.25rem; }
+
+  /* SVG panel viz */
+  .panel-viz { margin-bottom: 1.5rem; max-width: 720px; }
+
+  /* ── EXAMPLE VIEW ── */
+  .example-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 2rem;
   }
 
-  .activity-name {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1rem;
-    margin-bottom: 0.3rem;
+  .example-header h2 { font-family: 'DM Serif Display', serif; font-size: 2rem; }
+
+  .example-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--moss);
+    background: rgba(61,92,53,0.08);
+    padding: 0.3rem 0.6rem;
   }
 
-  .activity-desc {
-    font-size: 0.78rem;
+  .example-export-btn {
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--border);
+    background: transparent;
     color: var(--muted);
-    line-height: 1.5;
+    cursor: pointer;
+    transition: all 0.2s;
   }
+
+  .example-export-btn:hover { border-color: var(--moss); color: var(--moss); }
+
+  .example-flow { display: flex; flex-direction: column; gap: 0; max-width: 860px; }
+
+  .ex-stage {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    border-top: 1px solid var(--border);
+  }
+
+  .ex-stage:last-child { border-bottom: 1px solid var(--border); }
+
+  .ex-label { padding: 1.5rem 1.5rem 1.5rem 0; border-right: 1px solid var(--border); }
+
+  .ex-stage-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
+
+  .ex-stage-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.3rem; line-height: 1; color: var(--border); }
+  .ex-stage-sub { font-family: 'DM Mono', monospace; font-size: 0.52rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 0.2rem; }
+  .ex-content { padding: 1.5rem 0 1.5rem 1.5rem; }
+  .ex-items { display: flex; flex-direction: column; gap: 0.4rem; }
+
+  .ex-item {
+    font-size: 0.86rem;
+    line-height: 1.6;
+    color: var(--stone);
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .ex-item::before { content: '—'; position: absolute; left: 0; color: var(--moss); font-size: 0.72rem; }
+
+  .ex-hmw {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.08rem;
+    line-height: 1.5;
+    color: var(--soil);
+    padding-left: 1rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+  }
+
+  .ex-hmw::before { content: '→'; position: absolute; left: 0; color: var(--moss); }
+
+  /* ── SUMMARY VIEW ── */
+  .summary-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .summary-card { background: white; border: 1px solid var(--border); padding: 1.2rem; }
+
+  .summary-card-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .summary-card-title { font-family: 'DM Serif Display', serif; font-size: 1.05rem; margin-bottom: 0.75rem; }
+  .summary-items { display: flex; flex-direction: column; gap: 0.3rem; }
+
+  .summary-item {
+    font-size: 0.8rem;
+    color: var(--stone);
+    line-height: 1.5;
+    padding-left: 0.75rem;
+    position: relative;
+  }
+
+  .summary-item::before { content: '·'; position: absolute; left: 0; color: var(--moss); }
+  .summary-empty { color: var(--border); font-style: italic; font-size: 0.8rem; }
+
+  .summary-export-btn {
+    margin-top: 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .summary-export-btn:hover { border-color: var(--moss); color: var(--moss); }
+
+  /* ── EXPORT BAR ── */
+  .export-bar {
+    position: fixed;
+    bottom: 0; right: 0;
+    background: var(--bark);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+    z-index: 100;
+  }
+
+  .export-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.85rem;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: transparent;
+    color: var(--paper);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .export-btn:hover { background: var(--moss); border-color: var(--moss); }
 
   /* Scrollbar */
   ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -917,7 +873,7 @@
 
   /* ── FOOTER ── */
   footer {
-    background: var(--ink);
+    background: var(--soil);
     color: var(--paper);
     padding: 2.5rem 3rem;
     margin-top: 6rem;
@@ -932,54 +888,26 @@
     align-items: end;
   }
 
-  .footer-brand {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.6rem;
-    letter-spacing: 0.06em;
-    color: var(--paper);
-    line-height: 1;
-    margin-bottom: 0.4rem;
-  }
+  .footer-brand { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.06em; color: var(--paper); line-height: 1; margin-bottom: 0.35rem; }
+  .footer-brand span { color: var(--moss-light); }
+  .footer-tagline { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
 
-  .footer-brand span { color: var(--rust-light); }
-
-  .footer-tagline {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-  }
+  .footer-links { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
 
   .footer-link {
     font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
+    font-size: 0.58rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.35);
     text-decoration: none;
     transition: color 0.2s;
     cursor: pointer;
-    background: none;
-    border: none;
-    padding: 0;
+    background: none; border: none; padding: 0;
   }
 
-  .footer-link:hover { color: var(--rust-light); }
-
-  .footer-divider {
-    border: none;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    margin: 1.5rem 0 1rem;
-  }
+  .footer-link:hover { color: var(--moss-light); }
+  .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 1.5rem 0 1rem; }
 
   .footer-bottom {
     max-width: 1400px;
@@ -991,29 +919,17 @@
     gap: 0.5rem;
   }
 
-  .footer-copy {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.55rem;
-    letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.2);
-  }
+  .footer-copy { font-family: 'DM Mono', monospace; font-size: 0.52rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.18); }
+  .footer-method { font-family: 'DM Mono', monospace; font-size: 0.52rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.18); }
+  .footer-method span { color: var(--moss-light); }
 
-  .footer-method {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.55rem;
-    letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.2);
-  }
-
-  .footer-method span { color: var(--rust-light); }
-
+  /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     header { padding: 1.5rem; }
     .concept-bar { padding: 0.75rem 1.5rem; gap: 0.75rem; }
     .concept-bar label { display: none; }
     main { padding-left: 1rem; padding-right: 1rem; padding-bottom: 3rem; }
-    .breadcrumb-trail { padding-left: 1rem; padding-right: 1rem; }
-    .gen-status { padding-left: 1rem; padding-right: 1rem; }
+    .breadcrumb-trail, .gen-status { padding-left: 1rem; padding-right: 1rem; }
     .stage-row { grid-template-columns: 40px 1fr; }
     .stage-meta { display: none; }
     .workspace { grid-template-columns: 1fr; }
@@ -1032,14 +948,15 @@
     .footer-inner { grid-template-columns: 1fr; gap: 1.25rem; }
     .footer-links { justify-content: flex-start; }
     .footer-bottom { flex-direction: column; align-items: flex-start; }
+    .cycle-diagram svg { width: 320px; height: 320px; }
   }
 
   @media (max-width: 480px) {
     .header-right { gap: 0.35rem; }
-    .mode-btn { padding: 0.4rem 0.65rem; font-size: 0.6rem; }
+    .mode-btn { padding: 0.38rem 0.6rem; font-size: 0.58rem; }
     .activities-grid { grid-template-columns: 1fr; }
-    .concept-input { font-size: 0.95rem; }
-    .generate-btn { font-size: 0.65rem; padding: 0.45rem 0.85rem; }
+    .concept-input { font-size: 0.92rem; }
+    .generate-btn { font-size: 0.62rem; padding: 0.42rem 0.8rem; }
   }
 </style>
 </head>
@@ -1048,11 +965,11 @@
 <!-- HEADER -->
 <header>
   <div class="header-left">
-    <h1>Service<br>Design <span>Gym</span></h1>
-    <p>HMW Journey Builder — Reusable for any concept</p>
+    <h1>Service<br>Design <span>Lab</span></h1>
+    <p>Biomimicry Journey — Nature-Informed Service Design</p>
   </div>
   <div class="header-right">
-    <button class="mode-btn active" onclick="setView('journey')">↓ Process</button>
+    <button class="mode-btn active" onclick="setView('journey')">◎ Cycle</button>
     <button class="mode-btn" onclick="setView('workspace')">✏ Workspace</button>
     <button class="mode-btn" onclick="setView('example')">◈ Example</button>
     <button class="mode-btn" onclick="setView('summary')">⊞ Summary</button>
@@ -1062,7 +979,9 @@
 <!-- CONCEPT BAR -->
 <div class="concept-bar">
   <label>Working Concept</label>
-  <input class="concept-input" id="conceptInput" type="text" placeholder="e.g. Inclusive AI, Community Healthcare, Sustainable Mobility…" oninput="updateConcept()" onkeydown="if(event.key==='Enter')generateAll()">
+  <input class="concept-input" id="conceptInput" type="text"
+    placeholder="e.g. Community Water Access, Urban Food Systems, Regenerative Healthcare…"
+    oninput="updateConcept()" onkeydown="if(event.key==='Enter')generateAll()">
   <button class="generate-btn" id="generateBtn" onclick="generateAll()">
     <span id="generateBtnText">✦ Generate journey</span>
   </button>
@@ -1077,13 +996,12 @@
 
 <!-- BREADCRUMB TRAIL -->
 <nav class="breadcrumb-trail">
-  <div class="crumb active" id="crumb-0" onclick="goToStage(0)"><span class="crumb-dot"></span>Inputs</div>
-  <div class="crumb" id="crumb-1" onclick="goToStage(1)"><span class="crumb-dot"></span>Observations</div>
-  <div class="crumb" id="crumb-2" onclick="goToStage(2)"><span class="crumb-dot"></span>Themes</div>
-  <div class="crumb" id="crumb-3" onclick="goToStage(3)"><span class="crumb-dot"></span>Insights</div>
-  <div class="crumb" id="crumb-4" onclick="goToStage(4)"><span class="crumb-dot"></span>Problem Statements</div>
-  <div class="crumb" id="crumb-5" onclick="goToStage(5)"><span class="crumb-dot"></span>HMWs</div>
-  <div class="crumb" id="crumb-6" onclick="goToStage(6)"><span class="crumb-dot"></span>Activities</div>
+  <div class="crumb active" id="crumb-0" onclick="goToStage(0)"><span class="crumb-dot"></span>Observe</div>
+  <div class="crumb" id="crumb-1" onclick="goToStage(1)"><span class="crumb-dot"></span>Pattern</div>
+  <div class="crumb" id="crumb-2" onclick="goToStage(2)"><span class="crumb-dot"></span>Emulate</div>
+  <div class="crumb" id="crumb-3" onclick="goToStage(3)"><span class="crumb-dot"></span>Prototype</div>
+  <div class="crumb" id="crumb-4" onclick="goToStage(4)"><span class="crumb-dot"></span>Adapt</div>
+  <div class="crumb" id="crumb-5" onclick="goToStage(5)"><span class="crumb-dot"></span>Propagate</div>
 </nav>
 
 <!-- MAIN -->
@@ -1092,8 +1010,88 @@
   <!-- ══ JOURNEY VIEW ══ -->
   <div class="view active" id="view-journey">
     <div class="journey-intro">
-      <h2>The Research Sprint Journey</h2>
-      <p>A structured path from raw inputs to actionable How Might We questions. Each stage builds on the last. Click any stage to jump into the workspace, or work through them in order.</p>
+      <h2>The Living Systems Journey</h2>
+      <p>Nature has solved every design challenge we face — scarcity, resilience, trust, feedback, adaptation. This framework borrows its structure from ecosystems: observe without agenda, find the deep patterns, emulate what works, experiment fast, iterate from signals, and propagate what takes root.</p>
+    </div>
+
+    <!-- SVG CYCLE DIAGRAM -->
+    <div class="cycle-diagram">
+      <svg width="480" height="480" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L6,3 z" fill="#3d5c35" opacity="0.5"/>
+          </marker>
+        </defs>
+
+        <!-- Outer ring -->
+        <circle cx="240" cy="240" r="190" fill="none" stroke="#cdc8b8" stroke-width="1" stroke-dasharray="4 4"/>
+        <!-- Inner ring -->
+        <circle cx="240" cy="240" r="70" fill="#2d2a24" opacity="0.06"/>
+        <circle cx="240" cy="240" r="70" fill="none" stroke="#cdc8b8" stroke-width="1"/>
+
+        <!-- Centre text -->
+        <text x="240" y="233" text-anchor="middle" font-family="'DM Serif Display',serif" font-size="13" fill="#2d2a24">Service</text>
+        <text x="240" y="252" text-anchor="middle" font-family="'DM Serif Display',serif" font-size="13" fill="#2d2a24">Design</text>
+
+        <!-- Flow arrows on outer ring -->
+        <path d="M 240 52 A 188 188 0 0 1 414 145" fill="none" stroke="#3d5c35" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+        <path d="M 414 145 A 188 188 0 0 1 414 335" fill="none" stroke="#3d5c35" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+        <path d="M 414 335 A 188 188 0 0 1 240 428" fill="none" stroke="#3d5c35" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+        <path d="M 240 428 A 188 188 0 0 1 66 335" fill="none" stroke="#3d5c35" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+        <path d="M 66 335 A 188 188 0 0 1 66 145" fill="none" stroke="#3d5c35" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+        <path d="M 66 145 A 188 188 0 0 1 240 52" fill="none" stroke="#3d5c35" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+
+        <!-- Stage nodes — positioned on hexagon -->
+        <!-- 1 Observe top -->
+        <g onclick="jumpToWorkspace(0)" style="cursor:pointer">
+          <circle cx="240" cy="50" r="36" fill="#3d5c35"/>
+          <text x="240" y="45" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="rgba(255,255,255,0.6)" letter-spacing="1">01</text>
+          <text x="240" y="57" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" fill="white" letter-spacing="1">Observe</text>
+        </g>
+
+        <!-- 2 Pattern top-right -->
+        <g onclick="jumpToWorkspace(1)" style="cursor:pointer">
+          <circle cx="414" cy="143" r="36" fill="#7a8c5c"/>
+          <text x="414" y="138" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="rgba(255,255,255,0.6)" letter-spacing="1">02</text>
+          <text x="414" y="150" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" fill="white" letter-spacing="1">Pattern</text>
+        </g>
+
+        <!-- 3 Emulate bottom-right -->
+        <g onclick="jumpToWorkspace(2)" style="cursor:pointer">
+          <circle cx="414" cy="337" r="36" fill="#c47c1a"/>
+          <text x="414" y="332" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="rgba(255,255,255,0.6)" letter-spacing="1">03</text>
+          <text x="414" y="344" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" fill="white" letter-spacing="1">Emulate</text>
+        </g>
+
+        <!-- 4 Prototype bottom -->
+        <g onclick="jumpToWorkspace(3)" style="cursor:pointer">
+          <circle cx="240" cy="430" r="36" fill="#9e4a2a"/>
+          <text x="240" y="425" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="rgba(255,255,255,0.6)" letter-spacing="1">04</text>
+          <text x="240" y="437" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="13" fill="white" letter-spacing="1">Prototype</text>
+        </g>
+
+        <!-- 5 Adapt bottom-left -->
+        <g onclick="jumpToWorkspace(4)" style="cursor:pointer">
+          <circle cx="66" cy="337" r="36" fill="#6a5c3a"/>
+          <text x="66" y="332" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="rgba(255,255,255,0.6)" letter-spacing="1">05</text>
+          <text x="66" y="344" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" fill="white" letter-spacing="1">Adapt</text>
+        </g>
+
+        <!-- 6 Propagate top-left -->
+        <g onclick="jumpToWorkspace(5)" style="cursor:pointer">
+          <circle cx="66" cy="143" r="36" fill="#3d5c35" opacity="0.75"/>
+          <text x="66" y="138" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="rgba(255,255,255,0.6)" letter-spacing="1">06</text>
+          <text x="66" y="147" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="11" fill="white" letter-spacing="0.5">Propagate</text>
+        </g>
+
+        <!-- Spoke lines centre to nodes -->
+        <line x1="240" y1="170" x2="240" y2="86" stroke="#cdc8b8" stroke-width="0.8" stroke-dasharray="3 3"/>
+        <line x1="240" y1="170" x2="378" y2="161" stroke="#cdc8b8" stroke-width="0.8" stroke-dasharray="3 3"/>
+        <line x1="240" y1="310" x2="378" y2="319" stroke="#cdc8b8" stroke-width="0.8" stroke-dasharray="3 3"/>
+        <line x1="240" y1="310" x2="240" y2="394" stroke="#cdc8b8" stroke-width="0.8" stroke-dasharray="3 3"/>
+        <line x1="240" y1="310" x2="102" y2="319" stroke="#cdc8b8" stroke-width="0.8" stroke-dasharray="3 3"/>
+        <line x1="240" y1="170" x2="102" y2="161" stroke="#cdc8b8" stroke-width="0.8" stroke-dasharray="3 3"/>
+      </svg>
     </div>
 
     <div class="stages-list">
@@ -1101,12 +1099,13 @@
       <div class="stage-row" onclick="jumpToWorkspace(0)">
         <div class="stage-num">1</div>
         <div class="stage-content">
-          <div class="stage-tag" style="color:var(--stage-1)">Spread the table</div>
-          <div class="stage-title">Inputs</div>
-          <div class="stage-desc">Lay out everything — articles, conversations, field notes, policy docs, lived experience stories. Don't analyse yet. Notice what's here.</div>
+          <div class="stage-tag" style="color:var(--s1)">The Naturalist's Eye</div>
+          <div class="stage-title">Observe</div>
+          <div class="stage-subtitle">Service Design: Inputs & Field Research</div>
+          <div class="stage-desc">Gather without agenda. Articles, interviews, field notes, policy docs, lived stories. A naturalist doesn't classify on the first day — they just watch. Don't analyse yet.</div>
         </div>
         <div class="stage-meta">
-          <div class="stage-output">Output <span>Raw material list</span></div>
+          <div class="stage-output">Output <span>Raw field notes</span></div>
           <div class="stage-time">⏱ 20–30 min</div>
           <button class="go-btn">Enter →</button>
         </div>
@@ -1115,13 +1114,14 @@
       <div class="stage-row" onclick="jumpToWorkspace(1)">
         <div class="stage-num">2</div>
         <div class="stage-content">
-          <div class="stage-tag" style="color:var(--stage-2)">I notice…</div>
-          <div class="stage-title">Observations</div>
-          <div class="stage-desc">Read across the inputs independently. Write "I notice…" statements — one per sticky. No interpretation yet, just evidence close to the surface.</div>
+          <div class="stage-tag" style="color:var(--s2)">Recurring Forms</div>
+          <div class="stage-title">Pattern</div>
+          <div class="stage-subtitle">Service Design: Observations & Themes</div>
+          <div class="stage-desc">Nature repeats its solutions: spirals, networks, feedback loops, edge effects. Look for what keeps appearing in different forms across your field notes. Name patterns as tensions, not topics.</div>
         </div>
         <div class="stage-meta">
-          <div class="stage-output">Output <span>Observation statements</span></div>
-          <div class="stage-time">⏱ 20 min</div>
+          <div class="stage-output">Output <span>Named patterns & tensions</span></div>
+          <div class="stage-time">⏱ 30–40 min</div>
           <button class="go-btn">Enter →</button>
         </div>
       </div>
@@ -1129,13 +1129,14 @@
       <div class="stage-row" onclick="jumpToWorkspace(2)">
         <div class="stage-num">3</div>
         <div class="stage-content">
-          <div class="stage-tag" style="color:var(--stage-3)">Group & name</div>
-          <div class="stage-title">Themes</div>
-          <div class="stage-desc">Cluster observations without over-debating. Name themes as tensions or dynamics, not topics. "Who controls data controls story" beats "Data".</div>
+          <div class="stage-tag" style="color:var(--s3)">Learn from Living Systems</div>
+          <div class="stage-title">Emulate</div>
+          <div class="stage-subtitle">Service Design: Insights & Problem Statements</div>
+          <div class="stage-desc">Biomimicry's core move: what has nature already solved that mirrors this challenge? Translate patterns into insights, then into HMW questions that borrow nature's logic.</div>
         </div>
         <div class="stage-meta">
-          <div class="stage-output">Output <span>Named tension themes</span></div>
-          <div class="stage-time">⏱ 30 min</div>
+          <div class="stage-output">Output <span>Insights + HMW questions</span></div>
+          <div class="stage-time">⏱ 45 min</div>
           <button class="go-btn">Enter →</button>
         </div>
       </div>
@@ -1143,13 +1144,14 @@
       <div class="stage-row" onclick="jumpToWorkspace(3)">
         <div class="stage-num">4</div>
         <div class="stage-content">
-          <div class="stage-tag" style="color:var(--stage-4)">We thought… but actually…</div>
-          <div class="stage-title">Insights</div>
-          <div class="stage-desc">The hardest step. An insight reframes what you thought you knew. Format: [Who] needs [what] because [unexpected truth]. Not a theme — a revelation.</div>
+          <div class="stage-tag" style="color:var(--s4)">Small Experiments</div>
+          <div class="stage-title">Prototype</div>
+          <div class="stage-subtitle">Service Design: Concept Sketching</div>
+          <div class="stage-desc">Nature tests constantly — billions of micro-experiments every season. Sketch service concepts at low fidelity. What's the minimum viable interaction that tests your HMW?</div>
         </div>
         <div class="stage-meta">
-          <div class="stage-output">Output <span>Insight statements</span></div>
-          <div class="stage-time">⏱ 45 min</div>
+          <div class="stage-output">Output <span>Service concepts</span></div>
+          <div class="stage-time">⏱ 45–60 min</div>
           <button class="go-btn">Enter →</button>
         </div>
       </div>
@@ -1157,13 +1159,14 @@
       <div class="stage-row" onclick="jumpToWorkspace(4)">
         <div class="stage-num">5</div>
         <div class="stage-content">
-          <div class="stage-tag" style="color:var(--stage-5)">Frame the challenge</div>
-          <div class="stage-title">Problem Statements</div>
-          <div class="stage-desc">Translate insights into human-centred problem statements. Use the POV Madlib: [User] needs [verb] because [compelling insight]. The bridge to HMW.</div>
+          <div class="stage-tag" style="color:var(--s5)">Feedback Loops</div>
+          <div class="stage-title">Adapt</div>
+          <div class="stage-subtitle">Service Design: Testing & Learning</div>
+          <div class="stage-desc">Healthy ecosystems run on feedback. Plan how you'll test each concept — who, what signal, what threshold. Failure is data. What does the system tell you when you act?</div>
         </div>
         <div class="stage-meta">
-          <div class="stage-output">Output <span>POV statements</span></div>
-          <div class="stage-time">⏱ 30 min</div>
+          <div class="stage-output">Output <span>Test plan + signals</span></div>
+          <div class="stage-time">⏱ ongoing</div>
           <button class="go-btn">Enter →</button>
         </div>
       </div>
@@ -1171,26 +1174,13 @@
       <div class="stage-row" onclick="jumpToWorkspace(5)">
         <div class="stage-num">6</div>
         <div class="stage-content">
-          <div class="stage-tag" style="color:var(--stage-6)">Open the space</div>
-          <div class="stage-title">How Might We</div>
-          <div class="stage-desc">Reframe each problem statement as a HMW question. Solution-neutral, positively framed, broad enough for many answers, specific enough to matter.</div>
+          <div class="stage-tag" style="color:var(--s6)">Scale What Takes Root</div>
+          <div class="stage-title">Propagate</div>
+          <div class="stage-subtitle">Service Design: Methods & Next Steps</div>
+          <div class="stage-desc">Seeds spread through wind, water, animals — not one mechanism. Choose the propagation methods that fit your ecosystem: co-design, blueprinting, safaris, system mapping.</div>
         </div>
         <div class="stage-meta">
-          <div class="stage-output">Output <span>HMW questions</span></div>
-          <div class="stage-time">⏱ 45 min</div>
-          <button class="go-btn">Enter →</button>
-        </div>
-      </div>
-
-      <div class="stage-row" onclick="jumpToWorkspace(6)">
-        <div class="stage-num">7</div>
-        <div class="stage-content">
-          <div class="stage-tag" style="color:var(--stage-7)">Keep moving</div>
-          <div class="stage-title">Continued Research</div>
-          <div class="stage-desc">HMWs aren't the finish line. Choose your next methods: service safaris, ecosystem mapping, co-design, blueprinting, experience prototyping.</div>
-        </div>
-        <div class="stage-meta">
-          <div class="stage-output">Output <span>Research plan</span></div>
+          <div class="stage-output">Output <span>Research & action plan</span></div>
           <div class="stage-time">⏱ ongoing</div>
           <button class="go-btn">Enter →</button>
         </div>
@@ -1206,150 +1196,280 @@
       <!-- Side nav -->
       <nav class="stage-nav">
         <div class="stage-nav-item active" id="nav-0" onclick="goToStage(0)">
-          <div class="nav-dot active" id="navdot-0"></div>Inputs
+          <div class="nav-dot active" id="navdot-0"></div>Observe
         </div>
         <div class="stage-nav-item" id="nav-1" onclick="goToStage(1)">
-          <div class="nav-dot" id="navdot-1"></div>Observations
+          <div class="nav-dot" id="navdot-1"></div>Pattern
         </div>
         <div class="stage-nav-item" id="nav-2" onclick="goToStage(2)">
-          <div class="nav-dot" id="navdot-2"></div>Themes
+          <div class="nav-dot" id="navdot-2"></div>Emulate
         </div>
         <div class="stage-nav-item" id="nav-3" onclick="goToStage(3)">
-          <div class="nav-dot" id="navdot-3"></div>Insights
+          <div class="nav-dot" id="navdot-3"></div>Prototype
         </div>
         <div class="stage-nav-item" id="nav-4" onclick="goToStage(4)">
-          <div class="nav-dot" id="navdot-4"></div>Problem Statements
+          <div class="nav-dot" id="navdot-4"></div>Adapt
         </div>
         <div class="stage-nav-item" id="nav-5" onclick="goToStage(5)">
-          <div class="nav-dot" id="navdot-5"></div>How Might We
-        </div>
-        <div class="stage-nav-item" id="nav-6" onclick="goToStage(6)">
-          <div class="nav-dot" id="navdot-6"></div>Activities
+          <div class="nav-dot" id="navdot-5"></div>Propagate
         </div>
       </nav>
 
       <!-- Panels -->
-      <div style="flex:1">
+      <div style="flex:1; min-width:0;">
 
-        <!-- Stage 0: Inputs -->
+        <!-- Stage 0: Observe -->
         <div class="stage-panel active" id="panel-0">
+          <button class="panel-export-btn" onclick="exportPanel(0)">↓ Export this stage</button>
           <div class="panel-header">
-            <div class="panel-num">1</div>
-            <div class="panel-title">Inputs</div>
+            <div class="panel-num" style="color:var(--s1)">1</div>
+            <div class="panel-title">Observe</div>
           </div>
-          <div class="panel-tag">Spread the table — no analysis yet</div>
+          <div class="panel-nature-label">Naturalist — watch before you classify</div>
+          <div class="panel-tag">Service design: Inputs & field research — no analysis yet</div>
+
+          <!-- SVG: field notebook metaphor -->
+          <div class="panel-viz">
+            <svg width="100%" height="60" viewBox="0 0 600 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+              <rect width="600" height="60" fill="#ede8d8" rx="2"/>
+              <line x1="40" y1="0" x2="40" y2="60" stroke="#3d5c35" stroke-width="2" opacity="0.3"/>
+              <line x1="0" y1="15" x2="600" y2="15" stroke="#cdc8b8" stroke-width="0.8"/>
+              <line x1="0" y1="30" x2="600" y2="30" stroke="#cdc8b8" stroke-width="0.8"/>
+              <line x1="0" y1="45" x2="600" y2="45" stroke="#cdc8b8" stroke-width="0.8"/>
+              <text x="50" y="11" font-family="'DM Mono',monospace" font-size="7" fill="#8a8472" letter-spacing="1">FIELD NOTES — OBSERVE WITHOUT AGENDA — WHAT IS ACTUALLY HERE?</text>
+              <circle cx="20" cy="15" r="3" fill="#3d5c35" opacity="0.4"/>
+              <circle cx="20" cy="30" r="3" fill="#3d5c35" opacity="0.4"/>
+              <circle cx="20" cy="45" r="3" fill="#3d5c35" opacity="0.4"/>
+            </svg>
+          </div>
+
           <div class="panel-instruction">
-            List everything you're bringing to the table: articles, interviews, field notes, policy documents, lived experience stories, data sets, images. <strong>Don't interpret.</strong> Just catalogue what's here.
+            List everything you're bringing to the table: articles, interviews, field notes, policy documents, lived experience stories, data. <strong>Don't interpret.</strong> A naturalist fills the notebook before drawing conclusions.
           </div>
           <div class="entries" id="entries-0"></div>
-          <button class="add-btn" onclick="addEntry(0, 'Input')">+ Add input</button>
-          <button class="next-stage-btn" onclick="goToStage(1)">Next: Observations →</button>
+          <button class="add-btn" onclick="addEntry(0, 'Source')">+ Add source</button>
+          <button class="next-stage-btn" onclick="goToStage(1)">Next: Pattern →</button>
         </div>
 
-        <!-- Stage 1: Observations -->
+        <!-- Stage 1: Pattern -->
         <div class="stage-panel" id="panel-1">
+          <button class="panel-export-btn" onclick="exportPanel(1)">↓ Export this stage</button>
           <div class="panel-header">
-            <div class="panel-num">2</div>
-            <div class="panel-title">Observations</div>
+            <div class="panel-num" style="color:var(--s2)">2</div>
+            <div class="panel-title">Pattern</div>
           </div>
-          <div class="panel-tag">I notice… — stay close to the evidence</div>
+          <div class="panel-nature-label">Recurring Forms — nature repeats what works</div>
+          <div class="panel-tag">Service design: Observations & themes — name tensions, not topics</div>
+
+          <!-- SVG: branching / network pattern -->
+          <div class="panel-viz">
+            <svg width="100%" height="80" viewBox="0 0 600 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+              <rect width="600" height="80" fill="#ede8d8" rx="2"/>
+              <!-- Branch lines -->
+              <line x1="300" y1="40" x2="100" y2="20" stroke="#7a8c5c" stroke-width="1.5" opacity="0.5"/>
+              <line x1="300" y1="40" x2="200" y2="65" stroke="#7a8c5c" stroke-width="1.5" opacity="0.5"/>
+              <line x1="300" y1="40" x2="400" y2="18" stroke="#7a8c5c" stroke-width="1.5" opacity="0.5"/>
+              <line x1="300" y1="40" x2="480" y2="60" stroke="#7a8c5c" stroke-width="1.5" opacity="0.5"/>
+              <line x1="300" y1="40" x2="150" y2="45" stroke="#7a8c5c" stroke-width="1.2" opacity="0.35"/>
+              <line x1="300" y1="40" x2="430" y2="42" stroke="#7a8c5c" stroke-width="1.2" opacity="0.35"/>
+              <!-- Nodes -->
+              <circle cx="300" cy="40" r="7" fill="#7a8c5c"/>
+              <circle cx="100" cy="20" r="4" fill="#7a8c5c" opacity="0.6"/>
+              <circle cx="200" cy="65" r="4" fill="#7a8c5c" opacity="0.6"/>
+              <circle cx="400" cy="18" r="4" fill="#7a8c5c" opacity="0.6"/>
+              <circle cx="480" cy="60" r="4" fill="#7a8c5c" opacity="0.6"/>
+              <circle cx="150" cy="45" r="3" fill="#7a8c5c" opacity="0.4"/>
+              <circle cx="430" cy="42" r="3" fill="#7a8c5c" opacity="0.4"/>
+              <text x="12" y="12" font-family="'DM Mono',monospace" font-size="7" fill="#8a8472" letter-spacing="1">WHAT KEEPS REAPPEARING?</text>
+            </svg>
+          </div>
+
           <div class="panel-instruction">
-            Read across your inputs independently. Write <strong>"I notice…"</strong> statements — one per row. No interpretation, no analysis. Just what you see at the surface. Keep going until you have at least 8–10.
+            Read across your observations. Write <strong>"I notice…"</strong> statements first, then group into recurring patterns. Name each cluster as a <strong>tension or dynamic</strong> — not a topic. <em>"Trust erodes faster than it builds"</em> beats <em>"Trust"</em>.
           </div>
+          <div class="section-label" style="margin-top:0">Observations (I notice…)</div>
           <div class="entries" id="entries-1"></div>
           <button class="add-btn" onclick="addEntry(1, 'Observation', 'I notice…')">+ Add observation</button>
-          <button class="next-stage-btn" onclick="goToStage(2)">Next: Themes →</button>
-        </div>
-
-        <!-- Stage 2: Themes -->
-        <div class="stage-panel" id="panel-2">
-          <div class="panel-header">
-            <div class="panel-num">3</div>
-            <div class="panel-title">Themes</div>
-          </div>
-          <div class="panel-tag">Group & name as tensions, not topics</div>
-          <div class="panel-instruction">
-            Cluster your observations into groups. Name each cluster as a <strong>tension or dynamic</strong>, not a topic label. Aim for 3–6 themes. Example: instead of "Trust" try <em>"Trust erodes faster than it builds."</em>
-          </div>
+          <div class="section-label">Themes (tensions & dynamics)</div>
           <div class="entries" id="entries-2"></div>
-          <button class="add-btn" onclick="addEntry(2, 'Theme', 'e.g. Power hides inside neutral language')">+ Add theme</button>
-          <button class="next-stage-btn" onclick="goToStage(3)">Next: Insights →</button>
+          <button class="add-btn" onclick="addEntry(2, 'Pattern', 'e.g. Access accumulates at the edges, not the centre')">+ Add pattern</button>
+          <button class="next-stage-btn" onclick="goToStage(2)">Next: Emulate →</button>
         </div>
 
-        <!-- Stage 3: Insights -->
-        <div class="stage-panel" id="panel-3">
+        <!-- Stage 2: Emulate -->
+        <div class="stage-panel" id="panel-2">
+          <button class="panel-export-btn" onclick="exportPanel(2)">↓ Export this stage</button>
           <div class="panel-header">
-            <div class="panel-num">4</div>
-            <div class="panel-title">Insights</div>
+            <div class="panel-num" style="color:var(--s3)">3</div>
+            <div class="panel-title">Emulate</div>
           </div>
-          <div class="panel-tag">We thought… but actually… — the reframe</div>
+          <div class="panel-nature-label">Learn from Living Systems — reframe through nature's logic</div>
+          <div class="panel-tag">Service design: Insights & HMW questions</div>
+
+          <!-- SVG: leaf vein / insight structure -->
+          <div class="panel-viz">
+            <svg width="100%" height="70" viewBox="0 0 600 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+              <rect width="600" height="70" fill="#ede8d8" rx="2"/>
+              <path d="M 50 35 Q 200 10 350 35 Q 450 50 560 30" fill="none" stroke="#c47c1a" stroke-width="2" opacity="0.5"/>
+              <path d="M 100 35 Q 130 20 160 30" fill="none" stroke="#c47c1a" stroke-width="1" opacity="0.4"/>
+              <path d="M 180 34 Q 210 18 240 28" fill="none" stroke="#c47c1a" stroke-width="1" opacity="0.4"/>
+              <path d="M 260 35 Q 290 22 320 33" fill="none" stroke="#c47c1a" stroke-width="1" opacity="0.4"/>
+              <path d="M 360 36 Q 390 48 420 38" fill="none" stroke="#c47c1a" stroke-width="1" opacity="0.4"/>
+              <path d="M 450 33 Q 480 20 510 30" fill="none" stroke="#c47c1a" stroke-width="1" opacity="0.4"/>
+              <text x="12" y="12" font-family="'DM Mono',monospace" font-size="7" fill="#8a8472" letter-spacing="1">WHAT HAS NATURE ALREADY SOLVED HERE?</text>
+            </svg>
+          </div>
+
           <div class="panel-instruction">
-            An insight is not a theme. It's a <strong>surprising reframe</strong> of what you thought you knew. Use the format: <em>[Who] needs [what] because [unexpected truth].</em> Aim for 3–5 strong insights.
+            Biomimicry asks: <strong>what organism or ecosystem has already solved this?</strong> Mycelium distributes nutrients without central control. Mangroves protect edges. Fire clears for regeneration. Translate your patterns into insights — then into HMW questions that borrow nature's strategy.
           </div>
+          <div class="section-label" style="margin-top:0">Insights (unexpected truths)</div>
           <div class="entries" id="entries-3"></div>
           <button class="add-btn" onclick="addEntry(3, 'Insight', '[Who] needs [what] because [unexpected truth]')">+ Add insight</button>
-          <button class="next-stage-btn" onclick="goToStage(4)">Next: Problem Statements →</button>
-        </div>
 
-        <!-- Stage 4: Problem Statements -->
-        <div class="stage-panel" id="panel-4">
-          <div class="panel-header">
-            <div class="panel-num">5</div>
-            <div class="panel-title">Problem Statements</div>
-          </div>
-          <div class="panel-tag">POV Madlib — human-centred, not solution-led</div>
-          <div class="panel-instruction">
-            Use the POV Madlib: <strong>[User] needs [verb] because [compelling insight].</strong> One per insight. These are your bridge into HMW — they should be specific enough to focus energy, broad enough to avoid prescribing solutions.
-          </div>
+          <div class="section-label">Problem statements</div>
           <div class="checklist">
-            <h4>A good problem statement is…</h4>
-            <label class="check-item"><input type="checkbox"> Human-centred, not technology-centred</label>
-            <label class="check-item"><input type="checkbox"> Specific enough to guide ideation</label>
-            <label class="check-item"><input type="checkbox"> Broad enough not to prescribe solutions</label>
-            <label class="check-item"><input type="checkbox"> Based on observed insight, not assumption</label>
-            <label class="check-item"><input type="checkbox"> Inspiring — it makes people want to solve it</label>
+            <h4>A strong problem statement…</h4>
+            <label class="check-item"><input type="checkbox"> Names a real person, not a user type</label>
+            <label class="check-item"><input type="checkbox"> Reveals a tension, not just a gap</label>
+            <label class="check-item"><input type="checkbox"> Doesn't prescribe the solution</label>
+            <label class="check-item"><input type="checkbox"> Comes from observed evidence</label>
+            <label class="check-item"><input type="checkbox"> Makes people want to solve it</label>
           </div>
           <div class="entries" id="entries-4"></div>
-          <button class="add-btn" onclick="addEntry(4, 'POV', '[User] needs [verb] because [insight]')">+ Add problem statement</button>
-          <button class="next-stage-btn" onclick="goToStage(5)">Next: HMWs →</button>
-        </div>
+          <button class="add-btn" onclick="addEntry(4, 'POV', '[Person] needs [verb] because [insight]')">+ Add problem statement</button>
 
-        <!-- Stage 5: HMWs -->
-        <div class="stage-panel" id="panel-5">
-          <div class="panel-header">
-            <div class="panel-num">6</div>
-            <div class="panel-title">How Might We</div>
-          </div>
-          <div class="panel-tag">Open the space — solution-neutral, positively framed</div>
-          <div class="panel-instruction">
-            Reframe each problem statement starting with <strong>"How might we…"</strong> Then check: could 10 teams answer this 10 different ways? If yes — strong. If it points to one solution — too narrow. If it could be anything — too broad.
-          </div>
+          <div class="section-label">How Might We questions</div>
           <div class="checklist">
             <h4>HMW quality checks</h4>
-            <label class="check-item"><input type="checkbox"> Solution-neutral (doesn't embed a specific fix)</label>
-            <label class="check-item"><input type="checkbox"> Positively framed (not "prevent" or "stop")</label>
-            <label class="check-item"><input type="checkbox"> Based on a real insight or observed need</label>
-            <label class="check-item"><input type="checkbox"> Right-sized (not too broad, not too narrow)</label>
-            <label class="check-item"><input type="checkbox"> Generative (multiple answers possible)</label>
+            <label class="check-item"><input type="checkbox"> Solution-neutral (no embedded fix)</label>
+            <label class="check-item"><input type="checkbox"> Positively framed</label>
+            <label class="check-item"><input type="checkbox"> Rooted in insight</label>
+            <label class="check-item"><input type="checkbox"> Right-sized — 10 teams, 10 answers</label>
+            <label class="check-item"><input type="checkbox"> Generative</label>
           </div>
           <div id="hmw-cards"></div>
           <button class="add-btn" onclick="addHMW()">+ Add HMW question</button>
-          <button class="next-stage-btn" onclick="goToStage(6)">Next: Activities →</button>
+          <button class="next-stage-btn" onclick="goToStage(3)">Next: Prototype →</button>
         </div>
 
-        <!-- Stage 6: Activities -->
-        <div class="stage-panel" id="panel-6">
+        <!-- Stage 3: Prototype -->
+        <div class="stage-panel" id="panel-3">
+          <button class="panel-export-btn" onclick="exportPanel(3)">↓ Export this stage</button>
           <div class="panel-header">
-            <div class="panel-num">7</div>
-            <div class="panel-title">Continued Research</div>
+            <div class="panel-num" style="color:var(--s4)">4</div>
+            <div class="panel-title">Prototype</div>
           </div>
-          <div class="panel-tag">Service design container — keep moving</div>
+          <div class="panel-nature-label">Small Experiments — nature tests billions of variations</div>
+          <div class="panel-tag">Service design: Concept sketching — low fidelity, fast</div>
+
+          <!-- SVG: cell division / iteration -->
+          <div class="panel-viz">
+            <svg width="100%" height="70" viewBox="0 0 600 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+              <rect width="600" height="70" fill="#ede8d8" rx="2"/>
+              <circle cx="80" cy="35" r="25" fill="none" stroke="#9e4a2a" stroke-width="1.5" opacity="0.4"/>
+              <circle cx="80" cy="35" r="10" fill="#9e4a2a" opacity="0.15"/>
+              <circle cx="190" cy="35" r="25" fill="none" stroke="#9e4a2a" stroke-width="1.5" opacity="0.4"/>
+              <circle cx="190" cy="35" r="10" fill="#9e4a2a" opacity="0.15"/>
+              <circle cx="310" cy="35" r="25" fill="none" stroke="#9e4a2a" stroke-width="1.5" opacity="0.55"/>
+              <circle cx="310" cy="35" r="12" fill="#9e4a2a" opacity="0.25"/>
+              <circle cx="430" cy="35" r="25" fill="none" stroke="#9e4a2a" stroke-width="1.5" opacity="0.7"/>
+              <circle cx="430" cy="35" r="14" fill="#9e4a2a" opacity="0.35"/>
+              <circle cx="540" cy="35" r="20" fill="#9e4a2a" opacity="0.2"/>
+              <line x1="105" y1="35" x2="165" y2="35" stroke="#9e4a2a" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.4"/>
+              <line x1="215" y1="35" x2="285" y2="35" stroke="#9e4a2a" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.4"/>
+              <line x1="335" y1="35" x2="405" y2="35" stroke="#9e4a2a" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.4"/>
+              <line x1="455" y1="35" x2="520" y2="35" stroke="#9e4a2a" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.4"/>
+              <text x="12" y="12" font-family="'DM Mono',monospace" font-size="7" fill="#8a8472" letter-spacing="1">ITERATE FAST — FAIL CHEAP — LEARN EARLY</text>
+            </svg>
+          </div>
+
           <div class="panel-instruction">
-            HMWs are not the finish line. Select the methods that will carry your research forward. These feed back into earlier stages — <strong>new field work reshapes old insights.</strong>
+            Pick your strongest HMW. Sketch a service concept — describe the <strong>key interaction, touchpoint, or moment</strong> in enough detail to test. What does someone experience? What happens backstage? Keep it scrappy — the goal is to make the idea tangible, not polished.
+          </div>
+          <div class="section-label" style="margin-top:0">Service concepts</div>
+          <div class="entries" id="entries-5"></div>
+          <button class="add-btn" onclick="addEntry(5, 'Concept', 'Describe the service moment: who, what happens, what it feels like…')">+ Add concept</button>
+          <button class="next-stage-btn" onclick="goToStage(4)">Next: Adapt →</button>
+        </div>
+
+        <!-- Stage 4: Adapt -->
+        <div class="stage-panel" id="panel-4">
+          <button class="panel-export-btn" onclick="exportPanel(4)">↓ Export this stage</button>
+          <div class="panel-header">
+            <div class="panel-num" style="color:var(--s5)">5</div>
+            <div class="panel-title">Adapt</div>
+          </div>
+          <div class="panel-nature-label">Feedback Loops — healthy systems respond to signals</div>
+          <div class="panel-tag">Service design: Testing plan & learning criteria</div>
+
+          <!-- SVG: feedback loop -->
+          <div class="panel-viz">
+            <svg width="100%" height="80" viewBox="0 0 600 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+              <rect width="600" height="80" fill="#ede8d8" rx="2"/>
+              <defs>
+                <marker id="arr2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                  <path d="M0,0 L0,6 L6,3 z" fill="#6a5c3a" opacity="0.7"/>
+                </marker>
+              </defs>
+              <path d="M 100 40 Q 200 15 300 40 Q 400 65 500 40" fill="none" stroke="#6a5c3a" stroke-width="2" opacity="0.5" marker-end="url(#arr2)"/>
+              <path d="M 500 40 Q 400 15 300 40 Q 200 65 100 40" fill="none" stroke="#6a5c3a" stroke-width="1.2" stroke-dasharray="5 3" opacity="0.35" marker-end="url(#arr2)"/>
+              <circle cx="100" cy="40" r="8" fill="#6a5c3a" opacity="0.6"/>
+              <circle cx="300" cy="40" r="8" fill="#6a5c3a" opacity="0.6"/>
+              <circle cx="500" cy="40" r="8" fill="#6a5c3a" opacity="0.6"/>
+              <text x="85" y="62" font-family="'DM Mono',monospace" font-size="6.5" fill="#8a8472">Test</text>
+              <text x="285" y="22" font-family="'DM Mono',monospace" font-size="6.5" fill="#8a8472">Signal</text>
+              <text x="480" y="62" font-family="'DM Mono',monospace" font-size="6.5" fill="#8a8472">Learn</text>
+              <text x="12" y="12" font-family="'DM Mono',monospace" font-size="7" fill="#8a8472" letter-spacing="1">WHAT WILL YOU TEST? WHAT COUNTS AS A SIGNAL?</text>
+            </svg>
+          </div>
+
+          <div class="panel-instruction">
+            For each concept, define: <strong>who you'll test with, what you're measuring, and what signal tells you it's working</strong> (or not). Nature doesn't distinguish failure from data — both are feedback. Set a threshold before you start.
+          </div>
+          <div class="section-label" style="margin-top:0">Test plans</div>
+          <div class="entries" id="entries-6"></div>
+          <button class="add-btn" onclick="addEntry(6, 'Test', 'Test [concept] with [who] — success signal: [what you\'d observe]')">+ Add test plan</button>
+          <button class="next-stage-btn" onclick="goToStage(5)">Next: Propagate →</button>
+        </div>
+
+        <!-- Stage 5: Propagate -->
+        <div class="stage-panel" id="panel-5">
+          <button class="panel-export-btn" onclick="exportPanel(5)">↓ Export this stage</button>
+          <div class="panel-header">
+            <div class="panel-num" style="color:var(--s6)">6</div>
+            <div class="panel-title">Propagate</div>
+          </div>
+          <div class="panel-nature-label">Scale What Takes Root — seeds spread through multiple vectors</div>
+          <div class="panel-tag">Service design: Methods, activities & next actions</div>
+
+          <!-- SVG: seed dispersal / mycelium network -->
+          <div class="panel-viz">
+            <svg width="100%" height="80" viewBox="0 0 600 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+              <rect width="600" height="80" fill="#ede8d8" rx="2"/>
+              <circle cx="300" cy="40" r="6" fill="#3d5c35"/>
+              <line x1="300" y1="40" x2="80"  y2="20" stroke="#3d5c35" stroke-width="1" opacity="0.4"/>
+              <line x1="300" y1="40" x2="150" y2="65" stroke="#3d5c35" stroke-width="1" opacity="0.4"/>
+              <line x1="300" y1="40" x2="240" y2="15" stroke="#3d5c35" stroke-width="1" opacity="0.4"/>
+              <line x1="300" y1="40" x2="370" y2="68" stroke="#3d5c35" stroke-width="1" opacity="0.4"/>
+              <line x1="300" y1="40" x2="450" y2="18" stroke="#3d5c35" stroke-width="1" opacity="0.4"/>
+              <line x1="300" y1="40" x2="530" y2="55" stroke="#3d5c35" stroke-width="1" opacity="0.4"/>
+              <circle cx="80"  cy="20" r="4" fill="#3d5c35" opacity="0.5"/>
+              <circle cx="150" cy="65" r="4" fill="#3d5c35" opacity="0.5"/>
+              <circle cx="240" cy="15" r="4" fill="#3d5c35" opacity="0.5"/>
+              <circle cx="370" cy="68" r="4" fill="#3d5c35" opacity="0.5"/>
+              <circle cx="450" cy="18" r="4" fill="#3d5c35" opacity="0.5"/>
+              <circle cx="530" cy="55" r="4" fill="#3d5c35" opacity="0.5"/>
+              <text x="12" y="12" font-family="'DM Mono',monospace" font-size="7" fill="#8a8472" letter-spacing="1">CHOOSE YOUR DISPERSAL VECTORS</text>
+            </svg>
+          </div>
+
+          <div class="panel-instruction">
+            Seeds don't wait for perfect conditions — they use wind, water, animals, and decay. Choose the <strong>propagation methods</strong> that match your ecosystem. Not all need equal investment; pick the vectors that reach the right soil.
           </div>
           <div class="activities-grid" id="activities-grid"></div>
-          <div class="section-label">Selected methods</div>
-          <div id="selected-activities" style="font-size:0.88rem;color:var(--muted);font-style:italic;">No methods selected yet.</div>
+          <div class="section-label">Selected propagation methods</div>
+          <div id="selected-activities" style="font-size:0.86rem;color:var(--muted);font-style:italic;">No methods selected yet.</div>
           <button class="next-stage-btn" style="margin-top:1.5rem" onclick="setView('summary')">View full summary ⊞</button>
         </div>
 
@@ -1361,111 +1481,107 @@
   <div class="view" id="view-example">
     <div class="example-header">
       <h2>Worked Example</h2>
-      <div class="example-tag">Inclusive AI — Omidyar</div>
+      <div class="example-tag">Community Water Access — Biomimicry Lens</div>
+      <button class="example-export-btn" onclick="exportExample()">↓ Export example</button>
     </div>
     <div class="example-flow">
 
       <div class="ex-stage">
         <div class="ex-label">
-          <div class="ex-stage-name" style="color:var(--stage-1)">Stage 1</div>
-          <div class="ex-stage-num">Inputs</div>
+          <div class="ex-stage-name" style="color:var(--s1)">Stage 1</div>
+          <div class="ex-stage-num">Observe</div>
+          <div class="ex-stage-sub">Field notes</div>
         </div>
         <div class="ex-content">
           <div class="ex-items">
-            <div class="ex-item">Omidyar Network: Inclusive AI framework documents</div>
-            <div class="ex-item">Field interviews with frontline social workers using automated case management tools</div>
-            <div class="ex-item">Academic papers on algorithmic bias in welfare systems</div>
-            <div class="ex-item">Community forum transcripts from affected neighbourhoods</div>
-            <div class="ex-item">Policy documents: EU AI Act, US Algorithmic Accountability Act</div>
-            <div class="ex-item">News articles on AI rollout failures in public services</div>
+            <div class="ex-item">UNICEF field reports on rural water point failure rates in Sub-Saharan Africa</div>
+            <div class="ex-item">Interviews with women who walk 3–6 km daily to fetch water</div>
+            <div class="ex-item">Community forum transcripts: what happens when a pump breaks</div>
+            <div class="ex-item">Academic literature: social dynamics of communal infrastructure</div>
+            <div class="ex-item">Case studies: where water access has been sustained for 20+ years</div>
           </div>
         </div>
       </div>
 
       <div class="ex-stage">
         <div class="ex-label">
-          <div class="ex-stage-name" style="color:var(--stage-2)">Stage 2</div>
-          <div class="ex-stage-num">Observations</div>
+          <div class="ex-stage-name" style="color:var(--s2)">Stage 2</div>
+          <div class="ex-stage-num">Pattern</div>
+          <div class="ex-stage-sub">Observations + tensions</div>
         </div>
         <div class="ex-content">
           <div class="ex-items">
-            <div class="ex-item">I notice most AI ethics frameworks centre English-speaking, formally educated users</div>
-            <div class="ex-item">I notice community trust in AI systems varies significantly by prior institutional experience</div>
-            <div class="ex-item">I notice "inclusion" in most articles refers to dataset diversity, not decision-making power</div>
-            <div class="ex-item">I notice frontline workers are rarely consulted in AI procurement decisions</div>
-            <div class="ex-item">I notice harm travels faster through AI systems than accountability does</div>
+            <div class="ex-item">I notice women are primary users but rarely primary decision-makers in water governance</div>
+            <div class="ex-item">I notice working pumps attract informal care networks; broken ones attract blame cycles</div>
+            <div class="ex-item">I notice external maintenance contracts collapse when funding ends</div>
+          </div>
+          <div style="margin-top:0.75rem;">
+            <div class="ex-item">Pattern: <em>Ownership and use are distributed differently — this mismatch is the failure point</em></div>
+            <div class="ex-item">Pattern: <em>Care infrastructure scales from relationships, not from rules</em></div>
           </div>
         </div>
       </div>
 
       <div class="ex-stage">
         <div class="ex-label">
-          <div class="ex-stage-name" style="color:var(--stage-3)">Stage 3</div>
-          <div class="ex-stage-num">Themes</div>
+          <div class="ex-stage-name" style="color:var(--s3)">Stage 3</div>
+          <div class="ex-stage-num">Emulate</div>
+          <div class="ex-stage-sub">Insights + HMWs</div>
         </div>
         <div class="ex-content">
           <div class="ex-items">
-            <div class="ex-item">Representation in data ≠ representation in power</div>
-            <div class="ex-item">Participation is offered; control is not</div>
-            <div class="ex-item">Trust erodes faster than it is built</div>
-            <div class="ex-item">Opacity is a governance choice, not a technical necessity</div>
+            <div class="ex-item">Nature analog: mycelium networks — no centre, distributed sensing, rerouting when one node fails</div>
+            <div class="ex-item">Insight: Water point stewards need social legitimacy, not just technical training, because maintenance follows trust, not procedure</div>
+          </div>
+          <div style="margin-top:0.75rem;">
+            <div class="ex-hmw">How might we design water governance so that the people who carry the most responsibility also hold the most authority?</div>
+            <div class="ex-hmw">How might we build maintenance systems that strengthen when one node fails — like a mycelium network?</div>
           </div>
         </div>
       </div>
 
       <div class="ex-stage">
         <div class="ex-label">
-          <div class="ex-stage-name" style="color:var(--stage-4)">Stage 4</div>
-          <div class="ex-stage-num">Insights</div>
+          <div class="ex-stage-name" style="color:var(--s4)">Stage 4</div>
+          <div class="ex-stage-num">Prototype</div>
+          <div class="ex-stage-sub">Service concepts</div>
         </div>
         <div class="ex-content">
           <div class="ex-items">
-            <div class="ex-item">Communities affected by AI systems need meaningful intervention points — not feedback channels — because consultation without consequence is a form of exclusion</div>
-            <div class="ex-item">Frontline practitioners need legible explanations of AI recommendations because opacity erodes trust faster than errors do</div>
-            <div class="ex-item">Marginalized groups need to be co-designers of AI governance, not subjects of impact assessments, because representation in data doesn't translate to representation in power</div>
+            <div class="ex-item">Concept A: A rotating stewardship council — women elected by water-point users, with a small maintenance fund they control</div>
+            <div class="ex-item">Concept B: A peer network of 3 water points: when one breaks, the others send a steward, not a complaint</div>
+            <div class="ex-item">Concept C: A visual maintenance log pinned at the pump — public, legible, names who is responsible this month</div>
           </div>
         </div>
       </div>
 
       <div class="ex-stage">
         <div class="ex-label">
-          <div class="ex-stage-name" style="color:var(--stage-5)">Stage 5</div>
-          <div class="ex-stage-num">Problem Statements</div>
+          <div class="ex-stage-name" style="color:var(--s5)">Stage 5</div>
+          <div class="ex-stage-num">Adapt</div>
+          <div class="ex-stage-sub">Test plans</div>
         </div>
         <div class="ex-content">
           <div class="ex-items">
-            <div class="ex-item">Affected community members need genuine decision-making authority in AI governance processes because being consulted is not the same as being heard</div>
-            <div class="ex-item">Frontline social workers need clear explanations of how AI recommendations are made because they are accountable for decisions they don't fully understand</div>
-            <div class="ex-item">Marginalised groups need structured roles as co-designers of AI systems because their absence from the design table reproduces the harms they already face</div>
+            <div class="ex-item">Test Concept A with 2 communities over 3 months — signal: does the council meet without external prompting?</div>
+            <div class="ex-item">Test Concept B with 3 neighbouring pumps — signal: mutual repair within 48h without NGO involvement</div>
+            <div class="ex-item">Failure signal: if the log is blank after 6 weeks, the concept didn't transfer ownership</div>
           </div>
         </div>
       </div>
 
       <div class="ex-stage">
         <div class="ex-label">
-          <div class="ex-stage-name" style="color:var(--stage-6)">Stage 6</div>
-          <div class="ex-stage-num">HMWs</div>
-        </div>
-        <div class="ex-content">
-          <div class="ex-hmw">How might we design AI governance so that affected communities can shape outcomes — not just respond to them?</div>
-          <div class="ex-hmw">How might we make AI decision-making legible to those most impacted, without requiring technical fluency?</div>
-          <div class="ex-hmw">How might we shift co-design from a research method into a durable institutional practice?</div>
-          <div class="ex-hmw">How might we ensure accountability travels at the same speed as harm through AI systems?</div>
-        </div>
-      </div>
-
-      <div class="ex-stage">
-        <div class="ex-label">
-          <div class="ex-stage-name" style="color:var(--stage-7)">Stage 7</div>
-          <div class="ex-stage-num">Activities</div>
+          <div class="ex-stage-name" style="color:var(--s6)">Stage 6</div>
+          <div class="ex-stage-num">Propagate</div>
+          <div class="ex-stage-sub">Methods & next steps</div>
         </div>
         <div class="ex-content">
           <div class="ex-items">
-            <div class="ex-item">Service safaris: experience AI-mediated services as community members do</div>
-            <div class="ex-item">Ecosystem mapping: visualise all actors, flows of data, decisions and accountability</div>
-            <div class="ex-item">Co-design sessions: frame as collaborative authorship, not user research</div>
-            <div class="ex-item">Experience prototyping: what does it feel like to be invited into AI governance?</div>
-            <div class="ex-item">Service blueprinting: map the backstage as carefully as the frontstage</div>
+            <div class="ex-item">Service safaris: walk with stewards through their maintenance routines</div>
+            <div class="ex-item">Ecosystem mapping: visualise all actors, resource flows, and accountability gaps</div>
+            <div class="ex-item">Co-design sessions: redesign governance structures with users as co-authors</div>
+            <div class="ex-item">Service blueprinting: map what sustains beyond a pilot — who funds, who repairs, who decides</div>
           </div>
         </div>
       </div>
@@ -1475,10 +1591,15 @@
 
   <!-- ══ SUMMARY VIEW ══ -->
   <div class="view" id="view-summary">
-    <div class="example-header">
+    <div class="example-header" style="flex-wrap:wrap; gap:0.75rem;">
       <h2>Your Summary</h2>
       <div class="example-tag" id="summary-concept-tag">No concept set</div>
+      <button class="example-export-btn" onclick="exportSummary()">↓ Export summary</button>
     </div>
+
+    <!-- SVG progress ring -->
+    <div id="summary-progress" style="margin-bottom:2rem;"></div>
+
     <div class="summary-view" id="summary-grid"></div>
   </div>
 
@@ -1487,8 +1608,30 @@
 <!-- Export bar -->
 <div class="export-bar">
   <button class="export-btn" onclick="window.print()">⎙ Print</button>
-  <button class="export-btn" onclick="exportText()">↓ Export text</button>
+  <button class="export-btn" onclick="exportAll()">↓ Export all</button>
 </div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Service Design <span>Lab</span></div>
+      <div class="footer-tagline">Biomimicry Journey Builder — Nature-Informed Service Design</div>
+    </div>
+    <div class="footer-links">
+      <button class="footer-link" onclick="setView('journey')">Cycle</button>
+      <button class="footer-link" onclick="setView('workspace')">Workspace</button>
+      <button class="footer-link" onclick="setView('example')">Example</button>
+      <button class="footer-link" onclick="setView('summary')">Summary</button>
+      <button class="footer-link" onclick="exportAll()">Export ↓</button>
+    </div>
+  </div>
+  <hr class="footer-divider">
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Service Design Lab. Built for practitioners.</div>
+    <div class="footer-method">Framework: <span>Observe → Pattern → Emulate → Prototype → Adapt → Propagate</span></div>
+  </div>
+</footer>
 
 <script>
 // ── STATE ──
@@ -1496,40 +1639,48 @@ const state = {
   concept: '',
   currentStage: 0,
   currentView: 'journey',
-  stages: [[], [], [], [], [], []],
-  hmws: [],
   selectedActivities: []
 };
 
-const stageNames = ['Inputs','Observations','Themes','Insights','Problem Statements','HMWs'];
-const placeholders = [
-  'e.g. Field interview transcript, Policy paper, News article…',
-  'I notice that most frameworks assume…',
-  'e.g. Trust erodes faster than it builds',
-  '[Who] needs [what] because [unexpected truth]',
-  '[User] needs [verb] because [insight]',
-  'How might we…'
+// Stage map for export
+const STAGES = [
+  { id: 0, name: 'Observe',    entries: ['entries-0'],              nature: 'Naturalist — field notes' },
+  { id: 1, name: 'Pattern',    entries: ['entries-1','entries-2'],  nature: 'Recurring forms & tensions' },
+  { id: 2, name: 'Emulate',    entries: ['entries-3','entries-4'],  nature: 'Insights + HMWs' },
+  { id: 3, name: 'Prototype',  entries: ['entries-5'],              nature: 'Service concepts' },
+  { id: 4, name: 'Adapt',      entries: ['entries-6'],              nature: 'Test plans' },
+  { id: 5, name: 'Propagate',  entries: [],                         nature: 'Methods & activities' },
 ];
 
+const placeholders = {
+  'entries-0': 'e.g. Field interview transcript, Policy paper, Community forum notes…',
+  'entries-1': 'I notice that…',
+  'entries-2': 'e.g. Care infrastructure scales from relationships, not rules',
+  'entries-3': '[Who] needs [what] because [unexpected truth]',
+  'entries-4': '[Person] needs [verb] because [insight]',
+  'entries-5': 'Describe the service moment: who, what happens, what it feels like…',
+  'entries-6': "Test [concept] with [who] — success signal: [what you'd observe]",
+};
+
+// ── PROPAGATION ACTIVITIES (nature-framed) ──
 const activities = [
-  { icon: '🦺', name: 'Service Safari', desc: 'Experience the service as users do. Document what trust, confusion, and exclusion feel like from the inside.' },
-  { icon: '🗺', name: 'Ecosystem Mapping', desc: 'Map all actors and the flows between them: data, decisions, accountability, money, trust. Make invisible power visible.' },
-  { icon: '🔬', name: 'Experience Prototyping', desc: 'Prototype a service moment, not a product. What does a key touchpoint feel like from the inside?' },
-  { icon: '🤝', name: 'Co-design Sessions', desc: 'Frame as collaborative authorship — participants bring expertise in their own lives; team brings design fluency.' },
-  { icon: '📋', name: 'Service Blueprinting', desc: 'Map the backstage as carefully as the frontstage. Who sustains this beyond a pilot?' },
-  { icon: '🗣', name: 'Stakeholder Interviews', desc: 'Go deeper with key actors. Uncover motivations, constraints, and mental models that drive behaviour.' },
-  { icon: '🧩', name: 'Card Sorting', desc: 'Understand how different groups mentally organise concepts, priorities, and relationships.' },
-  { icon: '📈', name: 'Desk Research', desc: 'Return to literature, data, and precedents with fresh questions from your HMWs.' },
-  { icon: '🎭', name: 'Role Playing', desc: 'Step into different actor roles to test assumptions and surface emotional dimensions of the service.' },
-  { icon: '🗒', name: 'Cultural Probes', desc: 'Send participants simple kits to self-document their experiences, revealing what observation misses.' },
-  { icon: '🔁', name: 'Assumption Testing', desc: 'List assumptions embedded in your HMWs and design quick tests to validate or invalidate them.' },
-  { icon: '🌐', name: 'Systems Mapping', desc: 'Zoom out to the wider system — policies, incentives, power structures — that your design must navigate.' }
+  { icon: '🌿', nature: 'Embodied knowing', name: 'Service Safari', desc: 'Become the user. Walk through the service as they do. Document what trust, confusion, and care feel like from inside the system.' },
+  { icon: '🕸', nature: 'Network mapping', name: 'Ecosystem Mapping', desc: 'Map all actors and the flows between them: resources, decisions, accountability, trust. Make invisible power structures visible.' },
+  { icon: '🌱', nature: 'Germination test', name: 'Experience Prototyping', desc: 'Prototype a service moment, not a product. What does a key touchpoint feel like at human scale?' },
+  { icon: '🌳', nature: 'Co-evolution', name: 'Co-design Sessions', desc: 'Frame as collaborative authorship — participants bring expertise in their own lives; you bring design fluency.' },
+  { icon: '🔬', nature: 'Root system study', name: 'Service Blueprinting', desc: 'Map the backstage as carefully as the frontstage. Who sustains this system beyond a pilot? What are the roots?' },
+  { icon: '🦋', nature: 'Metamorphosis', name: 'Stakeholder Interviews', desc: 'Go deeper with key actors. Uncover the mental models, motivations, and constraints that drive behaviour from the inside.' },
+  { icon: '🌊', nature: 'Flow dynamics', name: 'Systems Mapping', desc: 'Zoom out to the wider system — policies, incentives, power structures. What currents is your design swimming in?' },
+  { icon: '🌾', nature: 'Seasonal rhythm', name: 'Longitudinal Research', desc: 'Track change over time. Some patterns only emerge through seasons — return to the same community at intervals.' },
+  { icon: '🔭', nature: 'Horizon scanning', name: 'Desk Research', desc: 'Return to literature and precedents with fresh questions from your HMWs. What analogues exist in other ecosystems?' },
+  { icon: '🐾', nature: 'Behaviour tracking', name: 'Cultural Probes', desc: 'Send participants self-documentation kits. Reveal the behaviours and rituals that direct observation misses.' },
+  { icon: '⚗️', nature: 'Controlled experiment', name: 'Assumption Testing', desc: 'List assumptions embedded in your HMWs. Design the smallest possible test to validate or invalidate each one.' },
+  { icon: '🌍', nature: 'Niche adaptation', name: 'Contextual Inquiry', desc: 'Observe people in their natural environment, doing real tasks. Understand adaptations that only emerge in context.' },
 ];
 
 // ── INIT ──
 document.addEventListener('DOMContentLoaded', () => {
-  // Pre-populate stages 0–4 with 3 empty entries
-  for (let i = 0; i < 6; i++) addEntry(i);
+  ['entries-0','entries-1','entries-2','entries-3','entries-4','entries-5','entries-6'].forEach(id => addEntry(id));
   addHMW();
   renderActivities();
 });
@@ -1539,7 +1690,7 @@ function setView(v) {
   document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
   document.getElementById('view-' + v).classList.add('active');
   document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-  const map = {journey:0,workspace:1,example:2,summary:3};
+  const map = { journey:0, workspace:1, example:2, summary:3 };
   document.querySelectorAll('.mode-btn')[map[v]].classList.add('active');
   state.currentView = v;
   if (v === 'summary') renderSummary();
@@ -1550,24 +1701,19 @@ function jumpToWorkspace(stageIdx) {
   goToStage(stageIdx);
 }
 
-// ── STAGE NAVIGATION ──
+// ── STAGE NAV ──
 function goToStage(idx) {
   if (state.currentView !== 'workspace') setView('workspace');
   state.currentStage = idx;
-
   document.querySelectorAll('.stage-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.stage-nav-item').forEach(n => n.classList.remove('active'));
-  document.querySelectorAll('[id^="crumb-"]').forEach(c => c.classList.remove('active'));
-
   document.getElementById('panel-' + idx).classList.add('active');
   document.getElementById('nav-' + idx).classList.add('active');
-  document.getElementById('crumb-' + idx).classList.add('active');
-
   updateNavDots(idx);
 }
 
 function updateNavDots(current) {
-  for (let i = 0; i <= 6; i++) {
+  for (let i = 0; i <= 5; i++) {
     const dot = document.getElementById('navdot-' + i);
     if (!dot) continue;
     dot.className = 'nav-dot';
@@ -1583,33 +1729,27 @@ function updateNavDots(current) {
 }
 
 // ── ENTRIES ──
-function addEntry(stageIdx, labelText, placeholder) {
-  labelText = labelText || stageNames[stageIdx]?.replace(/s$/,'') || 'Item';
-  placeholder = placeholder || placeholders[stageIdx] || '';
-  const container = document.getElementById('entries-' + stageIdx);
+function addEntry(containerId, labelText, placeholder) {
+  if (typeof containerId === 'number') {
+    // legacy call from stage idx — map to container
+    const maps = ['entries-0','entries-1','entries-2','entries-3','entries-4','entries-5','entries-6'];
+    containerId = maps[containerId];
+  }
+  const container = document.getElementById(containerId);
   if (!container) return;
-
-  const rowId = 'entry-' + stageIdx + '-' + Date.now();
+  labelText = labelText || 'Item';
+  placeholder = placeholder || placeholders[containerId] || '';
+  const rowId = 'row-' + Date.now() + Math.random().toString(36).slice(2);
+  const count = container.children.length + 1;
   const row = document.createElement('div');
   row.className = 'entry-row';
   row.id = rowId;
-
-  const count = container.children.length + 1;
   row.innerHTML = `
     <div class="entry-label">${labelText} ${count}</div>
-    <textarea class="entry-input" rows="2" placeholder="${placeholder}" oninput="saveEntry(${stageIdx}, '${rowId}', this.value)"></textarea>
-    <button class="remove-btn" onclick="removeEntry('${rowId}')">×</button>
+    <textarea class="entry-input" rows="2" placeholder="${placeholder}"></textarea>
+    <button class="remove-btn" onclick="document.getElementById('${rowId}').remove()">×</button>
   `;
   container.appendChild(row);
-}
-
-function removeEntry(rowId) {
-  const el = document.getElementById(rowId);
-  if (el) el.remove();
-}
-
-function saveEntry(stageIdx, rowId, val) {
-  // Live state sync optional — summary pulls from DOM
 }
 
 // ── HMW CARDS ──
@@ -1620,8 +1760,8 @@ function addHMW() {
   card.className = 'hmw-card';
   card.id = id;
   card.innerHTML = `
-    <div class="hmw-prefix">How might we…</div>
-    <textarea class="entry-input" rows="2" placeholder="…make it easier for communities to shape AI outcomes?" style="font-family:'DM Serif Display',serif;font-size:1.1rem;border:none;border-bottom:1px solid var(--border);padding:0.25rem 0;background:transparent;"></textarea>
+    <div class="hmw-prefix">How might we… </div>
+    <textarea class="entry-input" rows="2" placeholder="…design [service] so that [who] can [outcome] without [obstacle]?" style="font-family:'DM Serif Display',serif;font-size:1.05rem;border:none;border-bottom:1px solid var(--border);padding:0.25rem 0;background:transparent;"></textarea>
     <div class="hmw-quality">
       <div class="quality-check" onclick="this.classList.toggle('checked')">✓ Solution-neutral</div>
       <div class="quality-check" onclick="this.classList.toggle('checked')">✓ Positive framing</div>
@@ -1644,6 +1784,7 @@ function renderActivities() {
     card.id = 'act-' + i;
     card.innerHTML = `
       <span class="activity-icon">${a.icon}</span>
+      <div class="activity-nature">${a.nature}</div>
       <div class="activity-name">${a.name}</div>
       <div class="activity-desc">${a.desc}</div>
     `;
@@ -1668,7 +1809,7 @@ function updateSelectedActivities() {
   } else {
     el.style.fontStyle = 'normal';
     el.innerHTML = state.selectedActivities.map(a =>
-      `<div style="padding:0.3rem 0;border-bottom:1px solid var(--border);font-size:0.88rem;color:var(--slate);">→ ${a}</div>`
+      `<div style="padding:0.3rem 0;border-bottom:1px solid var(--border);font-size:0.86rem;color:var(--stone);">→ ${a}</div>`
     ).join('');
   }
 }
@@ -1678,60 +1819,95 @@ function renderSummary() {
   const concept = document.getElementById('conceptInput').value || 'No concept set';
   document.getElementById('summary-concept-tag').textContent = concept;
 
+  // Progress SVG
+  const filled = STAGES.filter(s => {
+    if (s.entries.length === 0) return state.selectedActivities.length > 0;
+    return s.entries.some(eid => {
+      const inputs = document.querySelectorAll(`#${eid} .entry-input`);
+      return [...inputs].some(i => i.value.trim());
+    });
+  }).length;
+  const pct = Math.round((filled / 6) * 100);
+  const circumference = 2 * Math.PI * 30;
+  const dash = (pct / 100) * circumference;
+  document.getElementById('summary-progress').innerHTML = `
+    <div style="display:flex;align-items:center;gap:1.25rem;margin-bottom:0.5rem;">
+      <svg width="80" height="80" viewBox="0 0 80 80">
+        <circle cx="40" cy="40" r="30" fill="none" stroke="#cdc8b8" stroke-width="4"/>
+        <circle cx="40" cy="40" r="30" fill="none" stroke="#3d5c35" stroke-width="4"
+          stroke-dasharray="${dash} ${circumference}" stroke-dashoffset="${circumference * 0.25}"
+          stroke-linecap="round" transform="rotate(-90 40 40)"/>
+        <text x="40" y="44" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="18" fill="#2d2a24">${pct}%</text>
+      </svg>
+      <div>
+        <div style="font-family:'DM Serif Display',serif;font-size:1.1rem;">${filled} of 6 stages have content</div>
+        <div style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:0.25rem;">Journey progress</div>
+      </div>
+    </div>
+  `;
+
   const grid = document.getElementById('summary-grid');
   grid.innerHTML = '';
 
-  const stageDefs = [
-    { title: 'Inputs', idx: 0 },
-    { title: 'Observations', idx: 1 },
-    { title: 'Themes', idx: 2 },
-    { title: 'Insights', idx: 3 },
-    { title: 'Problem Statements', idx: 4 },
-  ];
-
-  stageDefs.forEach(({ title, idx }) => {
-    const card = document.createElement('div');
-    card.className = 'summary-card';
-    const entries = document.querySelectorAll(`#entries-${idx} .entry-input`);
-    const items = [...entries].map(e => e.value.trim()).filter(Boolean);
-
-    card.innerHTML = `
-      <div class="summary-card-tag">Stage ${idx + 1}</div>
-      <div class="summary-card-title">${title}</div>
-      <div class="summary-items">${
-        items.length ? items.map(i => `<div class="summary-item">${i}</div>`).join('')
-        : '<div class="summary-empty">Nothing added yet</div>'
-      }</div>
-    `;
-    grid.appendChild(card);
-  });
+  // Stage 0: Observe
+  addSummaryCard(grid, '01 / Observe', 'Field Notes', 'entries-0');
+  // Stage 1: Pattern
+  addSummaryCard(grid, '02 / Pattern', 'Observations', 'entries-1');
+  addSummaryCard(grid, '02 / Pattern', 'Themes', 'entries-2');
+  // Stage 2: Emulate
+  addSummaryCard(grid, '03 / Emulate', 'Insights', 'entries-3');
+  addSummaryCard(grid, '03 / Emulate', 'Problem Statements', 'entries-4');
 
   // HMWs
   const hmwCard = document.createElement('div');
   hmwCard.className = 'summary-card';
   const hmwTexts = [...document.querySelectorAll('#hmw-cards textarea')].map(t => t.value.trim()).filter(Boolean);
   hmwCard.innerHTML = `
-    <div class="summary-card-tag">Stage 6</div>
+    <div class="summary-card-tag">03 / Emulate</div>
     <div class="summary-card-title">How Might We</div>
     <div class="summary-items">${
-      hmwTexts.length ? hmwTexts.map(h => `<div class="summary-item" style="font-family:'DM Serif Display',serif">How might we ${h.replace(/^how might we\s*/i,'')}</div>`).join('')
-      : '<div class="summary-empty">No HMWs added yet</div>'
+      hmwTexts.length
+        ? hmwTexts.map(h => `<div class="summary-item" style="font-family:'DM Serif Display',serif">How might we ${h.replace(/^how might we\s*/i,'')}</div>`).join('')
+        : '<div class="summary-empty">No HMWs added yet</div>'
     }</div>
   `;
   grid.appendChild(hmwCard);
 
-  // Activities
+  // Stage 3: Prototype
+  addSummaryCard(grid, '04 / Prototype', 'Service Concepts', 'entries-5');
+  // Stage 4: Adapt
+  addSummaryCard(grid, '05 / Adapt', 'Test Plans', 'entries-6');
+
+  // Stage 5: Propagate
   const actCard = document.createElement('div');
   actCard.className = 'summary-card';
   actCard.innerHTML = `
-    <div class="summary-card-tag">Stage 7</div>
-    <div class="summary-card-title">Continued Research</div>
+    <div class="summary-card-tag">06 / Propagate</div>
+    <div class="summary-card-title">Methods Selected</div>
     <div class="summary-items">${
-      state.selectedActivities.length ? state.selectedActivities.map(a => `<div class="summary-item">${a}</div>`).join('')
-      : '<div class="summary-empty">No methods selected yet</div>'
+      state.selectedActivities.length
+        ? state.selectedActivities.map(a => `<div class="summary-item">${a}</div>`).join('')
+        : '<div class="summary-empty">No methods selected yet</div>'
     }</div>
   `;
   grid.appendChild(actCard);
+}
+
+function addSummaryCard(grid, tag, title, containerId) {
+  const card = document.createElement('div');
+  card.className = 'summary-card';
+  const inputs = document.querySelectorAll(`#${containerId} .entry-input`);
+  const items = [...inputs].map(e => e.value.trim()).filter(Boolean);
+  card.innerHTML = `
+    <div class="summary-card-tag">${tag}</div>
+    <div class="summary-card-title">${title}</div>
+    <div class="summary-items">${
+      items.length
+        ? items.map(i => `<div class="summary-item">${i}</div>`).join('')
+        : '<div class="summary-empty">Nothing added yet</div>'
+    }</div>
+  `;
+  grid.appendChild(card);
 }
 
 // ── CONCEPT ──
@@ -1739,13 +1915,94 @@ function updateConcept() {
   state.concept = document.getElementById('conceptInput').value;
 }
 
+// ── EXPORTS ──
+
+function getStageText(stageIdx) {
+  const s = STAGES[stageIdx];
+  let out = `\n── ${s.name.toUpperCase()} ──\n`;
+  out += `(${s.nature})\n\n`;
+  s.entries.forEach(eid => {
+    const inputs = document.querySelectorAll(`#${eid} .entry-input`);
+    [...inputs].forEach((el, i) => {
+      if (el.value.trim()) out += `  ${i+1}. ${el.value.trim()}\n`;
+    });
+  });
+  if (stageIdx === 2) {
+    // Also include HMWs
+    out += '\nHOW MIGHT WE\n';
+    document.querySelectorAll('#hmw-cards textarea').forEach((t, i) => {
+      if (t.value.trim()) out += `  ${i+1}. How might we ${t.value.trim().replace(/^how might we\s*/i,'')}\n`;
+    });
+  }
+  if (stageIdx === 5) {
+    out += '\nSELECTED METHODS\n';
+    state.selectedActivities.forEach(a => { out += `  → ${a}\n`; });
+  }
+  return out;
+}
+
+function exportPanel(stageIdx) {
+  const concept = document.getElementById('conceptInput').value || 'Untitled';
+  const s = STAGES[stageIdx];
+  let out = `SERVICE DESIGN LAB — BIOMIMICRY JOURNEY\n`;
+  out += `Concept: ${concept}\n`;
+  out += `${'─'.repeat(48)}\n`;
+  out += getStageText(stageIdx);
+  download(out, `SDLab-${s.name}-${concept.replace(/\s+/g,'-')}.txt`);
+}
+
+function exportExample() {
+  const exStages = document.querySelectorAll('.ex-stage');
+  let out = `SERVICE DESIGN LAB — WORKED EXAMPLE\nCommunity Water Access — Biomimicry Lens\n${'─'.repeat(48)}\n`;
+  exStages.forEach(el => {
+    const name = el.querySelector('.ex-stage-num')?.textContent || '';
+    const sub = el.querySelector('.ex-stage-sub')?.textContent || '';
+    out += `\n── ${name.toUpperCase()} (${sub}) ──\n`;
+    el.querySelectorAll('.ex-item').forEach(i => { out += `  — ${i.textContent.trim()}\n`; });
+    el.querySelectorAll('.ex-hmw').forEach(h => { out += `  → ${h.textContent.trim()}\n`; });
+  });
+  download(out, 'SDLab-Example-Water-Access.txt');
+}
+
+function exportSummary() {
+  const concept = document.getElementById('conceptInput').value || 'Untitled';
+  let out = `SERVICE DESIGN LAB — FULL SUMMARY\nConcept: ${concept}\n${'─'.repeat(48)}\n`;
+  for (let i = 0; i <= 5; i++) out += getStageText(i);
+  download(out, `SDLab-Summary-${concept.replace(/\s+/g,'-')}.txt`);
+}
+
+function exportAll() {
+  exportSummary();
+}
+
+function download(text, filename) {
+  const blob = new Blob([text], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ── RESET ──
+function resetAll() {
+  if (!confirm('Reset all content? This cannot be undone.')) return;
+  document.getElementById('conceptInput').value = '';
+  ['entries-0','entries-1','entries-2','entries-3','entries-4','entries-5','entries-6'].forEach(id => {
+    const c = document.getElementById(id);
+    if (c) c.innerHTML = '';
+  });
+  document.getElementById('hmw-cards').innerHTML = '';
+  state.selectedActivities = [];
+  document.querySelectorAll('.activity-card').forEach(c => c.classList.remove('selected'));
+  updateSelectedActivities();
+  ['entries-0','entries-1','entries-2','entries-3','entries-4','entries-5','entries-6'].forEach(id => addEntry(id));
+  addHMW();
+}
+
 // ── AI GENERATION ──
 async function generateAll() {
   const concept = document.getElementById('conceptInput').value.trim();
-  if (!concept) {
-    alert('Please enter a working concept first.');
-    return;
-  }
+  if (!concept) { alert('Enter a working concept first.'); return; }
 
   const btn = document.getElementById('generateBtn');
   const btnText = document.getElementById('generateBtnText');
@@ -1756,75 +2013,42 @@ async function generateAll() {
   btnText.innerHTML = '<span class="generating-spinner"></span> Generating…';
   status.classList.add('visible');
 
-  // Clear existing entries
-  for (let i = 0; i < 6; i++) {
-    const c = document.getElementById('entries-' + i);
+  ['entries-0','entries-1','entries-2','entries-3','entries-4','entries-5','entries-6'].forEach(id => {
+    const c = document.getElementById(id);
     if (c) c.innerHTML = '';
-  }
+  });
   document.getElementById('hmw-cards').innerHTML = '';
 
-  const prompt = `You are a service design expert facilitating a research sprint using the HMW (How Might We) framework. The team is exploring the concept: "${concept}".
+  const prompt = `You are a service design expert and biomimicry practitioner. The team is exploring: "${concept}".
 
-Generate a complete, realistic worked example for all stages of the journey. Return ONLY valid JSON with this exact structure:
+Generate a complete worked example using the Observe → Pattern → Emulate → Prototype → Adapt → Propagate framework. Use biomimicry thinking — ask what nature has already solved that mirrors each challenge.
 
+Return ONLY valid JSON:
 {
-  "inputs": [
-    "string describing a real type of input/source relevant to ${concept}",
-    "string",
-    "string",
-    "string",
-    "string"
-  ],
-  "observations": [
-    "I notice that [specific observation about ${concept}]",
-    "I notice that [specific observation]",
-    "I notice that [specific observation]",
-    "I notice that [specific observation]",
-    "I notice that [specific observation]"
-  ],
-  "themes": [
-    "Tension or dynamic framed as a sentence (not a topic label) related to ${concept}",
-    "Tension or dynamic",
-    "Tension or dynamic",
-    "Tension or dynamic"
-  ],
-  "insights": [
-    "[Who] needs [what] because [unexpected truth about ${concept}]",
-    "[Who] needs [what] because [unexpected truth]",
-    "[Who] needs [what] because [unexpected truth]"
-  ],
-  "problemStatements": [
-    "[User type] needs [verb/action] because [compelling insight about ${concept}]",
-    "[User type] needs [verb/action] because [insight]",
-    "[User type] needs [verb/action] because [insight]"
-  ],
-  "hmws": [
-    "make [something] possible for [someone] so that [outcome related to ${concept}]",
-    "help [someone] [verb] without [barrier]",
-    "ensure [outcome] even when [constraint]",
-    "redesign [touchpoint] so that [human need] is centred"
-  ]
+  "observe": ["source or input relevant to ${concept}", "source", "source", "source", "source"],
+  "observations": ["I notice that [specific observation]", "I notice that [specific observation]", "I notice that [specific observation]", "I notice that [specific observation]"],
+  "themes": ["Tension framed as a dynamic, not a topic (e.g. 'Care infrastructure scales from relationships, not rules')", "Tension", "Tension", "Tension"],
+  "insights": ["[Who] needs [what] because [unexpected truth about ${concept}]", "[Who] needs [what] because [unexpected truth]", "[Who] needs [what] because [unexpected truth]"],
+  "problemStatements": ["[Person] needs [verb] because [insight about ${concept}]", "[Person] needs [verb] because [insight]", "[Person] needs [verb] because [insight]"],
+  "hmws": ["complete the sentence after 'How might we…' — solution-neutral, positive, generative", "another HMW", "another HMW", "another HMW"],
+  "concepts": ["Service concept A: describe the key interaction or moment", "Service concept B", "Service concept C"],
+  "tests": ["Test [concept] with [who] — signal: [what you would observe if it's working]", "Test [concept 2]", "Test [concept 3]"]
 }
 
 Rules:
-- All content must be specific to "${concept}" — not generic
-- Observations start with "I notice that"
-- Themes are framed as tensions/dynamics (full sentences), not topic words
-- Insights follow [who] needs [what] because [unexpected truth] — the truth should be genuinely surprising
-- Problem statements follow [user] needs [verb] because [insight]
+- All items must be specific to "${concept}", not generic
+- Themes must be tensions or dynamics, not topic labels
 - HMWs do NOT start with "How might we" — just the rest of the question
-- HMWs must be solution-neutral, positively framed, and generative
-- Return ONLY the JSON object, no markdown, no explanation`;
+- Return ONLY the JSON, no markdown, no explanation`;
 
   try {
-    statusText.textContent = 'Thinking about ' + concept + '…';
-
+    statusText.textContent = 'Reading the landscape…';
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
+        model: 'claude-opus-4-5',
+        max_tokens: 1400,
         messages: [{ role: 'user', content: prompt }]
       })
     });
@@ -1832,30 +2056,59 @@ Rules:
     const data = await response.json();
     const text = data.content?.map(b => b.text || '').join('') || '';
     const clean = text.replace(/```json|```/g, '').trim();
-    const parsed = JSON.parse(clean);
+    const p = JSON.parse(clean);
 
-    // Populate stages
-    const stageMap = [
-      { key: 'inputs', idx: 0, label: 'Input' },
-      { key: 'observations', idx: 1, label: 'Observation' },
-      { key: 'themes', idx: 2, label: 'Theme' },
-      { key: 'insights', idx: 3, label: 'Insight' },
-      { key: 'problemStatements', idx: 4, label: 'POV' }
-    ];
-
-    stageMap.forEach(({ key, idx, label }) => {
-      statusText.textContent = 'Filling in ' + stageNames[idx].toLowerCase() + '…';
-      const items = parsed[key] || [];
-      items.forEach(text => {
-        addEntryWithValue(idx, label, text);
+    const fill = (eid, arr, label) => {
+      (arr || []).forEach(val => {
+        const container = document.getElementById(eid);
+        if (!container) return;
+        const rowId = 'row-' + Date.now() + Math.random().toString(36).slice(2);
+        const count = container.children.length + 1;
+        const row = document.createElement('div');
+        row.className = 'entry-row';
+        row.id = rowId;
+        row.innerHTML = `
+          <div class="entry-label">${label} ${count}</div>
+          <textarea class="entry-input ai-suggested" rows="2">${val}</textarea>
+          <button class="remove-btn" onclick="document.getElementById('${rowId}').remove()">×</button>
+        `;
+        container.appendChild(row);
       });
+    };
+
+    statusText.textContent = 'Gathering field notes…';
+    fill('entries-0', p.observe, 'Source');
+    statusText.textContent = 'Finding patterns…';
+    fill('entries-1', p.observations, 'Observation');
+    fill('entries-2', p.themes, 'Pattern');
+    statusText.textContent = 'Extracting insights…';
+    fill('entries-3', p.insights, 'Insight');
+    fill('entries-4', p.problemStatements, 'POV');
+    statusText.textContent = 'Crafting HMWs…';
+    (p.hmws || []).forEach(hmw => {
+      const container = document.getElementById('hmw-cards');
+      const id = 'hmw-' + Date.now() + Math.random();
+      const card = document.createElement('div');
+      card.className = 'hmw-card';
+      card.id = id;
+      card.innerHTML = `
+        <div class="hmw-prefix">How might we… <span class="ai-badge">AI</span></div>
+        <textarea class="entry-input ai-suggested" rows="2" style="font-family:'DM Serif Display',serif;font-size:1.05rem;border:none;border-bottom:1px solid var(--border);padding:0.25rem 0;background:transparent;">${hmw}</textarea>
+        <div class="hmw-quality">
+          <div class="quality-check" onclick="this.classList.toggle('checked')">✓ Solution-neutral</div>
+          <div class="quality-check" onclick="this.classList.toggle('checked')">✓ Positive framing</div>
+          <div class="quality-check" onclick="this.classList.toggle('checked')">✓ Insight-based</div>
+          <div class="quality-check" onclick="this.classList.toggle('checked')">✓ Right scope</div>
+          <div class="quality-check" onclick="this.classList.toggle('checked')">✓ Generative</div>
+        </div>
+        <button class="remove-btn" style="float:right;margin-top:-1rem" onclick="document.getElementById('${id}').remove()">× remove</button>
+      `;
+      container.appendChild(card);
     });
+    statusText.textContent = 'Building prototypes…';
+    fill('entries-5', p.concepts, 'Concept');
+    fill('entries-6', p.tests, 'Test');
 
-    // Populate HMWs
-    statusText.textContent = 'Crafting HMW questions…';
-    (parsed.hmws || []).forEach(hmw => addHMWWithValue(hmw));
-
-    // Jump to workspace
     statusText.textContent = 'Done ✓';
     setTimeout(() => {
       status.classList.remove('visible');
@@ -1864,123 +2117,13 @@ Rules:
 
   } catch (err) {
     console.error(err);
-    statusText.textContent = 'Error generating — check console';
+    statusText.textContent = 'Error — check console';
     setTimeout(() => status.classList.remove('visible'), 3000);
   } finally {
     btn.disabled = false;
     btnText.innerHTML = '✦ Regenerate';
   }
 }
-
-function addEntryWithValue(stageIdx, labelText, value) {
-  const container = document.getElementById('entries-' + stageIdx);
-  if (!container) return;
-  const rowId = 'entry-' + stageIdx + '-' + Date.now() + Math.random();
-  const row = document.createElement('div');
-  row.className = 'entry-row';
-  row.id = rowId;
-  const count = container.children.length + 1;
-  row.innerHTML = `
-    <div class="entry-label">${labelText} ${count}</div>
-    <textarea class="entry-input ai-suggested" rows="2">${value}</textarea>
-    <button class="remove-btn" onclick="removeEntry('${rowId}')">×</button>
-  `;
-  container.appendChild(row);
-}
-
-function addHMWWithValue(text) {
-  const container = document.getElementById('hmw-cards');
-  const id = 'hmw-' + Date.now() + Math.random();
-  const card = document.createElement('div');
-  card.className = 'hmw-card';
-  card.id = id;
-  card.innerHTML = `
-    <div class="hmw-prefix">How might we… <span class="ai-badge">AI suggested</span></div>
-    <textarea class="entry-input ai-suggested" rows="2" style="font-family:'DM Serif Display',serif;font-size:1.1rem;border:none;border-bottom:1px solid var(--border);padding:0.25rem 0;background:transparent;">${text}</textarea>
-    <div class="hmw-quality">
-      <div class="quality-check" onclick="this.classList.toggle('checked')">✓ Solution-neutral</div>
-      <div class="quality-check" onclick="this.classList.toggle('checked')">✓ Positive framing</div>
-      <div class="quality-check" onclick="this.classList.toggle('checked')">✓ Insight-based</div>
-      <div class="quality-check" onclick="this.classList.toggle('checked')">✓ Right scope</div>
-      <div class="quality-check" onclick="this.classList.toggle('checked')">✓ Generative</div>
-    </div>
-    <button class="remove-btn" style="float:right;margin-top:-1rem" onclick="document.getElementById('${id}').remove()">× remove</button>
-  `;
-  container.appendChild(card);
-}
-
-// ── RESET ──
-function resetAll() {
-  if (!confirm('Reset all content? This cannot be undone.')) return;
-  document.getElementById('conceptInput').value = '';
-  for (let i = 0; i < 6; i++) {
-    const c = document.getElementById('entries-' + i);
-    if (c) c.innerHTML = '';
-  }
-  document.getElementById('hmw-cards').innerHTML = '';
-  state.selectedActivities = [];
-  document.querySelectorAll('.activity-card').forEach(c => c.classList.remove('selected'));
-  updateSelectedActivities();
-  for (let i = 0; i < 6; i++) addEntry(i);
-  addHMW();
-}
-
-// ── EXPORT ──
-function exportText() {
-  const concept = document.getElementById('conceptInput').value || 'Untitled concept';
-  let out = `SERVICE DESIGN GYM — HMW JOURNEY\n`;
-  out += `Concept: ${concept}\n`;
-  out += `${'─'.repeat(50)}\n\n`;
-
-  const stageDefs = ['Inputs','Observations','Themes','Insights','Problem Statements'];
-  stageDefs.forEach((name, idx) => {
-    out += `STAGE ${idx+1}: ${name.toUpperCase()}\n`;
-    const entries = document.querySelectorAll(`#entries-${idx} .entry-input`);
-    [...entries].forEach((e, i) => {
-      if (e.value.trim()) out += `  ${i+1}. ${e.value.trim()}\n`;
-    });
-    out += '\n';
-  });
-
-  out += `STAGE 6: HOW MIGHT WE\n`;
-  document.querySelectorAll('#hmw-cards textarea').forEach((t, i) => {
-    if (t.value.trim()) out += `  ${i+1}. How might we ${t.value.trim().replace(/^how might we\s*/i,'')}\n`;
-  });
-  out += '\n';
-
-  out += `STAGE 7: CONTINUED RESEARCH\n`;
-  state.selectedActivities.forEach(a => { out += `  → ${a}\n`; });
-
-  const blob = new Blob([out], {type:'text/plain'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `HMW-Journey-${concept.replace(/\s+/g,'-')}.txt`;
-  a.click();
-}
 </script>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div>
-      <div class="footer-brand">Service Design <span>Gym</span></div>
-      <div class="footer-tagline">HMW Journey Builder — from inputs to action</div>
-    </div>
-    <div class="footer-links">
-      <button class="footer-link" onclick="setView('journey')">Process</button>
-      <button class="footer-link" onclick="setView('workspace')">Workspace</button>
-      <button class="footer-link" onclick="setView('example')">Example</button>
-      <button class="footer-link" onclick="setView('summary')">Summary</button>
-      <button class="footer-link" onclick="exportText()">Export ↓</button>
-    </div>
-  </div>
-  <hr class="footer-divider">
-  <div class="footer-bottom">
-    <div class="footer-copy">© 2025 Service Design Gym. Built for practitioners.</div>
-    <div class="footer-method">Method: <span>Empathise → Define → Ideate</span></div>
-  </div>
-</footer>
-
 </body>
 </html>
