@@ -915,16 +915,131 @@
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2.5rem 3rem;
+    margin-top: 6rem;
+  }
+
+  .footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: end;
+  }
+
+  .footer-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.06em;
+    color: var(--paper);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .footer-brand span { color: var(--rust-light); }
+
+  .footer-tagline {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .footer-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .footer-link:hover { color: var(--rust-light); }
+
+  .footer-divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    margin: 1.5rem 0 1rem;
+  }
+
+  .footer-bottom {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .footer-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.2);
+  }
+
+  .footer-method {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.2);
+  }
+
+  .footer-method span { color: var(--rust-light); }
+
   @media (max-width: 768px) {
-    header, .concept-bar, main { padding-left: 1.5rem; padding-right: 1.5rem; }
-    .breadcrumb-trail { padding-left: 1.5rem; }
+    header { padding: 1.5rem; }
+    .concept-bar { padding: 0.75rem 1.5rem; gap: 0.75rem; }
+    .concept-bar label { display: none; }
+    main { padding-left: 1rem; padding-right: 1rem; padding-bottom: 3rem; }
+    .breadcrumb-trail { padding-left: 1rem; padding-right: 1rem; }
+    .gen-status { padding-left: 1rem; padding-right: 1rem; }
     .stage-row { grid-template-columns: 40px 1fr; }
     .stage-meta { display: none; }
     .workspace { grid-template-columns: 1fr; }
     .stage-nav { display: none; }
-    .stage-panel { padding: 1.5rem; }
+    .stage-panel { padding: 1rem 1.25rem; }
     .ex-stage { grid-template-columns: 1fr; }
     .ex-label { border-right: none; border-bottom: 1px solid var(--border); padding: 1rem 0; }
+    .export-bar { left: 0; right: 0; justify-content: center; }
+    .panel-header { gap: 0.75rem; }
+    .panel-num { font-size: 2.5rem; }
+    .panel-title { font-size: 1.4rem; }
+    .journey-intro h2 { font-size: 1.5rem; }
+    .summary-view { grid-template-columns: 1fr; }
+    .activities-grid { grid-template-columns: 1fr 1fr; }
+    footer { padding: 2rem 1.5rem; margin-top: 3rem; }
+    .footer-inner { grid-template-columns: 1fr; gap: 1.25rem; }
+    .footer-links { justify-content: flex-start; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (max-width: 480px) {
+    .header-right { gap: 0.35rem; }
+    .mode-btn { padding: 0.4rem 0.65rem; font-size: 0.6rem; }
+    .activities-grid { grid-template-columns: 1fr; }
+    .concept-input { font-size: 0.95rem; }
+    .generate-btn { font-size: 0.65rem; padding: 0.45rem 0.85rem; }
   }
 </style>
 </head>
@@ -1844,5 +1959,28 @@ function exportText() {
   a.click();
 }
 </script>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Service Design <span>Gym</span></div>
+      <div class="footer-tagline">HMW Journey Builder — from inputs to action</div>
+    </div>
+    <div class="footer-links">
+      <button class="footer-link" onclick="setView('journey')">Process</button>
+      <button class="footer-link" onclick="setView('workspace')">Workspace</button>
+      <button class="footer-link" onclick="setView('example')">Example</button>
+      <button class="footer-link" onclick="setView('summary')">Summary</button>
+      <button class="footer-link" onclick="exportText()">Export ↓</button>
+    </div>
+  </div>
+  <hr class="footer-divider">
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Service Design Gym. Built for practitioners.</div>
+    <div class="footer-method">Method: <span>Empathise → Define → Ideate</span></div>
+  </div>
+</footer>
+
 </body>
 </html>
