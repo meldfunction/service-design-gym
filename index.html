@@ -958,6 +958,406 @@
     .concept-input { font-size: 0.92rem; }
     .generate-btn { font-size: 0.62rem; padding: 0.42rem 0.8rem; }
   }
+  /* ── INTRO VIEW ── */
+  .intro-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin-bottom: 4rem;
+  }
+  .intro-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 0.92;
+    letter-spacing: 0.03em;
+    color: var(--soil);
+    margin-bottom: 1.25rem;
+  }
+  .intro-headline span { color: var(--moss); }
+  .intro-lead {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: var(--stone);
+    margin-bottom: 1.5rem;
+  }
+  .intro-body {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: var(--muted);
+  }
+  .intro-principles {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .intro-principle {
+    border-left: 3px solid var(--moss);
+    padding: 0.85rem 1.25rem;
+    background: var(--parchment);
+  }
+  .intro-principle-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 0.3rem;
+  }
+  .intro-principle-nature {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    color: var(--soil);
+    margin-bottom: 0.2rem;
+  }
+  .intro-principle-legacy {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+  .intro-how {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .intro-how h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+  .intro-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .intro-step {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 1.1rem;
+  }
+  .intro-step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--border);
+    line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+  .intro-step-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+  }
+  .intro-step-desc {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .intro-cta {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .cta-primary {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.75rem 1.75rem;
+    background: var(--moss);
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .cta-primary:hover { background: var(--moss-light); }
+  .cta-secondary {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.75rem 1.75rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--stone);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .cta-secondary:hover { border-color: var(--moss); color: var(--moss); }
+
+  /* ── TIMELINE VIEW ── */
+  .timeline-intro {
+    max-width: 680px;
+    margin-bottom: 2.5rem;
+  }
+  .timeline-intro h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .timeline-intro p { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+  .timeline-phase-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 3rem;
+    border: 1px solid var(--border);
+  }
+  .timeline-phase {
+    padding: 1.5rem 1.25rem;
+    border-right: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .timeline-phase:last-child { border-right: none; }
+  .timeline-phase:hover { background: var(--parchment); }
+  .timeline-phase-icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
+  .timeline-phase-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.25rem;
+  }
+  .timeline-phase-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+  }
+  .timeline-phase-nature {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    color: var(--moss);
+    font-style: italic;
+    margin-bottom: 0.4rem;
+  }
+  .timeline-phase-legacy {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .timeline-phase-stages {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-top: 0.75rem;
+  }
+  .timeline-stage-tag {
+    font-size: 0.76rem;
+    color: var(--stone);
+    padding: 0.2rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .timeline-stage-tag::before { content: '— '; color: var(--moss); }
+
+  /* ── CANVAS VIEWS (Business Design, CX, Ops) ── */
+  .canvas-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .canvas-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+  }
+  .canvas-nature-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--moss);
+    background: rgba(61,92,53,0.08);
+    padding: 0.3rem 0.6rem;
+  }
+  .canvas-legacy-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--parchment);
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--border);
+  }
+  .canvas-export-btn {
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .canvas-export-btn:hover { border-color: var(--moss); color: var(--moss); }
+  .canvas-tagline {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 680px;
+    margin-bottom: 2rem;
+  }
+  .canvas-tagline strong { color: var(--moss); }
+  .canvas-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+    max-width: 1200px;
+  }
+  .canvas-diagram { position: sticky; top: 2rem; }
+  .canvas-form-section { }
+  .canvas-block {
+    margin-bottom: 2rem;
+  }
+  .canvas-block-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 0.2rem;
+  }
+  .canvas-block-nature {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    color: var(--soil);
+    margin-bottom: 0.1rem;
+  }
+  .canvas-block-legacy {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .canvas-block-q {
+    font-size: 0.8rem;
+    color: var(--stone);
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--border);
+    font-style: italic;
+  }
+  .canvas-textarea {
+    width: 100%;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.88rem;
+    background: white;
+    border: 1px solid var(--border);
+    padding: 0.65rem 0.9rem;
+    color: var(--soil);
+    outline: none;
+    resize: vertical;
+    min-height: 72px;
+    line-height: 1.55;
+    transition: border-color 0.2s;
+  }
+  .canvas-textarea:focus { border-color: var(--moss); }
+  .canvas-textarea::placeholder { color: var(--border); font-style: italic; }
+  .canvas-ai-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.45rem 0.9rem;
+    background: var(--moss);
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .canvas-ai-btn:hover { background: var(--moss-light); }
+  .canvas-ai-btn:disabled { background: var(--border); cursor: not-allowed; }
+  /* Journey map row */
+  .jmap-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 0;
+    border-top: 1px solid var(--border);
+  }
+  .jmap-row:last-child { border-bottom: 1px solid var(--border); }
+  .jmap-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 1rem;
+    border-right: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+  }
+  .jmap-cells {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+  }
+  .jmap-cell {
+    border-right: 1px solid var(--border);
+    padding: 0.5rem;
+  }
+  .jmap-cell:last-child { border-right: none; }
+  .jmap-cell textarea {
+    width: 100%;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.76rem;
+    background: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    color: var(--soil);
+    line-height: 1.5;
+    min-height: 48px;
+  }
+  .jmap-cell textarea::placeholder { color: var(--border); font-style: italic; font-size: 0.7rem; }
+  .jmap-phase-header {
+    display: grid;
+    grid-template-columns: 100px repeat(5, 1fr);
+    gap: 0;
+    background: var(--bark);
+    color: var(--paper);
+  }
+  .jmap-phase-cell {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.6rem;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .intro-hero { grid-template-columns: 1fr; gap: 2rem; }
+    .timeline-phase-grid { grid-template-columns: 1fr 1fr; }
+    .canvas-layout { grid-template-columns: 1fr; }
+    .canvas-diagram { position: static; }
+    .jmap-cells { grid-template-columns: 1fr 1fr; }
+    .jmap-phase-header { grid-template-columns: 80px repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .timeline-phase-grid { grid-template-columns: 1fr; }
+    .jmap-cells { grid-template-columns: 1fr; }
+  }
+
   /* ── METHOD MODAL ── */
   .modal-overlay {
     display: none;
@@ -1057,13 +1457,16 @@
 <header>
   <div class="header-left">
     <h1>Service<br>Design <span>Lab</span></h1>
-    <p>Biomimicry Journey — Nature-Informed Service Design</p>
+    <p>Living Systems Framework — From Research to Market</p>
   </div>
   <div class="header-right">
-    <button class="mode-btn active" onclick="setView('journey')">◎ Cycle</button>
-    <button class="mode-btn" onclick="setView('workspace')">✏ Workspace</button>
-    <button class="mode-btn" onclick="setView('gtm')">⟶ Go-to-Field</button>
-    <button class="mode-btn" onclick="setView('example')">◈ Example</button>
+    <button class="mode-btn active" onclick="setView('intro')">⌂ Start</button>
+    <button class="mode-btn" onclick="setView('timeline')">⟿ Timeline</button>
+    <button class="mode-btn" onclick="setView('journey')">◎ Cycle</button>
+    <button class="mode-btn" onclick="setView('workspace')">✏ Research</button>
+    <button class="mode-btn" onclick="setView('gtm')">⟶ Field</button>
+    <button class="mode-btn" onclick="setView('bizdesign')">◈ Business</button>
+    <button class="mode-btn" onclick="setView('cx')">❋ CX</button>
     <button class="mode-btn" onclick="setView('summary')">⊞ Summary</button>
   </div>
 </header>
@@ -1100,8 +1503,286 @@
 <!-- MAIN -->
 <main>
 
+  <!-- ══ INTRO VIEW ══ -->
+  <div class="view active" id="view-intro" style="padding-top:0.5rem;">
+    <div class="intro-hero">
+      <div>
+        <div class="intro-headline">Living<br>Systems<br><span>Design</span></div>
+        <div class="intro-lead">Nature has been solving complex adaptive problems for 3.8 billion years. This framework borrows its logic — not its aesthetics — to help you design services, businesses, and experiences that are genuinely resilient.</div>
+        <div class="intro-body">
+          <p>Most design frameworks are linear: research → define → ideate → deliver. But living systems don't work that way. They observe continuously, find recurring patterns, emulate what works, run small experiments, read feedback signals, propagate what takes root, and then cycle back — because conditions always change.</p>
+          <p style="margin-top:0.75rem;">This tool guides you through the full lifecycle: from the naturalist's first field notes through to market deployment, customer experience, and long-term ecosystem health. At every stage it names both the <strong style="color:var(--moss)">biomimicry logic</strong> and the <span style="font-family:'DM Mono',monospace;font-size:0.8em;background:var(--parchment);padding:0.1rem 0.3rem;border:1px solid var(--border)">legacy SD/BD/CX equivalent</span> so you can move between languages fluently.</p>
+        </div>
+        <div class="intro-cta">
+          <button class="cta-primary" onclick="setView('timeline')">See the full lifecycle →</button>
+          <button class="cta-secondary" onclick="setView('workspace')">Jump to workspace</button>
+        </div>
+      </div>
+      <div class="intro-principles">
+        <div style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Core Principles</div>
+
+        <div class="intro-principle">
+          <div class="intro-principle-label">Principle 01</div>
+          <div class="intro-principle-nature">Observe before you interpret</div>
+          <div class="intro-principle-legacy">Legacy: User research / ethnography</div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-top:0.4rem;line-height:1.55;">A naturalist fills the notebook before drawing conclusions. Most design fails because interpretation happens before observation is complete.</div>
+        </div>
+
+        <div class="intro-principle">
+          <div class="intro-principle-label">Principle 02</div>
+          <div class="intro-principle-nature">Patterns reveal the system's logic</div>
+          <div class="intro-principle-legacy">Legacy: Synthesis / affinity mapping / insight generation</div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-top:0.4rem;line-height:1.55;">Nature repeats solutions that work: spirals, networks, edge effects, feedback loops. Find the recurring form — that's the design brief hiding inside the data.</div>
+        </div>
+
+        <div class="intro-principle">
+          <div class="intro-principle-label">Principle 03</div>
+          <div class="intro-principle-nature">Emulate what evolution already solved</div>
+          <div class="intro-principle-legacy">Legacy: Insight synthesis / HMW / problem framing</div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-top:0.4rem;line-height:1.55;">Ask: what organism has already solved a version of this challenge? Mycelium, mangroves, immune systems, and ant colonies are all design precedents.</div>
+        </div>
+
+        <div class="intro-principle">
+          <div class="intro-principle-label">Principle 04</div>
+          <div class="intro-principle-nature">Test cheaply at the edge before scaling</div>
+          <div class="intro-principle-legacy">Legacy: Prototyping / testing / MVP</div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-top:0.4rem;line-height:1.55;">Evolution runs billions of experiments simultaneously. Scale only what survives contact with reality. Failure is not a setback — it is the feedback loop working.</div>
+        </div>
+
+        <div class="intro-principle">
+          <div class="intro-principle-label">Principle 05</div>
+          <div class="intro-principle-nature">Design the whole ecosystem, not just the organism</div>
+          <div class="intro-principle-legacy">Legacy: Business design / CX strategy / service ops</div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-top:0.4rem;line-height:1.55;">A service is not a product. It is a relationship between an organism and its habitat. The business model, the customer experience, and the operational infrastructure are all part of the same living system.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- How to use -->
+    <div class="intro-how">
+      <h3>How to use this tool</h3>
+      <div class="intro-steps">
+        <div class="intro-step">
+          <div class="intro-step-num">1</div>
+          <div class="intro-step-title">Enter your concept</div>
+          <div class="intro-step-desc">Type your working concept in the bar at the top. Hit "Generate Journey" to AI-populate all stages, or work through them manually.</div>
+        </div>
+        <div class="intro-step">
+          <div class="intro-step-num">2</div>
+          <div class="intro-step-title">Follow the Research cycle</div>
+          <div class="intro-step-desc">Work through Observe → Pattern → Emulate → Prototype → Adapt → Propagate. Each stage builds on the last.</div>
+        </div>
+        <div class="intro-step">
+          <div class="intro-step-num">3</div>
+          <div class="intro-step-title">Plan your Go-to-Field</div>
+          <div class="intro-step-desc">When your concept is validated, move to the Field phase: soil conditions, actor agreements, germination plan, signal network.</div>
+        </div>
+        <div class="intro-step">
+          <div class="intro-step-num">4</div>
+          <div class="intro-step-title">Design the Business & CX</div>
+          <div class="intro-step-desc">Use the Business Design canvas (metabolic strategy) and the CX canvas (habitat design) to complete the full ecosystem.</div>
+        </div>
+        <div class="intro-step">
+          <div class="intro-step-num">5</div>
+          <div class="intro-step-title">Export at any stage</div>
+          <div class="intro-step-desc">Every panel has its own export. The Summary view gives you the full picture. Use Print for a shareable artifact.</div>
+        </div>
+        <div class="intro-step">
+          <div class="intro-step-num">6</div>
+          <div class="intro-step-title">Cycle back</div>
+          <div class="intro-step-desc">Living systems don't stop at delivery. New field signals should feed back into your Observe stage. Use the Timeline to track where you are.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TIMELINE VIEW ══ -->
+  <div class="view" id="view-timeline">
+    <div class="timeline-intro">
+      <h2>The Full Lifecycle</h2>
+      <p>A living system doesn't follow a linear process — it follows an adaptive cycle. Each phase below represents a distinct mode of engagement with the ecosystem. Click any phase to enter its workspace. The feedback arrows show where signals from later phases re-enter earlier ones.</p>
+    </div>
+
+    <!-- MAIN TIMELINE SVG -->
+    <div style="overflow-x:auto;margin-bottom:3rem;">
+      <svg width="1100" height="320" viewBox="0 0 1100 320" xmlns="http://www.w3.org/2000/svg" style="min-width:700px;display:block;">
+        <defs>
+          <marker id="tl-arrow" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L7,3.5 z" fill="#3d5c35" opacity="0.6"/>
+          </marker>
+          <marker id="tl-arrow-back" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L7,3.5 z" fill="#c47c1a" opacity="0.5"/>
+          </marker>
+        </defs>
+
+        <!-- Phase background bands -->
+        <rect x="10"   y="60" width="230" height="160" fill="#3d5c35" opacity="0.06" rx="2"/>
+        <rect x="250"  y="60" width="170" height="160" fill="#7a8c5c" opacity="0.06" rx="2"/>
+        <rect x="430"  y="60" width="170" height="160" fill="#c47c1a" opacity="0.06" rx="2"/>
+        <rect x="610"  y="60" width="170" height="160" fill="#9e4a2a" opacity="0.06" rx="2"/>
+        <rect x="790"  y="60" width="155" height="160" fill="#4a3d6a" opacity="0.06" rx="2"/>
+        <rect x="955"  y="60" width="135" height="160" fill="#5c3838" opacity="0.06" rx="2"/>
+
+        <!-- Phase labels top -->
+        <text x="125"  y="50" text-anchor="middle" font-family="'DM Mono',monospace" font-size="8" fill="#3d5c35" letter-spacing="1.5" text-transform="uppercase">RESEARCH</text>
+        <text x="335"  y="50" text-anchor="middle" font-family="'DM Mono',monospace" font-size="8" fill="#7a8c5c" letter-spacing="1.5">DEFINE</text>
+        <text x="515"  y="50" text-anchor="middle" font-family="'DM Mono',monospace" font-size="8" fill="#c47c1a" letter-spacing="1.5">DEVELOP</text>
+        <text x="695"  y="50" text-anchor="middle" font-family="'DM Mono',monospace" font-size="8" fill="#9e4a2a" letter-spacing="1.5">FIELD</text>
+        <text x="867"  y="50" text-anchor="middle" font-family="'DM Mono',monospace" font-size="8" fill="#4a3d6a" letter-spacing="1.5">MARKET</text>
+        <text x="1022" y="50" text-anchor="middle" font-family="'DM Mono',monospace" font-size="8" fill="#5c3838" letter-spacing="1.5">SUSTAIN</text>
+
+        <!-- Spine line -->
+        <line x1="50" y1="145" x2="1060" y2="145" stroke="#cdc8b8" stroke-width="1.5"/>
+
+        <!-- Forward arrows on spine -->
+        <path d="M 50 145 L 1060 145" fill="none" stroke="#cdc8b8" stroke-width="1.5"/>
+        <path d="M 240 145 L 248 145" fill="none" stroke="#3d5c35" stroke-width="2" marker-end="url(#tl-arrow)"/>
+        <path d="M 420 145 L 428 145" fill="none" stroke="#7a8c5c" stroke-width="2" marker-end="url(#tl-arrow)"/>
+        <path d="M 600 145 L 608 145" fill="none" stroke="#c47c1a" stroke-width="2" marker-end="url(#tl-arrow)"/>
+        <path d="M 780 145 L 788 145" fill="none" stroke="#9e4a2a" stroke-width="2" marker-end="url(#tl-arrow)"/>
+        <path d="M 950 145 L 958 145" fill="none" stroke="#4a3d6a" stroke-width="2" marker-end="url(#tl-arrow)"/>
+
+        <!-- Feedback loop (curved arrow back from SUSTAIN to RESEARCH) -->
+        <path d="M 1060 165 Q 550 280 50 165" fill="none" stroke="#c47c1a" stroke-width="1.2" stroke-dasharray="6 4" opacity="0.5" marker-end="url(#tl-arrow-back)"/>
+        <text x="550" y="278" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#c47c1a" opacity="0.6" letter-spacing="1">ADAPTIVE CYCLE — SIGNALS FEED BACK INTO OBSERVATION</text>
+
+        <!-- Stage nodes: Observe -->
+        <g onclick="jumpToWorkspace(0)" style="cursor:pointer">
+          <circle cx="70"  cy="145" r="18" fill="#3d5c35"/>
+          <text x="70"  y="149" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="10" fill="white">Obs</text>
+        </g>
+        <!-- Pattern -->
+        <g onclick="jumpToWorkspace(1)" style="cursor:pointer">
+          <circle cx="145" cy="145" r="18" fill="#5c8a50"/>
+          <text x="145" y="149" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="9" fill="white">Pat</text>
+        </g>
+        <!-- Emulate -->
+        <g onclick="jumpToWorkspace(2)" style="cursor:pointer">
+          <circle cx="270" cy="145" r="18" fill="#7a8c5c"/>
+          <text x="270" y="149" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="9" fill="white">Emu</text>
+        </g>
+        <!-- Prototype -->
+        <g onclick="jumpToWorkspace(3)" style="cursor:pointer">
+          <circle cx="365" cy="145" r="18" fill="#c47c1a"/>
+          <text x="365" y="149" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="8" fill="white">Proto</text>
+        </g>
+        <!-- Adapt -->
+        <g onclick="jumpToWorkspace(4)" style="cursor:pointer">
+          <circle cx="455" cy="145" r="18" fill="#9e6a2a"/>
+          <text x="455" y="149" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="10" fill="white">Adp</text>
+        </g>
+        <!-- Propagate -->
+        <g onclick="jumpToWorkspace(5)" style="cursor:pointer">
+          <circle cx="545" cy="145" r="18" fill="#6a8a50"/>
+          <text x="545" y="149" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="8" fill="white">Prop</text>
+        </g>
+        <!-- GTM -->
+        <g onclick="setView('gtm')" style="cursor:pointer">
+          <circle cx="660" cy="145" r="18" fill="#9e4a2a"/>
+          <text x="660" y="149" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="9" fill="white">GTF</text>
+        </g>
+        <!-- Biz Design -->
+        <g onclick="setView('bizdesign')" style="cursor:pointer">
+          <circle cx="780" cy="145" r="18" fill="#4a3d6a"/>
+          <text x="780" y="149" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="8" fill="white">Biz</text>
+        </g>
+        <!-- CX -->
+        <g onclick="setView('cx')" style="cursor:pointer">
+          <circle cx="870" cy="145" r="18" fill="#5c4a6a"/>
+          <text x="870" y="149" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="9" fill="white">CX</text>
+        </g>
+        <!-- Ops -->
+        <g onclick="setView('cx')" style="cursor:pointer">
+          <circle cx="960" cy="145" r="18" fill="#6a3838"/>
+          <text x="960" y="149" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="9" fill="white">Ops</text>
+        </g>
+        <!-- Health -->
+        <g onclick="setView('summary')" style="cursor:pointer">
+          <circle cx="1045" cy="145" r="18" fill="#3d5c35" opacity="0.7"/>
+          <text x="1045" y="149" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="8" fill="white">Health</text>
+        </g>
+
+        <!-- Stage labels below nodes -->
+        <text x="70"   y="175" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#5a5a4e">Observe</text>
+        <text x="145"  y="175" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#5a5a4e">Pattern</text>
+        <text x="270"  y="175" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#5a5a4e">Emulate</text>
+        <text x="365"  y="175" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#5a5a4e">Prototype</text>
+        <text x="455"  y="175" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#5a5a4e">Adapt</text>
+        <text x="545"  y="175" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#5a5a4e">Propagate</text>
+        <text x="660"  y="175" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#5a5a4e">Go-to-Field</text>
+        <text x="780"  y="175" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#5a5a4e">Biz Design</text>
+        <text x="870"  y="175" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#5a5a4e">CX</text>
+        <text x="960"  y="175" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#5a5a4e">Ops</text>
+        <text x="1045" y="175" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#5a5a4e">Ecosystem</text>
+
+        <!-- Nature analogs above nodes -->
+        <text x="107"  y="110" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" fill="#3d5c35" opacity="0.8">Field Notes</text>
+        <text x="318"  y="110" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" fill="#7a8c5c" opacity="0.8">Patterning</text>
+        <text x="500"  y="110" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" fill="#c47c1a" opacity="0.8">Experiments</text>
+        <text x="660"  y="110" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" fill="#9e4a2a" opacity="0.8">Germination</text>
+        <text x="825"  y="110" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" fill="#4a3d6a" opacity="0.8">Metabolism</text>
+        <text x="1002" y="110" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" fill="#5c3838" opacity="0.8">Climax Ecosystem</text>
+      </svg>
+    </div>
+
+    <!-- Phase grid cards -->
+    <div class="timeline-phase-grid">
+      <div class="timeline-phase" onclick="setView('workspace')">
+        <div class="timeline-phase-icon">🌿</div>
+        <div class="timeline-phase-label">Phase 1–2</div>
+        <div class="timeline-phase-name">Research &amp; Define</div>
+        <div class="timeline-phase-nature">Naturalist observing, finding recurring forms</div>
+        <div class="timeline-phase-legacy">Legacy SD: Discover + Define</div>
+        <div class="timeline-phase-stages">
+          <div class="timeline-stage-tag">Observe — field notes, sources</div>
+          <div class="timeline-stage-tag">Pattern — observations, themes</div>
+          <div class="timeline-stage-tag">Emulate — insights, HMWs</div>
+        </div>
+      </div>
+      <div class="timeline-phase" onclick="setView('workspace');goToStage(3)">
+        <div class="timeline-phase-icon">⚗️</div>
+        <div class="timeline-phase-label">Phase 3</div>
+        <div class="timeline-phase-name">Develop &amp; Test</div>
+        <div class="timeline-phase-nature">Small experiments, fast failure, feedback loops</div>
+        <div class="timeline-phase-legacy">Legacy SD: Develop + Deliver (early)</div>
+        <div class="timeline-phase-stages">
+          <div class="timeline-stage-tag">Prototype — service concepts</div>
+          <div class="timeline-stage-tag">Adapt — test plans, signals</div>
+          <div class="timeline-stage-tag">Propagate — method selection</div>
+        </div>
+      </div>
+      <div class="timeline-phase" onclick="setView('gtm')">
+        <div class="timeline-phase-icon">🌱</div>
+        <div class="timeline-phase-label">Phase 4</div>
+        <div class="timeline-phase-name">Go-to-Field</div>
+        <div class="timeline-phase-nature">First germination — seed meets soil</div>
+        <div class="timeline-phase-legacy">Legacy BD: GTM strategy + pilot launch</div>
+        <div class="timeline-phase-stages">
+          <div class="timeline-stage-tag">Soil Conditions — readiness</div>
+          <div class="timeline-stage-tag">Actor Agreements — partnerships</div>
+          <div class="timeline-stage-tag">Germination Plan — pilot</div>
+          <div class="timeline-stage-tag">Signal Network — metrics</div>
+          <div class="timeline-stage-tag">Scale Threshold — replication</div>
+        </div>
+      </div>
+      <div class="timeline-phase" onclick="setView('bizdesign')">
+        <div class="timeline-phase-icon">🔋</div>
+        <div class="timeline-phase-label">Phase 5</div>
+        <div class="timeline-phase-name">Business &amp; CX Design</div>
+        <div class="timeline-phase-nature">Metabolic strategy + habitat design</div>
+        <div class="timeline-phase-legacy">Legacy BD: Business model + CX strategy + Service Ops</div>
+        <div class="timeline-phase-stages">
+          <div class="timeline-stage-tag">Value Organism — value prop</div>
+          <div class="timeline-stage-tag">Energy Flows — revenue model</div>
+          <div class="timeline-stage-tag">Habitat Design — CX journey</div>
+          <div class="timeline-stage-tag">Colony Health — service ops</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ══ JOURNEY VIEW ══ -->
-  <div class="view active" id="view-journey">
+  <div class="view" id="view-journey">
     <div class="journey-intro">
       <h2>The Living Systems Journey</h2>
       <p>Nature has solved every design challenge we face — scarcity, resilience, trust, feedback, adaptation. This framework borrows its structure from ecosystems: observe without agenda, find the deep patterns, emulate what works, experiment fast, iterate from signals, and propagate what takes root.</p>
@@ -1878,6 +2559,374 @@
   </div>
 
   <!-- ══ SUMMARY VIEW ══ -->
+  <!-- ══ BUSINESS DESIGN VIEW ══ -->
+  <div class="view" id="view-bizdesign">
+    <div class="canvas-header">
+      <h2>Business Design</h2>
+      <span class="canvas-nature-tag">Metabolic Strategy</span>
+      <span class="canvas-legacy-tag">Legacy: Business Model Canvas / Value Prop</span>
+      <button class="canvas-export-btn" onclick="exportCanvas('bizdesign')">↓ Export canvas</button>
+    </div>
+    <div class="canvas-tagline">
+      Every living organism has a metabolic strategy — a way of converting available energy into survival and growth. Your business model is your metabolic strategy. <strong>How does value flow in, transform, and sustain the organism?</strong>
+    </div>
+
+    <!-- Canvas SVG diagram -->
+    <div style="overflow-x:auto;margin-bottom:2.5rem;">
+      <svg width="900" height="380" viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg" style="min-width:600px;display:block;">
+        <!-- Background -->
+        <rect width="900" height="380" fill="#f4f0e6" rx="3"/>
+
+        <!-- Title -->
+        <text x="450" y="28" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="16" fill="#2d2a24" letter-spacing="2">METABOLIC STRATEGY CANVAS</text>
+        <text x="450" y="44" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7.5" fill="#8a8472" letter-spacing="1.5">LEGACY: BUSINESS MODEL CANVAS</text>
+
+        <!-- Cell: Mutualist Partners (left) -->
+        <rect x="10"  y="55" width="155" height="310" fill="white" stroke="#cdc8b8" stroke-width="1" rx="1"/>
+        <text x="87"  y="78"  text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#3d5c35" letter-spacing="1">MUTUALIST PARTNERS</text>
+        <text x="87"  y="90"  text-anchor="middle" font-family="'DM Mono',monospace" font-size="6" fill="#8a8472">legacy: Key Partners</text>
+        <text x="20"  y="115" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">Who do you need in</text>
+        <text x="20"  y="127" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">mutualist relationship?</text>
+        <text x="20"  y="145" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">What do they give/receive?</text>
+        <text x="20"  y="163" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">Which species is keystone?</text>
+
+        <!-- Cell: Core Capabilities (left-mid) -->
+        <rect x="175" y="55" width="155" height="145" fill="white" stroke="#cdc8b8" stroke-width="1" rx="1"/>
+        <text x="252" y="78"  text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#3d5c35" letter-spacing="1">CORE CAPABILITIES</text>
+        <text x="252" y="90"  text-anchor="middle" font-family="'DM Mono',monospace" font-size="6" fill="#8a8472">legacy: Key Activities</text>
+        <text x="185" y="115" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">What must this organism</text>
+        <text x="185" y="127" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">do exceptionally well?</text>
+        <text x="185" y="145" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">What dies if you stop?</text>
+
+        <!-- Cell: Root Resources (left-mid lower) -->
+        <rect x="175" y="210" width="155" height="155" fill="white" stroke="#cdc8b8" stroke-width="1" rx="1"/>
+        <text x="252" y="233" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#3d5c35" letter-spacing="1">ROOT RESOURCES</text>
+        <text x="252" y="245" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6" fill="#8a8472">legacy: Key Resources</text>
+        <text x="185" y="270" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">What do you need to</text>
+        <text x="185" y="282" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">survive and function?</text>
+        <text x="185" y="300" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">What's your mycorrhizal</text>
+        <text x="185" y="312" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">infrastructure?</text>
+
+        <!-- Cell: Value Organism (centre — tall) -->
+        <rect x="340" y="55" width="220" height="310" fill="#3d5c35" opacity="0.05" stroke="#3d5c35" stroke-width="1.5" rx="1"/>
+        <text x="450" y="80"  text-anchor="middle" font-family="'DM Mono',monospace" font-size="7.5" fill="#3d5c35" letter-spacing="1.5">VALUE ORGANISM</text>
+        <text x="450" y="94"  text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" fill="#8a8472">legacy: Value Proposition</text>
+        <text x="355" y="125" font-family="'Instrument Sans',sans-serif" font-size="8.5" fill="#3d5c35">What does this organism offer</text>
+        <text x="355" y="140" font-family="'Instrument Sans',sans-serif" font-size="8.5" fill="#3d5c35">that no other organism can?</text>
+        <text x="355" y="168" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#5a5a4e">What pain does it relieve?</text>
+        <text x="355" y="182" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#5a5a4e">What capability does it unlock?</text>
+        <text x="355" y="196" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#5a5a4e">What gain does it create?</text>
+        <text x="355" y="222" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#5a5a4e">Who is it adapted for?</text>
+        <text x="355" y="248" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#5a5a4e">What would be lost if it</text>
+        <text x="355" y="262" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#5a5a4e">disappeared from the ecosystem?</text>
+
+        <!-- Cell: Relationships (right-mid upper) -->
+        <rect x="570" y="55" width="155" height="145" fill="white" stroke="#cdc8b8" stroke-width="1" rx="1"/>
+        <text x="647" y="78"  text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#3d5c35" letter-spacing="1">SYMBIOTIC BONDS</text>
+        <text x="647" y="90"  text-anchor="middle" font-family="'DM Mono',monospace" font-size="6" fill="#8a8472">legacy: Customer Relationships</text>
+        <text x="580" y="115" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">How does the relationship</text>
+        <text x="580" y="127" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">deepen over time?</text>
+        <text x="580" y="145" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">What makes the bond mutualist</text>
+        <text x="580" y="157" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">not extractive?</text>
+
+        <!-- Cell: Dispersal Channels (right-mid lower) -->
+        <rect x="570" y="210" width="155" height="155" fill="white" stroke="#cdc8b8" stroke-width="1" rx="1"/>
+        <text x="647" y="233" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#3d5c35" letter-spacing="1">DISPERSAL CHANNELS</text>
+        <text x="647" y="245" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6" fill="#8a8472">legacy: Channels</text>
+        <text x="580" y="270" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">What vectors carry value</text>
+        <text x="580" y="282" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">to the right soil?</text>
+        <text x="580" y="300" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">What dispersal mechanism</text>
+        <text x="580" y="312" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">fits this ecosystem?</text>
+
+        <!-- Cell: Habitat Segments (right) -->
+        <rect x="735" y="55" width="155" height="310" fill="white" stroke="#cdc8b8" stroke-width="1" rx="1"/>
+        <text x="812" y="78"  text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#3d5c35" letter-spacing="1">HABITAT SEGMENTS</text>
+        <text x="812" y="90"  text-anchor="middle" font-family="'DM Mono',monospace" font-size="6" fill="#8a8472">legacy: Customer Segments</text>
+        <text x="745" y="115" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">Which habitats does</text>
+        <text x="745" y="127" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">this organism thrive in?</text>
+        <text x="745" y="145" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">Who is the keystone user?</text>
+        <text x="745" y="163" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">Who is underserved at</text>
+        <text x="745" y="175" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">the edge of the system?</text>
+        <text x="745" y="200" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">Whose absence means</text>
+        <text x="745" y="212" font-family="'Instrument Sans',sans-serif" font-size="8" fill="#8a8472">the ecosystem fails?</text>
+
+        <!-- Bottom: Energy Flows (cost) left -->
+        <rect x="10"  y="330" width="425" height="45" fill="#2d2a24" opacity="0.04" stroke="#cdc8b8" stroke-width="1" rx="1"/>
+        <text x="222" y="349" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#3d5c35" letter-spacing="1">ENERGY COSTS</text>
+        <text x="222" y="361" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6" fill="#8a8472">legacy: Cost Structure — what does it cost to maintain this organism's metabolism?</text>
+
+        <!-- Bottom: Energy Returns (revenue) right -->
+        <rect x="445" y="330" width="445" height="45" fill="#3d5c35" opacity="0.05" stroke="#3d5c35" stroke-width="1" rx="1"/>
+        <text x="667" y="349" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#3d5c35" letter-spacing="1">ENERGY RETURNS</text>
+        <text x="667" y="361" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6" fill="#8a8472">legacy: Revenue Streams — what flows back to sustain and grow the organism?</text>
+      </svg>
+    </div>
+
+    <!-- Form -->
+    <div class="canvas-layout">
+      <div class="canvas-form-section">
+        <div class="canvas-block">
+          <div class="canvas-block-label">Value Organism</div>
+          <div class="canvas-block-nature">What does this organism uniquely offer?</div>
+          <div class="canvas-block-legacy">Legacy: Value Proposition</div>
+          <div class="canvas-block-q">What pain does it relieve? What capability does it unlock? Who is it adapted for? What would be lost if it disappeared?</div>
+          <textarea class="canvas-textarea" id="biz-value" placeholder="This service uniquely offers… to people who… because existing solutions fail to…"></textarea>
+        </div>
+        <div class="canvas-block">
+          <div class="canvas-block-label">Habitat Segments</div>
+          <div class="canvas-block-nature">Which habitats and species does this serve?</div>
+          <div class="canvas-block-legacy">Legacy: Customer Segments</div>
+          <div class="canvas-block-q">Which communities/users thrive with this service? Who is the keystone user? Who is currently at the edge and underserved?</div>
+          <textarea class="canvas-textarea" id="biz-segments" placeholder="Primary habitat: … / Keystone user: … / Underserved edge: …"></textarea>
+        </div>
+        <div class="canvas-block">
+          <div class="canvas-block-label">Mutualist Partners</div>
+          <div class="canvas-block-nature">Who must be in relationship for the system to work?</div>
+          <div class="canvas-block-legacy">Legacy: Key Partners</div>
+          <div class="canvas-block-q">Who are your fig wasps? What do they give / receive? Which partner is keystone — whose absence collapses the system?</div>
+          <textarea class="canvas-textarea" id="biz-partners" placeholder="[Partner] gives [resource/capacity] / receives [value] — they are keystone because…"></textarea>
+        </div>
+        <div class="canvas-block">
+          <div class="canvas-block-label">Core Capabilities</div>
+          <div class="canvas-block-nature">What must this organism do exceptionally well?</div>
+          <div class="canvas-block-legacy">Legacy: Key Activities</div>
+          <div class="canvas-block-q">What activities are essential to delivering your value? What dies if you stop doing it? What is your competitive metabolism?</div>
+          <textarea class="canvas-textarea" id="biz-activities" placeholder="We must excel at… / We cannot outsource… / Our differentiating activity is…"></textarea>
+        </div>
+        <div class="canvas-block">
+          <div class="canvas-block-label">Root Resources</div>
+          <div class="canvas-block-nature">What infrastructure must exist underground?</div>
+          <div class="canvas-block-legacy">Legacy: Key Resources</div>
+          <div class="canvas-block-q">What physical, intellectual, human, and financial resources are essential? What is your mycorrhizal infrastructure?</div>
+          <textarea class="canvas-textarea" id="biz-resources" placeholder="Essential resources: … / Infrastructure we must own vs. access: … / What we cannot afford to lose: …"></textarea>
+        </div>
+        <div class="canvas-block">
+          <div class="canvas-block-label">Dispersal Channels</div>
+          <div class="canvas-block-nature">What vectors carry value to the right soil?</div>
+          <div class="canvas-block-legacy">Legacy: Channels</div>
+          <div class="canvas-block-q">How do people discover, access, and receive the service? What dispersal mechanism fits the ecosystem — wind, water, animal, decay?</div>
+          <textarea class="canvas-textarea" id="biz-channels" placeholder="Discovery: … / Access: … / Delivery: … / Dispersal logic: …"></textarea>
+        </div>
+        <div class="canvas-block">
+          <div class="canvas-block-label">Symbiotic Bonds</div>
+          <div class="canvas-block-nature">How does the relationship deepen over time?</div>
+          <div class="canvas-block-legacy">Legacy: Customer Relationships</div>
+          <div class="canvas-block-q">What kind of relationship does each segment need? How does it become mutualistic (not extractive) over time?</div>
+          <textarea class="canvas-textarea" id="biz-relationships" placeholder="With [segment], the relationship deepens through… / It becomes mutualist when… / The risk of extraction is…"></textarea>
+        </div>
+        <div class="canvas-block">
+          <div class="canvas-block-label">Energy Costs</div>
+          <div class="canvas-block-nature">What does it cost to maintain this metabolism?</div>
+          <div class="canvas-block-legacy">Legacy: Cost Structure</div>
+          <div class="canvas-block-q">What are your largest cost centres? What costs scale with volume? What costs are fixed regardless of growth?</div>
+          <textarea class="canvas-textarea" id="biz-costs" placeholder="Fixed costs: … / Variable costs: … / Largest cost driver: … / Cost we must reduce to be viable: …"></textarea>
+        </div>
+        <div class="canvas-block">
+          <div class="canvas-block-label">Energy Returns</div>
+          <div class="canvas-block-nature">What flows back to sustain and grow the organism?</div>
+          <div class="canvas-block-legacy">Legacy: Revenue Streams</div>
+          <div class="canvas-block-q">How does value convert to energy returns? What revenue models fit your dispersal strategy? What is the path to metabolic surplus?</div>
+          <textarea class="canvas-textarea" id="biz-revenue" placeholder="Revenue streams: … / Pricing logic: … / Path to surplus: … / Non-financial returns: …"></textarea>
+        </div>
+        <button class="canvas-ai-btn" id="bizAiBtn" onclick="generateCanvas('biz')">
+          <span id="bizAiBtnText">✦ Generate with AI</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ CX + OPS VIEW ══ -->
+  <div class="view" id="view-cx">
+    <div class="canvas-header">
+      <h2>Habitat Design</h2>
+      <span class="canvas-nature-tag">CX + Service Ops</span>
+      <span class="canvas-legacy-tag">Legacy: CX Strategy / Journey Mapping / Service Operations</span>
+      <button class="canvas-export-btn" onclick="exportCanvas('cx')">↓ Export canvas</button>
+    </div>
+    <div class="canvas-tagline">
+      A habitat is the full environment in which an organism lives — not just a touchpoint, but the complete sensory, social, and resource landscape. <strong>CX design is habitat design.</strong> Service ops is the ecology that sustains the habitat day-to-day.
+    </div>
+
+    <!-- Journey Map Canvas SVG -->
+    <div style="overflow-x:auto;margin-bottom:2.5rem;">
+      <svg width="960" height="320" viewBox="0 0 960 320" xmlns="http://www.w3.org/2000/svg" style="min-width:700px;display:block;">
+        <rect width="960" height="320" fill="#f4f0e6" rx="3"/>
+        <text x="480" y="26" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="15" fill="#2d2a24" letter-spacing="2">HABITAT EXPERIENCE MAP</text>
+        <text x="480" y="42" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#8a8472" letter-spacing="1.5">LEGACY: CUSTOMER JOURNEY MAP</text>
+
+        <!-- Phase headers -->
+        <rect x="10" y="50" width="80" height="260" fill="#2d2a24" opacity="0.06" rx="1"/>
+        <text x="50" y="75" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6" fill="#5a5a4e" letter-spacing="1">LAYER</text>
+
+        <!-- 5 journey phases -->
+        <rect x="100" y="50" width="168" height="260" fill="#3d5c35" opacity="0.04" rx="1" stroke="#cdc8b8" stroke-width="0.5"/>
+        <text x="184" y="70" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#3d5c35" letter-spacing="1">APPROACH</text>
+        <text x="184" y="82" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6" fill="#8a8472">Awareness → Intent</text>
+
+        <rect x="278" y="50" width="168" height="260" fill="#7a8c5c" opacity="0.04" rx="1" stroke="#cdc8b8" stroke-width="0.5"/>
+        <text x="362" y="70" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#7a8c5c" letter-spacing="1">ENTRY</text>
+        <text x="362" y="82" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6" fill="#8a8472">First contact → Onboard</text>
+
+        <rect x="456" y="50" width="168" height="260" fill="#c47c1a" opacity="0.04" rx="1" stroke="#cdc8b8" stroke-width="0.5"/>
+        <text x="540" y="70" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#c47c1a" letter-spacing="1">CORE USE</text>
+        <text x="540" y="82" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6" fill="#8a8472">Core interaction loop</text>
+
+        <rect x="634" y="50" width="168" height="260" fill="#9e4a2a" opacity="0.04" rx="1" stroke="#cdc8b8" stroke-width="0.5"/>
+        <text x="718" y="70" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#9e4a2a" letter-spacing="1">STRESS TEST</text>
+        <text x="718" y="82" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6" fill="#8a8472">Problems → Recovery</text>
+
+        <rect x="812" y="50" width="138" height="260" fill="#3d5c35" opacity="0.04" rx="1" stroke="#cdc8b8" stroke-width="0.5"/>
+        <text x="881" y="70" text-anchor="middle" font-family="'DM Mono',monospace" font-size="7" fill="#3d5c35" letter-spacing="1">RETURN</text>
+        <text x="881" y="82" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6" fill="#8a8472">Loyalty → Advocacy</text>
+
+        <!-- Row labels -->
+        <text x="50" y="107" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6" fill="#5a5a4e" letter-spacing="0.5">ACTIONS</text>
+        <text x="50" y="152" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6" fill="#5a5a4e" letter-spacing="0.5">FEELING</text>
+        <text x="50" y="197" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6" fill="#5a5a4e" letter-spacing="0.5">FRICTION</text>
+        <text x="50" y="242" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6" fill="#5a5a4e" letter-spacing="0.5">BACKSTAGE</text>
+        <text x="50" y="287" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6" fill="#5a5a4e" letter-spacing="0.5">SIGNAL</text>
+
+        <!-- Horizontal dividers -->
+        <line x1="10" y1="120" x2="950" y2="120" stroke="#cdc8b8" stroke-width="0.5"/>
+        <line x1="10" y1="165" x2="950" y2="165" stroke="#cdc8b8" stroke-width="0.5"/>
+        <line x1="10" y1="210" x2="950" y2="210" stroke="#cdc8b8" stroke-width="0.5"/>
+        <line x1="10" y1="255" x2="950" y2="255" stroke="#cdc8b8" stroke-width="0.5"/>
+
+        <!-- Emotional arc line -->
+        <path d="M 130 148 Q 230 130 362 142 Q 460 152 540 135 Q 640 118 718 148 Q 790 172 881 132" fill="none" stroke="#3d5c35" stroke-width="2" opacity="0.5" stroke-dasharray="5 3"/>
+        <circle cx="130" cy="148" r="3" fill="#3d5c35" opacity="0.6"/>
+        <circle cx="362" cy="142" r="3" fill="#3d5c35" opacity="0.6"/>
+        <circle cx="540" cy="135" r="3" fill="#3d5c35" opacity="0.6"/>
+        <circle cx="718" cy="148" r="3" fill="#9e4a2a" opacity="0.6"/>
+        <circle cx="881" cy="132" r="3" fill="#3d5c35" opacity="0.6"/>
+        <text x="730" y="110" font-family="'DM Mono',monospace" font-size="6" fill="#8a8472">emotional arc</text>
+      </svg>
+    </div>
+
+    <!-- Journey map interactive form -->
+    <div style="margin-bottom:2.5rem;overflow-x:auto;">
+      <div style="min-width:700px;">
+        <div class="jmap-phase-header">
+          <div class="jmap-phase-cell" style="font-size:0.55rem;">Layer</div>
+          <div class="jmap-phase-cell" style="background:rgba(61,92,53,0.15)">Approach</div>
+          <div class="jmap-phase-cell" style="background:rgba(122,140,92,0.15)">Entry</div>
+          <div class="jmap-phase-cell" style="background:rgba(196,124,26,0.15)">Core Use</div>
+          <div class="jmap-phase-cell" style="background:rgba(158,74,42,0.15)">Stress Test</div>
+          <div class="jmap-phase-cell" style="background:rgba(61,92,53,0.15)">Return</div>
+        </div>
+        <div class="jmap-row">
+          <div class="jmap-label">What they do</div>
+          <div class="jmap-cells">
+            <div class="jmap-cell"><textarea placeholder="Hears about it…" id="jmap-0-0"></textarea></div>
+            <div class="jmap-cell"><textarea placeholder="First visits / signs up…" id="jmap-0-1"></textarea></div>
+            <div class="jmap-cell"><textarea placeholder="Uses the core service…" id="jmap-0-2"></textarea></div>
+            <div class="jmap-cell"><textarea placeholder="Encounters a problem…" id="jmap-0-3"></textarea></div>
+            <div class="jmap-cell"><textarea placeholder="Returns, refers…" id="jmap-0-4"></textarea></div>
+          </div>
+        </div>
+        <div class="jmap-row">
+          <div class="jmap-label">How it feels</div>
+          <div class="jmap-cells">
+            <div class="jmap-cell"><textarea placeholder="Curious / sceptical…" id="jmap-1-0"></textarea></div>
+            <div class="jmap-cell"><textarea placeholder="Hopeful / uncertain…" id="jmap-1-1"></textarea></div>
+            <div class="jmap-cell"><textarea placeholder="Confident / frustrated…" id="jmap-1-2"></textarea></div>
+            <div class="jmap-cell"><textarea placeholder="Anxious / let down…" id="jmap-1-3"></textarea></div>
+            <div class="jmap-cell"><textarea placeholder="Loyal / proud…" id="jmap-1-4"></textarea></div>
+          </div>
+        </div>
+        <div class="jmap-row">
+          <div class="jmap-label">Friction points</div>
+          <div class="jmap-cells">
+            <div class="jmap-cell"><textarea placeholder="Can't find it…" id="jmap-2-0"></textarea></div>
+            <div class="jmap-cell"><textarea placeholder="Confusing onboarding…" id="jmap-2-1"></textarea></div>
+            <div class="jmap-cell"><textarea placeholder="Feature gap…" id="jmap-2-2"></textarea></div>
+            <div class="jmap-cell"><textarea placeholder="No recovery path…" id="jmap-2-3"></textarea></div>
+            <div class="jmap-cell"><textarea placeholder="No reason to return…" id="jmap-2-4"></textarea></div>
+          </div>
+        </div>
+        <div class="jmap-row">
+          <div class="jmap-label">Backstage</div>
+          <div class="jmap-cells">
+            <div class="jmap-cell"><textarea placeholder="Marketing / comms…" id="jmap-3-0"></textarea></div>
+            <div class="jmap-cell"><textarea placeholder="Onboarding ops…" id="jmap-3-1"></textarea></div>
+            <div class="jmap-cell"><textarea placeholder="Support staff / systems…" id="jmap-3-2"></textarea></div>
+            <div class="jmap-cell"><textarea placeholder="Escalation process…" id="jmap-3-3"></textarea></div>
+            <div class="jmap-cell"><textarea placeholder="Retention ops…" id="jmap-3-4"></textarea></div>
+          </div>
+        </div>
+        <div class="jmap-row">
+          <div class="jmap-label">Health signal</div>
+          <div class="jmap-cells">
+            <div class="jmap-cell"><textarea placeholder="Referral rate…" id="jmap-4-0"></textarea></div>
+            <div class="jmap-cell"><textarea placeholder="Activation rate…" id="jmap-4-1"></textarea></div>
+            <div class="jmap-cell"><textarea placeholder="Engagement depth…" id="jmap-4-2"></textarea></div>
+            <div class="jmap-cell"><textarea placeholder="Recovery rate…" id="jmap-4-3"></textarea></div>
+            <div class="jmap-cell"><textarea placeholder="NPS / LTV…" id="jmap-4-4"></textarea></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service Ops canvas -->
+    <div style="margin-top:3rem;border-top:1px solid var(--border);padding-top:2rem;">
+      <div class="canvas-header" style="margin-bottom:0.5rem;">
+        <h2 style="font-size:1.5rem;">Colony Health</h2>
+        <span class="canvas-nature-tag">Service Operations</span>
+        <span class="canvas-legacy-tag">Legacy: Service Ops / Staff XP / Continuous Improvement</span>
+      </div>
+      <div class="canvas-tagline" style="margin-bottom:1.5rem;">A colony sustains itself through distributed intelligence — no single organism manages the whole. Service ops is the colony's maintenance logic: <strong>what keeps every cell healthy and the whole system adaptive?</strong></div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;max-width:1100px;">
+        <div class="canvas-block">
+          <div class="canvas-block-label">Staff Ecosystem</div>
+          <div class="canvas-block-nature">Who are the organism's frontline cells?</div>
+          <div class="canvas-block-legacy">Legacy: Staff experience / employee journey</div>
+          <div class="canvas-block-q">What do frontline staff need to do their best work? What invisible labour do they carry? How does the system support them?</div>
+          <textarea class="canvas-textarea" id="cx-staff" placeholder="Frontline staff need… / Invisible labour includes… / Current gaps: …"></textarea>
+        </div>
+        <div class="canvas-block">
+          <div class="canvas-block-label">Process Metabolism</div>
+          <div class="canvas-block-nature">How does the system maintain its internal rhythms?</div>
+          <div class="canvas-block-legacy">Legacy: Process design / standard operating procedures</div>
+          <div class="canvas-block-q">What processes must run reliably for the service to function? Where do processes currently break down? What should be automated vs. human?</div>
+          <textarea class="canvas-textarea" id="cx-process" placeholder="Critical processes: … / Current breakdowns: … / Automation candidates: …"></textarea>
+        </div>
+        <div class="canvas-block">
+          <div class="canvas-block-label">Distress Signals</div>
+          <div class="canvas-block-nature">What does the colony signal when it's under stress?</div>
+          <div class="canvas-block-legacy">Legacy: Quality metrics / KPIs / NPS</div>
+          <div class="canvas-block-q">What signals tell you the service is unhealthy? How quickly do you detect them? What is the response protocol when distress fires?</div>
+          <textarea class="canvas-textarea" id="cx-signals" placeholder="Health signals: … / Distress signals: … / Response protocol: …"></textarea>
+        </div>
+        <div class="canvas-block">
+          <div class="canvas-block-label">Adaptive Capacity</div>
+          <div class="canvas-block-nature">How does the system learn and evolve?</div>
+          <div class="canvas-block-legacy">Legacy: Continuous improvement / retrospectives / learning loops</div>
+          <div class="canvas-block-q">How do you incorporate field signals back into the service design? How often do you run retrospectives? What is the cycle from signal to change?</div>
+          <textarea class="canvas-textarea" id="cx-adapt" placeholder="Learning cadence: … / Signal-to-change cycle: … / Who holds the learning: …"></textarea>
+        </div>
+        <div class="canvas-block">
+          <div class="canvas-block-label">Service Recovery</div>
+          <div class="canvas-block-nature">How does the ecosystem heal after damage?</div>
+          <div class="canvas-block-legacy">Legacy: Service recovery / complaints / crisis management</div>
+          <div class="canvas-block-q">What is the recovery protocol when service fails? How do you restore trust? What does the research on service recovery paradox tell you to do?</div>
+          <textarea class="canvas-textarea" id="cx-recovery" placeholder="Recovery protocol: … / Trust restoration: … / What we will always do when we fail: …"></textarea>
+        </div>
+        <div class="canvas-block">
+          <div class="canvas-block-label">Succession Plan</div>
+          <div class="canvas-block-nature">How does the ecosystem mature beyond founders?</div>
+          <div class="canvas-block-legacy">Legacy: Scale / sustainability / exit strategy</div>
+          <div class="canvas-block-q">What must be true for this service to run without its founders? How does it build institutional memory? What does maturity look like?</div>
+          <textarea class="canvas-textarea" id="cx-succession" placeholder="Maturity indicators: … / What must be documented: … / Succession conditions: …"></textarea>
+        </div>
+      </div>
+      <button class="canvas-ai-btn" id="cxAiBtn" onclick="generateCanvas('cx')">
+        <span id="cxAiBtnText">✦ Generate with AI</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ══ SUMMARY VIEW ══ -->
   <div class="view" id="view-summary">
     <div class="example-header" style="flex-wrap:wrap; gap:0.75rem;">
       <h2>Your Summary</h2>
@@ -1907,10 +2956,12 @@
       <div class="footer-tagline">Biomimicry Journey Builder — Nature-Informed Service Design</div>
     </div>
     <div class="footer-links">
-      <button class="footer-link" onclick="setView('journey')">Cycle</button>
-      <button class="footer-link" onclick="setView('workspace')">Workspace</button>
-      <button class="footer-link" onclick="setView('gtm')">Go-to-Field</button>
-      <button class="footer-link" onclick="setView('example')">Example</button>
+      <button class="footer-link" onclick="setView('intro')">Start</button>
+      <button class="footer-link" onclick="setView('timeline')">Timeline</button>
+      <button class="footer-link" onclick="setView('workspace')">Research</button>
+      <button class="footer-link" onclick="setView('gtm')">Field</button>
+      <button class="footer-link" onclick="setView('bizdesign')">Business</button>
+      <button class="footer-link" onclick="setView('cx')">CX</button>
       <button class="footer-link" onclick="setView('summary')">Summary</button>
       <button class="footer-link" onclick="exportAll()">Export ↓</button>
     </div>
@@ -1985,7 +3036,7 @@ function setView(v) {
   document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
   document.getElementById('view-' + v).classList.add('active');
   document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-  const map = { journey:0, workspace:1, gtm:2, example:3, summary:4 };
+  const map = { intro:0, timeline:1, journey:2, workspace:3, gtm:4, bizdesign:5, cx:6, summary:7 };
   if (map[v] !== undefined) document.querySelectorAll('.mode-btn')[map[v]].classList.add('active');
   state.currentView = v;
   if (v === 'summary') renderSummary();
@@ -2509,6 +3560,157 @@ Rules:
     btn.disabled = false;
     btnText.innerHTML = '✦ Regenerate';
   }
+}
+
+// ── CANVAS AI GENERATION ──
+const BIZ_FIELDS = [
+  { id: 'biz-value',         key: 'value',         label: 'Value Organism' },
+  { id: 'biz-segments',      key: 'segments',      label: 'Habitat Segments' },
+  { id: 'biz-partners',      key: 'partners',      label: 'Mutualist Partners' },
+  { id: 'biz-activities',    key: 'activities',    label: 'Core Capabilities' },
+  { id: 'biz-resources',     key: 'resources',     label: 'Root Resources' },
+  { id: 'biz-channels',      key: 'channels',      label: 'Dispersal Channels' },
+  { id: 'biz-relationships', key: 'relationships', label: 'Symbiotic Bonds' },
+  { id: 'biz-costs',         key: 'costs',         label: 'Energy Costs' },
+  { id: 'biz-revenue',       key: 'revenue',       label: 'Energy Returns' },
+];
+
+const CX_FIELDS = [
+  { id: 'cx-staff',      key: 'staff',      label: 'Staff Ecosystem' },
+  { id: 'cx-process',    key: 'process',    label: 'Process Metabolism' },
+  { id: 'cx-signals',    key: 'signals',    label: 'Distress Signals' },
+  { id: 'cx-adapt',      key: 'adapt',      label: 'Adaptive Capacity' },
+  { id: 'cx-recovery',   key: 'recovery',   label: 'Service Recovery' },
+  { id: 'cx-succession', key: 'succession', label: 'Succession Plan' },
+];
+
+const JMAP_PHASES = ['approach','entry','core','stress','return'];
+const JMAP_ROWS   = ['actions','feelings','friction','backstage','signal'];
+
+async function generateCanvas(type) {
+  const concept = document.getElementById('conceptInput').value.trim();
+  if (!concept) { alert('Enter a working concept in the bar at the top first.'); return; }
+
+  const btnId   = type === 'biz' ? 'bizAiBtn' : 'cxAiBtn';
+  const textId  = type === 'biz' ? 'bizAiBtnText' : 'cxAiBtnText';
+  const btn     = document.getElementById(btnId);
+  const btnText = document.getElementById(textId);
+  btn.disabled = true;
+  btnText.innerHTML = '<span class="generating-spinner"></span> Generating…';
+
+  let prompt;
+  if (type === 'biz') {
+    prompt = `You are an expert in business design using a biomimicry framework. The concept is: "${concept}".
+
+Generate a complete Metabolic Strategy Canvas (Business Model Canvas equivalent) using nature-systems language. Return ONLY valid JSON:
+{
+  "value": "What this service uniquely offers, who it is adapted for, what pain/gain, what would be lost if removed",
+  "segments": "Primary habitat/users, keystone user, underserved edge community",
+  "partners": "Mutualist partners — what they give and receive, which is keystone",
+  "activities": "Core capabilities this organism must do exceptionally well",
+  "resources": "Root infrastructure — physical, intellectual, human, financial",
+  "channels": "Dispersal vectors — how value reaches the right soil",
+  "relationships": "How symbiotic bonds deepen over time, avoiding extraction",
+  "costs": "Energy costs — fixed, variable, largest driver",
+  "revenue": "Energy returns — revenue streams, pricing logic, path to surplus"
+}
+All responses must use biomimicry metaphor language but call out the legacy business term in parentheses. Be specific to "${concept}". Return ONLY JSON.`;
+  } else {
+    prompt = `You are an expert in CX strategy and service operations using a biomimicry framework. The concept is: "${concept}".
+
+Generate a Habitat Experience Map and Colony Health canvas. Return ONLY valid JSON:
+{
+  "jmap": {
+    "approach":  { "actions": "", "feelings": "", "friction": "", "backstage": "", "signal": "" },
+    "entry":     { "actions": "", "feelings": "", "friction": "", "backstage": "", "signal": "" },
+    "core":      { "actions": "", "feelings": "", "friction": "", "backstage": "", "signal": "" },
+    "stress":    { "actions": "", "feelings": "", "friction": "", "backstage": "", "signal": "" },
+    "return":    { "actions": "", "feelings": "", "friction": "", "backstage": "", "signal": "" }
+  },
+  "staff":      "What frontline staff need, invisible labour they carry, system gaps",
+  "process":    "Critical processes, current breakdowns, automation vs human",
+  "signals":    "Health signals, distress signals, response protocol",
+  "adapt":      "Learning cadence, signal-to-change cycle, who holds learning",
+  "recovery":   "Service recovery protocol, trust restoration approach",
+  "succession": "Maturity indicators, documentation needs, succession conditions"
+}
+Be specific to "${concept}". Use biomimicry language. Return ONLY JSON.`;
+  }
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-opus-4-5',
+        max_tokens: 1600,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const data  = await response.json();
+    const text  = data.content?.map(b => b.text || '').join('') || '';
+    const clean = text.replace(/```json|```/g, '').trim();
+    const p     = JSON.parse(clean);
+
+    if (type === 'biz') {
+      BIZ_FIELDS.forEach(f => {
+        const el = document.getElementById(f.id);
+        if (el && p[f.key]) { el.value = p[f.key]; el.classList.add('ai-suggested'); }
+      });
+    } else {
+      // Journey map
+      if (p.jmap) {
+        JMAP_PHASES.forEach((phase, pi) => {
+          JMAP_ROWS.forEach((row, ri) => {
+            const el = document.getElementById(`jmap-${ri}-${pi}`);
+            if (el && p.jmap[phase]?.[row]) { el.value = p.jmap[phase][row]; }
+          });
+        });
+      }
+      // Ops fields
+      CX_FIELDS.forEach(f => {
+        const el = document.getElementById(f.id);
+        if (el && p[f.key]) { el.value = p[f.key]; el.classList.add('ai-suggested'); }
+      });
+    }
+  } catch(err) {
+    console.error(err);
+    alert('Generation failed — check console or try again.');
+  } finally {
+    btn.disabled = false;
+    btnText.innerHTML = '✦ Regenerate';
+  }
+}
+
+// ── CANVAS EXPORTS ──
+function exportCanvas(type) {
+  const concept = document.getElementById('conceptInput').value || 'Untitled';
+  let out = `SERVICE DESIGN LAB — ${type === 'biz' ? 'METABOLIC STRATEGY CANVAS' : 'HABITAT DESIGN + COLONY HEALTH'}\nConcept: ${concept}\n${'─'.repeat(50)}\n\n`;
+
+  if (type === 'biz') {
+    BIZ_FIELDS.forEach(f => {
+      const el = document.getElementById(f.id);
+      out += `${f.label.toUpperCase()}\n${el?.value?.trim() || '(empty)'}\n\n`;
+    });
+  } else {
+    out += 'HABITAT EXPERIENCE MAP\n\n';
+    const phaseNames = ['Approach','Entry','Core Use','Stress Test','Return'];
+    const rowNames   = ['What they do','How it feels','Friction points','Backstage','Health signal'];
+    JMAP_PHASES.forEach((ph, pi) => {
+      out += `── ${phaseNames[pi].toUpperCase()} ──\n`;
+      JMAP_ROWS.forEach((row, ri) => {
+        const el = document.getElementById(`jmap-${ri}-${pi}`);
+        if (el?.value?.trim()) out += `  ${rowNames[ri]}: ${el.value.trim()}\n`;
+      });
+      out += '\n';
+    });
+    out += '\nCOLONY HEALTH (SERVICE OPS)\n\n';
+    CX_FIELDS.forEach(f => {
+      const el = document.getElementById(f.id);
+      out += `${f.label.toUpperCase()}\n${el?.value?.trim() || '(empty)'}\n\n`;
+    });
+  }
+  download(out, `SDLab-${type === 'biz' ? 'BusinessDesign' : 'CX-Ops'}-${concept.replace(/\s+/g,'-')}.txt`);
 }
 </script>
 </body>
