@@ -968,6 +968,358 @@
     .timeline-phase-grid { grid-template-columns: 1fr; }
     .jmap-cells { grid-template-columns: 1fr; }
   }
+  /* ── PROBLEM ECOLOGY PANEL ── */
+  .ecology-bar {
+    background: var(--bark);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    padding: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    max-height: 0;
+  }
+  .ecology-bar.open {
+    max-height: 320px;
+    padding: 0.75rem 2rem 1rem;
+  }
+  .ecology-bar-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 2rem;
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    cursor: pointer;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    user-select: none;
+  }
+  .ecology-bar-toggle:hover { color: var(--amber-light); }
+  .ecology-bar-toggle .toggle-arrow {
+    display: inline-block;
+    transition: transform 0.2s;
+    font-style: normal;
+  }
+  .ecology-bar-toggle.open .toggle-arrow { transform: rotate(90deg); }
+  .ecology-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.6rem;
+  }
+  .ecology-header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--amber-light);
+  }
+  .ecology-save-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    background: none;
+    border: 1px solid var(--moss);
+    color: var(--moss-light);
+    padding: 0.2rem 0.6rem;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  .ecology-save-btn:hover { background: var(--moss); color: var(--paper); }
+  .ecology-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.6rem;
+  }
+  @media (max-width: 900px) { .ecology-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 540px) { .ecology-grid { grid-template-columns: repeat(2, 1fr); } }
+  .ecology-field label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 0.3rem;
+  }
+  .ecology-field label span {
+    color: var(--amber);
+    font-style: normal;
+  }
+  .ecology-field textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 3px;
+    color: var(--paper);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.78rem;
+    line-height: 1.45;
+    padding: 0.4rem 0.5rem;
+    resize: none;
+    height: 72px;
+    transition: border-color 0.2s;
+  }
+  .ecology-field textarea:focus {
+    outline: none;
+    border-color: var(--amber);
+  }
+  .ecology-field textarea::placeholder { color: rgba(255,255,255,0.2); font-size: 0.72rem; }
+
+  /* ── RESEARCH LOG DRAWER ── */
+  .log-drawer {
+    position: fixed;
+    top: 0; right: 0;
+    width: min(480px, 95vw);
+    height: 100vh;
+    background: var(--soil);
+    border-left: 2px solid var(--amber);
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+  }
+  .log-drawer.open { transform: translateX(0); }
+  .log-drawer-header {
+    background: var(--bark);
+    padding: 1rem 1.25rem 0.75rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .log-drawer-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.06em;
+    color: var(--paper);
+    flex: 1;
+  }
+  .log-drawer-close {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.4);
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    line-height: 1;
+  }
+  .log-drawer-close:hover { color: var(--paper); }
+  .log-drawer-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .log-entry-form {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .log-entry-form select,
+  .log-entry-form textarea,
+  .log-entry-form input {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--paper);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.82rem;
+    padding: 0.35rem 0.6rem;
+    border-radius: 3px;
+    width: 100%;
+  }
+  .log-entry-form select { appearance: none; cursor: pointer; }
+  .log-entry-form textarea { resize: vertical; min-height: 64px; line-height: 1.5; }
+  .log-entry-form textarea::placeholder { color: rgba(255,255,255,0.25); font-size: 0.78rem; }
+  .log-entry-form .form-row {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .log-add-btn {
+    background: var(--moss);
+    color: var(--paper);
+    border: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+    border-radius: 2px;
+    align-self: flex-end;
+  }
+  .log-add-btn:hover { background: var(--moss-light); }
+  .log-entry {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-left: 3px solid var(--amber);
+    border-radius: 3px;
+    padding: 0.65rem 0.75rem;
+    position: relative;
+  }
+  .log-entry-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.35rem;
+  }
+  .log-entry-stage {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.5);
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+  }
+  .log-entry-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .tag-learning  { background: rgba(61,92,53,0.5);  color: #8dc87c; }
+  .tag-question  { background: rgba(196,124,26,0.4); color: #e0a84a; }
+  .tag-signal    { background: rgba(106,92,58,0.5);  color: #d4bc82; }
+  .tag-risk      { background: rgba(158,74,42,0.5);  color: #e08060; }
+  .tag-bet       { background: rgba(75,55,130,0.5);  color: #b89ee0; }
+  .log-entry-text {
+    font-size: 0.83rem;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.55;
+  }
+  .log-entry-del {
+    position: absolute;
+    top: 0.5rem; right: 0.5rem;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.2);
+    cursor: pointer;
+    font-size: 0.9rem;
+    line-height: 1;
+    padding: 0.1rem 0.3rem;
+  }
+  .log-entry-del:hover { color: var(--clay-light); }
+  .log-drawer-footer {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    gap: 0.6rem;
+  }
+  .log-export-btn, .log-bet-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    padding: 0.42rem 0.85rem;
+    border-radius: 2px;
+    cursor: pointer;
+    border: none;
+    flex: 1;
+  }
+  .log-export-btn { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.6); }
+  .log-export-btn:hover { background: rgba(255,255,255,0.14); color: var(--paper); }
+  .log-bet-btn { background: rgba(75,55,130,0.6); color: #c8b4f8; border: 1px solid rgba(150,120,220,0.3); }
+  .log-bet-btn:hover { background: rgba(75,55,130,0.9); }
+
+  /* Log toggle button (fixed, bottom right) */
+  .log-fab {
+    position: fixed;
+    bottom: 1.75rem;
+    right: 1.75rem;
+    background: var(--bark);
+    border: 1px solid var(--amber);
+    color: var(--amber-light);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.55rem 1rem;
+    cursor: pointer;
+    border-radius: 3px;
+    z-index: 400;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+    transition: background 0.2s;
+  }
+  .log-fab:hover { background: var(--amber); color: var(--soil); }
+  .log-fab .log-count {
+    background: var(--amber);
+    color: var(--soil);
+    border-radius: 10px;
+    padding: 0.05rem 0.4rem;
+    font-size: 0.58rem;
+    font-weight: 700;
+    min-width: 18px;
+    text-align: center;
+  }
+  .log-fab .log-count.hidden { display: none; }
+
+  /* Hard questions per stage */
+  .hard-questions {
+    margin: 0.75rem 0 1rem;
+    border: 1px solid rgba(196,124,26,0.25);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .hard-q-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.55rem 0.85rem;
+    background: rgba(196,124,26,0.08);
+    cursor: pointer;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--amber);
+    user-select: none;
+  }
+  .hard-q-toggle:hover { background: rgba(196,124,26,0.14); }
+  .hard-q-toggle .hq-arrow { transition: transform 0.2s; display: inline-block; }
+  .hard-q-toggle.open .hq-arrow { transform: rotate(90deg); }
+  .hard-q-list {
+    display: none;
+    padding: 0.65rem 0.85rem;
+    display: none;
+    flex-direction: column;
+    gap: 0.45rem;
+    background: rgba(0,0,0,0.12);
+  }
+  .hard-q-list.open { display: flex; }
+  .hard-q-item {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.5;
+    padding-left: 0.85rem;
+    border-left: 2px solid rgba(196,124,26,0.3);
+    position: relative;
+  }
+  .hard-q-item::before {
+    content: '?';
+    position: absolute;
+    left: -0.5rem;
+    top: 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--amber);
+    background: var(--bark);
+    padding: 0 0.15rem;
+  }
+
   /* ── INTRO VIEW ── */
   .intro-hero {
     display: grid;
@@ -1486,6 +1838,92 @@
   <span id="genStatusText">Generating…</span>
 </div>
 
+<!-- PROBLEM ECOLOGY TOGGLE -->
+<div class="ecology-bar-toggle" id="ecologyToggle" onclick="toggleEcology()">
+  <span class="toggle-arrow">▶</span>
+  Problem Ecology — Define the situation before you design the solution
+</div>
+
+<!-- PROBLEM ECOLOGY PANEL -->
+<div class="ecology-bar" id="ecologyBar">
+  <div class="ecology-header">
+    <span class="ecology-header-label">⬡ Problem Ecology Model</span>
+    <button class="ecology-save-btn" onclick="saveEcology()">Save ✓</button>
+  </div>
+  <div class="ecology-grid">
+    <div class="ecology-field">
+      <label>WHO <span>— person in situation</span></label>
+      <textarea id="eco-who" placeholder="Who lives this problem? Be specific — one person, not a category." oninput="debounceSaveEcology()"></textarea>
+    </div>
+    <div class="ecology-field">
+      <label>SYSTEM <span>— context + forces</span></label>
+      <textarea id="eco-system" placeholder="What system are they embedded in? What forces shape their choices?" oninput="debounceSaveEcology()"></textarea>
+    </div>
+    <div class="ecology-field">
+      <label>ATTEMPTS <span>— what's been tried</span></label>
+      <textarea id="eco-attempts" placeholder="What have they / others tried? Why didn't it work?" oninput="debounceSaveEcology()"></textarea>
+    </div>
+    <div class="ecology-field">
+      <label>TENSION <span>— the real constraint</span></label>
+      <textarea id="eco-tension" placeholder="What's the real tension? What's in conflict that can't be resolved by existing means?" oninput="debounceSaveEcology()"></textarea>
+    </div>
+    <div class="ecology-field">
+      <label>CONDITIONS <span>— for change</span></label>
+      <textarea id="eco-conditions" placeholder="What conditions would need to be true for change to be possible here?" oninput="debounceSaveEcology()"></textarea>
+    </div>
+    <div class="ecology-field">
+      <label>SIGNAL <span>— if it's working</span></label>
+      <textarea id="eco-signal" placeholder="What would you observe — in their behaviour — if something better was taking root?" oninput="debounceSaveEcology()"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- RESEARCH LOG DRAWER -->
+<div class="log-drawer" id="logDrawer">
+  <div class="log-drawer-header">
+    <div class="log-drawer-title">Research Log</div>
+    <button class="log-drawer-close" onclick="toggleLog()">×</button>
+  </div>
+  <div class="log-drawer-body" id="logEntries">
+    <!-- entries injected by JS -->
+  </div>
+  <div class="log-entry-form" style="margin:0 1.25rem 0; border-radius:0; border-left:none; border-right:none; border-bottom:none;">
+    <div class="form-row">
+      <select id="logStageSelect">
+        <option value="Observe">Observe</option>
+        <option value="Pattern">Pattern</option>
+        <option value="Emulate">Emulate</option>
+        <option value="Prototype">Prototype</option>
+        <option value="Adapt">Adapt</option>
+        <option value="Propagate">Propagate</option>
+        <option value="Go-to-Field">Go-to-Field</option>
+        <option value="Business">Business</option>
+        <option value="CX">CX</option>
+        <option value="General">General</option>
+      </select>
+      <select id="logTagSelect">
+        <option value="learning">Learning</option>
+        <option value="question">Question</option>
+        <option value="signal">Signal</option>
+        <option value="risk">Risk</option>
+        <option value="bet">Bet candidate</option>
+      </select>
+    </div>
+    <textarea id="logEntryText" placeholder="Log a finding, question, signal, or hypothesis…" rows="3"></textarea>
+    <button class="log-add-btn" onclick="addLogEntry()">+ Add entry</button>
+  </div>
+  <div class="log-drawer-footer">
+    <button class="log-export-btn" onclick="exportLog()">↓ Export log</button>
+    <button class="log-bet-btn" onclick="uploadAsBet()">⬡ Upload as Active Bet</button>
+  </div>
+</div>
+
+<!-- LOG FAB -->
+<button class="log-fab" id="logFab" onclick="toggleLog()">
+  ◎ Log
+  <span class="log-count hidden" id="logCount">0</span>
+</button>
+
 <!-- BREADCRUMB TRAIL -->
 <nav class="breadcrumb-trail">
   <div class="crumb active" id="crumb-0" onclick="goToStage(0)"><span class="crumb-dot"></span>Observe</div>
@@ -1998,6 +2436,16 @@
           </div>
           <div class="panel-nature-label">Naturalist — watch before you classify</div>
           <div class="panel-tag">Service design: Inputs & field research — no analysis yet</div>
+          <div class="hard-questions">
+            <div class="hard-q-toggle" onclick="toggleHQ(this)">⚑ Hard questions — Observe <span class="hq-arrow">▶</span></div>
+            <div class="hard-q-list">
+              <div class="hard-q-item">What are you <em>not</em> looking for that might be the most important thing present?</div>
+              <div class="hard-q-item">Who is absent from your research that would break your current understanding?</div>
+              <div class="hard-q-item">What would you observe if your current framing of the problem is completely wrong?</div>
+              <div class="hard-q-item">What do insiders treat as normal that an outsider would find strange?</div>
+              <div class="hard-q-item">If you removed yourself from the observation, what story would the data tell on its own?</div>
+            </div>
+          </div>
 
           <!-- SVG: field notebook metaphor -->
           <div class="panel-viz">
@@ -2031,6 +2479,16 @@
           </div>
           <div class="panel-nature-label">Recurring Forms — nature repeats what works</div>
           <div class="panel-tag">Service design: Observations & themes — name tensions, not topics</div>
+          <div class="hard-questions">
+            <div class="hard-q-toggle" onclick="toggleHQ(this)">⚑ Hard questions — Pattern <span class="hq-arrow">▶</span></div>
+            <div class="hard-q-list">
+              <div class="hard-q-item">Is this pattern structural (inherent to the system) or situational (particular to circumstances)?</div>
+              <div class="hard-q-item">Who benefits from this pattern staying exactly as it is?</div>
+              <div class="hard-q-item">What would have to be true about human nature for this pattern to exist?</div>
+              <div class="hard-q-item">Where does this pattern break down — what are the edges of its validity?</div>
+              <div class="hard-q-item">If this pattern is real, what does it predict about adjacent situations you haven't yet observed?</div>
+            </div>
+          </div>
 
           <!-- SVG: branching / network pattern -->
           <div class="panel-viz">
@@ -2076,6 +2534,16 @@
           </div>
           <div class="panel-nature-label">Learn from Living Systems — reframe through nature's logic</div>
           <div class="panel-tag">Service design: Insights & HMW questions</div>
+          <div class="hard-questions">
+            <div class="hard-q-toggle" onclick="toggleHQ(this)">⚑ Hard questions — Emulate <span class="hq-arrow">▶</span></div>
+            <div class="hard-q-list">
+              <div class="hard-q-item">Does your HMW assume a solution? Rewrite it so the solution space is genuinely open.</div>
+              <div class="hard-q-item">Who is the <em>specific person</em> this question is for — name them, don't describe a category.</div>
+              <div class="hard-q-item">What would your HMW look like if you moved the problem one level up in the system?</div>
+              <div class="hard-q-item">Is your insight a genuine surprise, or confirmation of what you already believed?</div>
+              <div class="hard-q-item">What's the most uncomfortable implication of your insight if it's true?</div>
+            </div>
+          </div>
 
           <!-- SVG: leaf vein / insight structure -->
           <div class="panel-viz">
@@ -2133,6 +2601,16 @@
           </div>
           <div class="panel-nature-label">Small Experiments — nature tests billions of variations</div>
           <div class="panel-tag">Service design: Concept sketching — low fidelity, fast</div>
+          <div class="hard-questions">
+            <div class="hard-q-toggle" onclick="toggleHQ(this)">⚑ Hard questions — Prototype <span class="hq-arrow">▶</span></div>
+            <div class="hard-q-list">
+              <div class="hard-q-item">What's the one assumption this concept cannot survive being wrong about?</div>
+              <div class="hard-q-item">Could someone with a different power position in the system use this in a way you didn't intend?</div>
+              <div class="hard-q-item">What would this look like at 10× scale — does the model hold or collapse?</div>
+              <div class="hard-q-item">What does the person with the least resources in your target system need from this?</div>
+              <div class="hard-q-item">If this failed, what would be the most likely cause — and have you designed against it?</div>
+            </div>
+          </div>
 
           <!-- SVG: cell division / iteration -->
           <div class="panel-viz">
@@ -2173,6 +2651,16 @@
           </div>
           <div class="panel-nature-label">Feedback Loops — healthy systems respond to signals</div>
           <div class="panel-tag">Service design: Testing plan & learning criteria</div>
+          <div class="hard-questions">
+            <div class="hard-q-toggle" onclick="toggleHQ(this)">⚑ Hard questions — Adapt <span class="hq-arrow">▶</span></div>
+            <div class="hard-q-list">
+              <div class="hard-q-item">What result would cause you to abandon this direction entirely — and are you actually willing to do that?</div>
+              <div class="hard-q-item">Are you testing what you believe, or what you hope?</div>
+              <div class="hard-q-item">Who would be harmed by a failed test — and have you accounted for them?</div>
+              <div class="hard-q-item">What would a negative result tell you that a positive result wouldn't?</div>
+              <div class="hard-q-item">Is your success signal behavioural (observable) or attitudinal (reported)? Which is more trustworthy here?</div>
+            </div>
+          </div>
 
           <!-- SVG: feedback loop -->
           <div class="panel-viz">
@@ -2213,6 +2701,16 @@
           </div>
           <div class="panel-nature-label">Scale What Takes Root — seeds spread through multiple vectors</div>
           <div class="panel-tag">Service design: Methods, activities & next actions</div>
+          <div class="hard-questions">
+            <div class="hard-q-toggle" onclick="toggleHQ(this)">⚑ Hard questions — Propagate <span class="hq-arrow">▶</span></div>
+            <div class="hard-q-list">
+              <div class="hard-q-item">Who are the carriers — the people who spread this without you pushing it?</div>
+              <div class="hard-q-item">What network or community does this need to land in to sustain itself?</div>
+              <div class="hard-q-item">What would make this impossible for the target system to ignore?</div>
+              <div class="hard-q-item">How does this spread without requiring your continued presence?</div>
+              <div class="hard-q-item">What are you over-investing in versus what actually drives propagation?</div>
+            </div>
+          </div>
 
           <!-- SVG: seed dispersal / mycelium network -->
           <div class="panel-viz">
@@ -3046,6 +3544,215 @@ const state = {
   selectedActivities: []
 };
 
+// ── PROBLEM ECOLOGY ──
+const ECO_KEYS = ['who','system','attempts','tension','conditions','signal'];
+
+function loadEcology() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('sdlab-ecology') || '{}');
+    ECO_KEYS.forEach(k => {
+      const el = document.getElementById('eco-' + k);
+      if (el && saved[k]) el.value = saved[k];
+    });
+  } catch(e) {}
+}
+
+function saveEcology() {
+  const data = {};
+  ECO_KEYS.forEach(k => {
+    const el = document.getElementById('eco-' + k);
+    if (el) data[k] = el.value;
+  });
+  localStorage.setItem('sdlab-ecology', JSON.stringify(data));
+}
+
+let _ecoDebounce;
+function debounceSaveEcology() {
+  clearTimeout(_ecoDebounce);
+  _ecoDebounce = setTimeout(saveEcology, 800);
+}
+
+function toggleEcology() {
+  const bar    = document.getElementById('ecologyBar');
+  const toggle = document.getElementById('ecologyToggle');
+  const open   = bar.classList.toggle('open');
+  toggle.classList.toggle('open', open);
+  localStorage.setItem('sdlab-ecology-open', open ? '1' : '0');
+}
+
+function initEcology() {
+  loadEcology();
+  const wasOpen = localStorage.getItem('sdlab-ecology-open') === '1';
+  if (wasOpen) {
+    document.getElementById('ecologyBar').classList.add('open');
+    document.getElementById('ecologyToggle').classList.add('open');
+  }
+}
+
+// ── RESEARCH LOG ──
+let logEntries = [];
+
+function loadLog() {
+  try {
+    logEntries = JSON.parse(localStorage.getItem('sdlab-log') || '[]');
+  } catch(e) { logEntries = []; }
+  renderLog();
+}
+
+function saveLog() {
+  localStorage.setItem('sdlab-log', JSON.stringify(logEntries));
+  updateLogCount();
+}
+
+function updateLogCount() {
+  const badge = document.getElementById('logCount');
+  if (!badge) return;
+  if (logEntries.length > 0) {
+    badge.textContent = logEntries.length;
+    badge.classList.remove('hidden');
+  } else {
+    badge.classList.add('hidden');
+  }
+}
+
+function toggleLog() {
+  document.getElementById('logDrawer').classList.toggle('open');
+}
+
+function addLogEntry() {
+  const text  = document.getElementById('logEntryText').value.trim();
+  if (!text) return;
+  const stage = document.getElementById('logStageSelect').value;
+  const tag   = document.getElementById('logTagSelect').value;
+  const entry = { id: Date.now(), stage, tag, text, ts: new Date().toISOString() };
+  logEntries.unshift(entry);
+  saveLog();
+  renderLog();
+  document.getElementById('logEntryText').value = '';
+  // sync stage select to current panel
+  syncLogStage();
+}
+
+function syncLogStage() {
+  const names = ['Observe','Pattern','Emulate','Prototype','Adapt','Propagate'];
+  const sel   = document.getElementById('logStageSelect');
+  if (sel && state.currentStage < names.length) {
+    sel.value = names[state.currentStage];
+  }
+}
+
+function deleteLogEntry(id) {
+  logEntries = logEntries.filter(e => e.id !== id);
+  saveLog();
+  renderLog();
+}
+
+function renderLog() {
+  const container = document.getElementById('logEntries');
+  if (!container) return;
+  if (logEntries.length === 0) {
+    container.innerHTML = '<div style="color:rgba(255,255,255,0.3);font-size:0.8rem;font-style:italic;padding:0.5rem 0;">No entries yet. Log a finding, question, or signal above.</div>';
+    return;
+  }
+  container.innerHTML = logEntries.map(e => `
+    <div class="log-entry">
+      <button class="log-entry-del" onclick="deleteLogEntry(${e.id})">×</button>
+      <div class="log-entry-meta">
+        <span class="log-entry-stage">${e.stage}</span>
+        <span class="log-entry-tag tag-${e.tag}">${e.tag}</span>
+      </div>
+      <div class="log-entry-text">${escHtml(e.text)}</div>
+    </div>
+  `).join('');
+  updateLogCount();
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function exportLog() {
+  const eco   = JSON.parse(localStorage.getItem('sdlab-ecology') || '{}');
+  const lines = [
+    `# Research Log — ${state.concept || 'Untitled'}`,
+    `Exported: ${new Date().toLocaleString()}`,
+    '',
+    '## Problem Ecology',
+    eco.who        ? `**WHO**: ${eco.who}`        : '',
+    eco.system     ? `**SYSTEM**: ${eco.system}`  : '',
+    eco.attempts   ? `**ATTEMPTS**: ${eco.attempts}` : '',
+    eco.tension    ? `**TENSION**: ${eco.tension}` : '',
+    eco.conditions ? `**CONDITIONS**: ${eco.conditions}` : '',
+    eco.signal     ? `**SIGNAL**: ${eco.signal}`  : '',
+    '',
+    '## Log Entries',
+    ...logEntries.map(e => `\n### [${e.stage}] — ${e.tag}\n${e.text}\n_${new Date(e.ts).toLocaleString()}_`)
+  ].filter(l => l !== '');
+  const blob = new Blob([lines.join('\n')], { type: 'text/markdown' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = `research-log-${Date.now()}.md`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function uploadAsBet() {
+  const eco = JSON.parse(localStorage.getItem('sdlab-ecology') || '{}');
+  const betQ = logEntries.filter(e => e.tag === 'bet');
+  if (!state.concept && !eco.who) {
+    alert('Add a concept and some Problem Ecology fields before uploading as a bet.');
+    return;
+  }
+  const belief  = betQ.length > 0 ? betQ[0].text : (eco.tension || 'Belief not yet stated');
+  const testing = logEntries.filter(e => e.tag === 'learning').map(e => e.text).join(' / ') || 'Testing approach not yet defined';
+  const learnings = logEntries.filter(e => e.tag === 'signal').map(e => e.text);
+
+  const bet = {
+    id: 'sdlab-' + Date.now(),
+    category: 'service',
+    belief,
+    testing,
+    status: 'forming',
+    level: 'signal',
+    learnings,
+    people: [],
+    relatedDocs: [],
+    sdlab: true,
+    concept: state.concept,
+    ecology: eco,
+    createdAt: new Date().toISOString(),
+  };
+
+  // Try Firestore if available (limi-hq context), else download JSON
+  if (window.__db && window.__fs) {
+    const { collection, addDoc } = window.__fs;
+    addDoc(collection(window.__db, 'bets'), bet)
+      .then(() => { alert('✓ Bet uploaded to Active Bets. View it in limi-hq.'); })
+      .catch(e => { console.error(e); downloadBetJson(bet); });
+  } else {
+    downloadBetJson(bet);
+  }
+}
+
+function downloadBetJson(bet) {
+  const blob = new Blob([JSON.stringify(bet, null, 2)], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = `bet-${bet.id}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  alert('Bet exported as JSON (Firestore not connected). Import manually into limi-hq.');
+}
+
+// Hard question toggles
+function toggleHQ(toggleEl) {
+  const list = toggleEl.nextElementSibling;
+  const open = list.classList.toggle('open');
+  toggleEl.classList.toggle('open', open);
+}
+
 // ── CANVAS FIELD MAPS ──
 const BIZ_FIELDS = [
   { id: 'biz-value',         key: 'value',         label: 'Value Organism' },
@@ -3122,6 +3829,10 @@ document.addEventListener('DOMContentLoaded', () => {
   ['gtm-entries-0a','gtm-entries-0b','gtm-entries-1a','gtm-entries-1b',
    'gtm-entries-2a','gtm-entries-2b','gtm-entries-3a','gtm-entries-3b',
    'gtm-entries-4a','gtm-entries-4b','gtm-entries-5a','gtm-entries-5b'].forEach(id => addEntry(id));
+  // Problem Ecology + Research Log
+  initEcology();
+  loadLog();
+  syncLogStage();
 });
 
 // ── VIEW CONTROL ──
@@ -3150,6 +3861,7 @@ function goToStage(idx) {
   document.getElementById('panel-' + idx).classList.add('active');
   document.getElementById('nav-' + idx).classList.add('active');
   updateNavDots(idx);
+  syncLogStage();
 }
 
 function updateNavDots(current) {
