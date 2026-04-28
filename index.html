@@ -958,9 +958,100 @@
     .concept-input { font-size: 0.92rem; }
     .generate-btn { font-size: 0.62rem; padding: 0.42rem 0.8rem; }
   }
+  /* ── METHOD MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26,23,18,0.75);
+    z-index: 200;
+    overflow-y: auto;
+    padding: 2rem 1rem;
+  }
+
+  .modal-overlay.open { display: flex; align-items: flex-start; justify-content: center; }
+
+  .modal-box {
+    background: var(--paper);
+    max-width: 760px;
+    width: 100%;
+    position: relative;
+    padding: 2.5rem 3rem;
+    border-top: 4px solid var(--moss);
+    margin: auto;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1.25rem; right: 1.5rem;
+    background: none; border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: var(--muted);
+    line-height: 1;
+    transition: color 0.2s;
+  }
+
+  .modal-close:hover { color: var(--soil); }
+
+  .modal-loading {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    padding: 3rem 0;
+    text-align: center;
+  }
+
+  /* Markdown rendered content */
+  .md-body { max-width: 680px; }
+  .md-body h1 { font-family: 'Bebas Neue',sans-serif; font-size: 2.4rem; letter-spacing: 0.04em; margin-bottom: 0.2rem; color: var(--soil); line-height: 1; }
+  .md-body h2 { font-family: 'DM Mono',monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--moss); margin-bottom: 1.5rem; font-weight: 500; }
+  .md-body h3 { font-family: 'DM Serif Display',serif; font-size: 1.15rem; margin: 1.75rem 0 0.5rem; color: var(--soil); }
+  .md-body h4 { font-family: 'DM Mono',monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 1.25rem 0 0.5rem; }
+  .md-body p { font-size: 0.9rem; line-height: 1.75; color: var(--stone); margin-bottom: 0.9rem; }
+  .md-body blockquote { border-left: 3px solid var(--moss); padding: 0.6rem 1rem; margin: 1rem 0; background: var(--parchment); }
+  .md-body blockquote p { color: var(--stone); font-style: italic; margin: 0; }
+  .md-body ul, .md-body ol { padding-left: 1.25rem; margin-bottom: 0.9rem; }
+  .md-body li { font-size: 0.88rem; line-height: 1.65; color: var(--stone); padding: 0.1rem 0; }
+  .md-body strong { color: var(--soil); font-weight: 600; }
+  .md-body em { color: var(--moss); font-style: italic; }
+  .md-body hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+  .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.84rem; }
+  .md-body th { font-family: 'DM Mono',monospace; font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.5rem 0.75rem; background: var(--parchment); color: var(--muted); text-align: left; border-bottom: 1px solid var(--border); }
+  .md-body td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); color: var(--stone); vertical-align: top; }
+  .md-body code { font-family: 'DM Mono',monospace; font-size: 0.8rem; background: var(--parchment); padding: 0.1rem 0.35rem; color: var(--moss); }
+
+  /* Activity card learn link */
+  .activity-learn {
+    display: inline-block;
+    font-family: 'DM Mono',monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-top: 0.5rem;
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+    background: none; border: none; padding: 0;
+  }
+
+  .activity-learn:hover { border-bottom-color: var(--moss); }
+
+  /* GTM stage colours */
+  --s7: #4a3d6a; /* Root — deep violet-soil */
 </style>
 </head>
 <body>
+
+<!-- METHOD MODAL -->
+<div class="modal-overlay" id="methodModal" onclick="closeModalOnOverlay(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div id="modalContent"><div class="modal-loading">Loading method…</div></div>
+  </div>
+</div>
 
 <!-- HEADER -->
 <header>
@@ -971,6 +1062,7 @@
   <div class="header-right">
     <button class="mode-btn active" onclick="setView('journey')">◎ Cycle</button>
     <button class="mode-btn" onclick="setView('workspace')">✏ Workspace</button>
+    <button class="mode-btn" onclick="setView('gtm')">⟶ Go-to-Field</button>
     <button class="mode-btn" onclick="setView('example')">◈ Example</button>
     <button class="mode-btn" onclick="setView('summary')">⊞ Summary</button>
   </div>
@@ -1002,6 +1094,7 @@
   <div class="crumb" id="crumb-3" onclick="goToStage(3)"><span class="crumb-dot"></span>Prototype</div>
   <div class="crumb" id="crumb-4" onclick="goToStage(4)"><span class="crumb-dot"></span>Adapt</div>
   <div class="crumb" id="crumb-5" onclick="goToStage(5)"><span class="crumb-dot"></span>Propagate</div>
+  <div class="crumb" id="crumb-gtm" onclick="setView('gtm')" style="color:rgba(255,255,255,0.25)"><span class="crumb-dot"></span>Go-to-Field</div>
 </nav>
 
 <!-- MAIN -->
@@ -1589,6 +1682,201 @@
     </div>
   </div>
 
+  <!-- ══ GO-TO-FIELD VIEW ══ -->
+  <div class="view" id="view-gtm">
+    <div class="journey-intro" style="max-width:720px;">
+      <h2 style="font-family:'DM Serif Display',serif;font-size:2rem;margin-bottom:0.75rem;">Go-to-Field</h2>
+      <p style="color:var(--muted);line-height:1.7;font-size:0.92rem;">The seed has been tested. Now it goes into the ground. Go-to-Field translates your validated prototype into a deployable service — with the ecosystem conditions, actor agreements, and feedback infrastructure needed for it to survive beyond a pilot.</p>
+      <p style="color:var(--muted);line-height:1.7;font-size:0.92rem;margin-top:0.75rem;">This is not "launch." In nature, propagation is an ongoing relationship between the seed and the soil — not a one-time event. This phase establishes that relationship.</p>
+    </div>
+
+    <!-- SVG: seed-to-root emergence -->
+    <div style="margin:2rem 0 2.5rem;">
+      <svg width="100%" height="100" viewBox="0 0 700 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" style="max-width:700px;">
+        <rect width="700" height="100" fill="#ede8d8" rx="2"/>
+        <!-- Ground line -->
+        <line x1="0" y1="52" x2="700" y2="52" stroke="#5a5a4e" stroke-width="1" opacity="0.3"/>
+        <text x="12" y="46" font-family="'DM Mono',monospace" font-size="6.5" fill="#8a8472" letter-spacing="1.5">ABOVE GROUND — VISIBLE EXPERIENCE</text>
+        <text x="12" y="62" font-family="'DM Mono',monospace" font-size="6.5" fill="#8a8472" letter-spacing="1.5">BELOW GROUND — INFRASTRUCTURE &amp; CONDITIONS</text>
+        <!-- Sprouts above -->
+        <line x1="120" y1="52" x2="120" y2="20" stroke="#3d5c35" stroke-width="2"/>
+        <ellipse cx="120" cy="16" rx="10" ry="6" fill="#3d5c35" opacity="0.7"/>
+        <line x1="280" y1="52" x2="280" y2="15" stroke="#5c8a50" stroke-width="2"/>
+        <ellipse cx="280" cy="11" rx="12" ry="7" fill="#5c8a50" opacity="0.7"/>
+        <line x1="450" y1="52" x2="450" y2="22" stroke="#7a8c5c" stroke-width="2"/>
+        <ellipse cx="450" cy="18" rx="9" ry="5" fill="#7a8c5c" opacity="0.7"/>
+        <line x1="600" y1="52" x2="600" y2="25" stroke="#c47c1a" stroke-width="2"/>
+        <ellipse cx="600" cy="21" rx="11" ry="6" fill="#c47c1a" opacity="0.6"/>
+        <!-- Roots below -->
+        <path d="M 120 52 Q 100 70 90 85" fill="none" stroke="#3d5c35" stroke-width="1.2" opacity="0.4"/>
+        <path d="M 120 52 Q 135 68 130 88" fill="none" stroke="#3d5c35" stroke-width="1.2" opacity="0.4"/>
+        <path d="M 280 52 Q 255 72 240 90" fill="none" stroke="#5c8a50" stroke-width="1.2" opacity="0.4"/>
+        <path d="M 280 52 Q 300 68 310 88" fill="none" stroke="#5c8a50" stroke-width="1.2" opacity="0.4"/>
+        <path d="M 450 52 Q 435 72 425 90" fill="none" stroke="#7a8c5c" stroke-width="1.2" opacity="0.4"/>
+        <path d="M 600 52 Q 585 70 575 88" fill="none" stroke="#c47c1a" stroke-width="1.2" opacity="0.35"/>
+        <path d="M 600 52 Q 618 68 625 86" fill="none" stroke="#c47c1a" stroke-width="1.2" opacity="0.35"/>
+        <!-- Stage labels -->
+        <text x="100" y="10" font-family="'DM Mono',monospace" font-size="6" fill="#3d5c35" letter-spacing="0.5" text-anchor="middle">Conditions</text>
+        <text x="280" y="5" font-family="'DM Mono',monospace" font-size="6" fill="#5c8a50" letter-spacing="0.5" text-anchor="middle">Actors</text>
+        <text x="450" y="11" font-family="'DM Mono',monospace" font-size="6" fill="#7a8c5c" letter-spacing="0.5" text-anchor="middle">Signals</text>
+        <text x="600" y="13" font-family="'DM Mono',monospace" font-size="6" fill="#c47c1a" letter-spacing="0.5" text-anchor="middle">Scale</text>
+      </svg>
+    </div>
+
+    <div style="display:grid;grid-template-columns:220px 1fr;gap:0;min-height:60vh;max-width:1100px;">
+
+      <!-- GTM side nav -->
+      <nav style="border-right:1px solid var(--border);">
+        <div class="stage-nav-item active" id="gtm-nav-0" onclick="goToGTM(0)"><div class="nav-dot active" id="gtm-dot-0"></div>Soil Conditions</div>
+        <div class="stage-nav-item" id="gtm-nav-1" onclick="goToGTM(1)"><div class="nav-dot" id="gtm-dot-1"></div>Actor Agreements</div>
+        <div class="stage-nav-item" id="gtm-nav-2" onclick="goToGTM(2)"><div class="nav-dot" id="gtm-dot-2"></div>Root Infrastructure</div>
+        <div class="stage-nav-item" id="gtm-nav-3" onclick="goToGTM(3)"><div class="nav-dot" id="gtm-dot-3"></div>Germination Plan</div>
+        <div class="stage-nav-item" id="gtm-nav-4" onclick="goToGTM(4)"><div class="nav-dot" id="gtm-dot-4"></div>Signal Network</div>
+        <div class="stage-nav-item" id="gtm-nav-5" onclick="goToGTM(5)"><div class="nav-dot" id="gtm-dot-5"></div>Scale Threshold</div>
+      </nav>
+
+      <!-- GTM panels -->
+      <div style="flex:1;min-width:0;">
+
+        <!-- GTM 0: Soil Conditions -->
+        <div class="stage-panel active" id="gtm-panel-0">
+          <button class="panel-export-btn" onclick="exportGTMPanel(0)">↓ Export</button>
+          <div class="panel-header">
+            <div class="panel-num" style="color:#3d5c35;font-size:2.5rem;">G1</div>
+            <div class="panel-title">Soil Conditions</div>
+          </div>
+          <div class="panel-nature-label">What must be true in the environment for this to germinate?</div>
+          <div class="panel-tag">GTM equivalent: market readiness & ecosystem prerequisites</div>
+          <div class="panel-instruction">
+            A seed needs the right soil chemistry, moisture, temperature, and light. Your service needs the right <strong>organisational, cultural, and systemic conditions</strong>. Map what must be true — and what isn't yet true — before you plant.
+          </div>
+          <div class="section-label" style="margin-top:0">Conditions that are ready</div>
+          <div class="entries" id="gtm-entries-0a"></div>
+          <button class="add-btn" onclick="addEntry('gtm-entries-0a','Ready')">+ Add condition</button>
+          <div class="section-label">Conditions that need preparation</div>
+          <div class="entries" id="gtm-entries-0b"></div>
+          <button class="add-btn" onclick="addEntry('gtm-entries-0b','Gap')">+ Add gap</button>
+          <button class="next-stage-btn" onclick="goToGTM(1)">Next: Actor Agreements →</button>
+        </div>
+
+        <!-- GTM 1: Actor Agreements -->
+        <div class="stage-panel" id="gtm-panel-1">
+          <button class="panel-export-btn" onclick="exportGTMPanel(1)">↓ Export</button>
+          <div class="panel-header">
+            <div class="panel-num" style="color:#5c8a50;font-size:2.5rem;">G2</div>
+            <div class="panel-title">Actor Agreements</div>
+          </div>
+          <div class="panel-nature-label">Which organisms in this ecosystem need to be in relationship?</div>
+          <div class="panel-tag">GTM equivalent: partnerships, distribution, and stakeholder alignment</div>
+          <div class="panel-instruction">
+            A fig tree cannot reproduce without the fig wasp. Your service cannot function without the actors who hold capacity, legitimacy, or access that you don't. Name the <strong>mutualist relationships</strong> required — and what each party gives and receives.
+          </div>
+          <div class="section-label" style="margin-top:0">Required actors & their roles</div>
+          <div class="entries" id="gtm-entries-1a"></div>
+          <button class="add-btn" onclick="addEntry('gtm-entries-1a','Actor','[Actor] gives [what] / receives [what]')">+ Add actor</button>
+          <div class="section-label">Agreements to secure</div>
+          <div class="entries" id="gtm-entries-1b"></div>
+          <button class="add-btn" onclick="addEntry('gtm-entries-1b','Agreement','We need [who] to agree to [what] by [when]')">+ Add agreement</button>
+          <button class="next-stage-btn" onclick="goToGTM(2)">Next: Root Infrastructure →</button>
+        </div>
+
+        <!-- GTM 2: Root Infrastructure -->
+        <div class="stage-panel" id="gtm-panel-2">
+          <button class="panel-export-btn" onclick="exportGTMPanel(2)">↓ Export</button>
+          <div class="panel-header">
+            <div class="panel-num" style="color:#7a8c5c;font-size:2.5rem;">G3</div>
+            <div class="panel-title">Root Infrastructure</div>
+          </div>
+          <div class="panel-nature-label">What sustains the canopy when you are not watching?</div>
+          <div class="panel-tag">GTM equivalent: operational model, staffing & backstage systems</div>
+          <div class="panel-instruction">
+            The mycorrhizal network sustains the forest without any organism managing it deliberately. What <strong>backstage infrastructure</strong> must exist for your service to sustain itself? Staff capacity, data systems, funding flows, informal care networks, governance structures.
+          </div>
+          <div class="section-label" style="margin-top:0">Infrastructure in place</div>
+          <div class="entries" id="gtm-entries-2a"></div>
+          <button class="add-btn" onclick="addEntry('gtm-entries-2a','Ready')">+ Add infrastructure</button>
+          <div class="section-label">Infrastructure to build</div>
+          <div class="entries" id="gtm-entries-2b"></div>
+          <button class="add-btn" onclick="addEntry('gtm-entries-2b','Build','[System/capacity] — owner: [who] — by: [when]')">+ Add build item</button>
+          <button class="next-stage-btn" onclick="goToGTM(3)">Next: Germination Plan →</button>
+        </div>
+
+        <!-- GTM 3: Germination Plan -->
+        <div class="stage-panel" id="gtm-panel-3">
+          <button class="panel-export-btn" onclick="exportGTMPanel(3)">↓ Export</button>
+          <div class="panel-header">
+            <div class="panel-num" style="color:#c47c1a;font-size:2.5rem;">G4</div>
+            <div class="panel-title">Germination Plan</div>
+          </div>
+          <div class="panel-nature-label">Where does the first seed go in, and what happens in the first season?</div>
+          <div class="panel-tag">GTM equivalent: pilot plan, launch sequence & first cohort</div>
+          <div class="panel-instruction">
+            Seeds don't germinate everywhere at once. They start in the <strong>most favourable microclimate</strong> — a sheltered north-facing slope, a nutrient-rich pocket of soil. Define your first planting site, your first season of growth, and what you will observe in those first weeks.
+          </div>
+          <div class="section-label" style="margin-top:0">First planting site (pilot context)</div>
+          <div class="entries" id="gtm-entries-3a"></div>
+          <button class="add-btn" onclick="addEntry('gtm-entries-3a','Site','[Location/community/context] — because [conditions are right]')">+ Add site</button>
+          <div class="section-label">First season timeline</div>
+          <div class="entries" id="gtm-entries-3b"></div>
+          <button class="add-btn" onclick="addEntry('gtm-entries-3b','Week','Week [n]: [what happens, who does what]')">+ Add milestone</button>
+          <button class="next-stage-btn" onclick="goToGTM(4)">Next: Signal Network →</button>
+        </div>
+
+        <!-- GTM 4: Signal Network -->
+        <div class="stage-panel" id="gtm-panel-4">
+          <button class="panel-export-btn" onclick="exportGTMPanel(4)">↓ Export</button>
+          <div class="panel-header">
+            <div class="panel-num" style="color:#9e4a2a;font-size:2.5rem;">G5</div>
+            <div class="panel-title">Signal Network</div>
+          </div>
+          <div class="panel-nature-label">How will the system tell you it is healthy — or in distress?</div>
+          <div class="panel-tag">GTM equivalent: metrics, feedback loops & early warning system</div>
+          <div class="panel-instruction">
+            Trees under pest attack release chemical signals that neighbouring trees detect and respond to. Design your <strong>signal network</strong> — the indicators that tell you the service is healthy, the early warnings that tell you something is wrong, and the response protocol when distress signals fire.
+          </div>
+          <div class="section-label" style="margin-top:0">Health signals (signs it's working)</div>
+          <div class="entries" id="gtm-entries-4a"></div>
+          <button class="add-btn" onclick="addEntry('gtm-entries-4a','Signal','[Observable behaviour] means the service is healthy')">+ Add health signal</button>
+          <div class="section-label">Distress signals (early warnings)</div>
+          <div class="entries" id="gtm-entries-4b"></div>
+          <button class="add-btn" onclick="addEntry('gtm-entries-4b','Warning','If [observable sign] appears, investigate [what]')">+ Add warning</button>
+          <button class="next-stage-btn" onclick="goToGTM(5)">Next: Scale Threshold →</button>
+        </div>
+
+        <!-- GTM 5: Scale Threshold -->
+        <div class="stage-panel" id="gtm-panel-5">
+          <button class="panel-export-btn" onclick="exportGTMPanel(5)">↓ Export</button>
+          <div class="panel-header">
+            <div class="panel-num" style="color:#6a5c3a;font-size:2.5rem;">G6</div>
+            <div class="panel-title">Scale Threshold</div>
+          </div>
+          <div class="panel-nature-label">When has the ecosystem demonstrated readiness to expand?</div>
+          <div class="panel-tag">GTM equivalent: scale criteria, replication model & exit from pilot</div>
+          <div class="panel-instruction">
+            Ecosystems don't scale arbitrarily — they expand when <strong>conditions are right and capacity exists</strong>. Define the threshold: what must be true before you replicate? What signals show the service can survive in new soil without constant intervention?
+          </div>
+          <div class="checklist">
+            <h4>Scale readiness criteria</h4>
+            <label class="check-item"><input type="checkbox"> Service runs without founders present</label>
+            <label class="check-item"><input type="checkbox"> Local actors can maintain it independently</label>
+            <label class="check-item"><input type="checkbox"> The backstage infrastructure is documented and transferable</label>
+            <label class="check-item"><input type="checkbox"> At least one full feedback cycle has completed</label>
+            <label class="check-item"><input type="checkbox"> The signal network is operational and readable</label>
+            <label class="check-item"><input type="checkbox"> A second site has been identified and assessed</label>
+          </div>
+          <div class="section-label" style="margin-top:0">Scale conditions we will require</div>
+          <div class="entries" id="gtm-entries-5a"></div>
+          <button class="add-btn" onclick="addEntry('gtm-entries-5a','Threshold','Before scaling: [what must be true]')">+ Add threshold</button>
+          <div class="section-label">Replication model</div>
+          <div class="entries" id="gtm-entries-5b"></div>
+          <button class="add-btn" onclick="addEntry('gtm-entries-5b','Model','[How the service reaches new soil — who carries it, what is standardised, what must adapt]')">+ Add model</button>
+          <button class="next-stage-btn" onclick="setView('summary')">View full summary ⊞</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
   <!-- ══ SUMMARY VIEW ══ -->
   <div class="view" id="view-summary">
     <div class="example-header" style="flex-wrap:wrap; gap:0.75rem;">
@@ -1621,6 +1909,7 @@
     <div class="footer-links">
       <button class="footer-link" onclick="setView('journey')">Cycle</button>
       <button class="footer-link" onclick="setView('workspace')">Workspace</button>
+      <button class="footer-link" onclick="setView('gtm')">Go-to-Field</button>
       <button class="footer-link" onclick="setView('example')">Example</button>
       <button class="footer-link" onclick="setView('summary')">Summary</button>
       <button class="footer-link" onclick="exportAll()">Export ↓</button>
@@ -1629,15 +1918,17 @@
   <hr class="footer-divider">
   <div class="footer-bottom">
     <div class="footer-copy">© 2025 Service Design Lab. Built for practitioners.</div>
-    <div class="footer-method">Framework: <span>Observe → Pattern → Emulate → Prototype → Adapt → Propagate</span></div>
+    <div class="footer-method">Framework: <span>Observe → Pattern → Emulate → Prototype → Adapt → Propagate → Go-to-Field</span></div>
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
 // ── STATE ──
 const state = {
   concept: '',
   currentStage: 0,
+  currentGTM: 0,
   currentView: 'journey',
   selectedActivities: []
 };
@@ -1683,6 +1974,10 @@ document.addEventListener('DOMContentLoaded', () => {
   ['entries-0','entries-1','entries-2','entries-3','entries-4','entries-5','entries-6'].forEach(id => addEntry(id));
   addHMW();
   renderActivities();
+  // Init GTM panels with one empty entry each
+  ['gtm-entries-0a','gtm-entries-0b','gtm-entries-1a','gtm-entries-1b',
+   'gtm-entries-2a','gtm-entries-2b','gtm-entries-3a','gtm-entries-3b',
+   'gtm-entries-4a','gtm-entries-4b','gtm-entries-5a','gtm-entries-5b'].forEach(id => addEntry(id));
 });
 
 // ── VIEW CONTROL ──
@@ -1690,10 +1985,11 @@ function setView(v) {
   document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
   document.getElementById('view-' + v).classList.add('active');
   document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-  const map = { journey:0, workspace:1, example:2, summary:3 };
-  document.querySelectorAll('.mode-btn')[map[v]].classList.add('active');
+  const map = { journey:0, workspace:1, gtm:2, example:3, summary:4 };
+  if (map[v] !== undefined) document.querySelectorAll('.mode-btn')[map[v]].classList.add('active');
   state.currentView = v;
   if (v === 'summary') renderSummary();
+  if (v === 'gtm') goToGTM(state.currentGTM || 0);
 }
 
 function jumpToWorkspace(stageIdx) {
@@ -1774,6 +2070,22 @@ function addHMW() {
   container.appendChild(card);
 }
 
+// ── METHOD SLUGS (name → md file) ──
+const methodSlugs = {
+  'Service Safari': 'service-safari',
+  'Ecosystem Mapping': 'ecosystem-mapping',
+  'Experience Prototyping': 'experience-prototyping',
+  'Co-design Sessions': 'co-design',
+  'Service Blueprinting': 'service-blueprinting',
+  'Stakeholder Interviews': 'stakeholder-interviews',
+  'Systems Mapping': 'systems-mapping',
+  'Longitudinal Research': 'longitudinal-research',
+  'Desk Research': 'desk-research',
+  'Cultural Probes': 'cultural-probes',
+  'Assumption Testing': 'assumption-testing',
+  'Contextual Inquiry': 'contextual-inquiry',
+};
+
 // ── ACTIVITIES ──
 function renderActivities() {
   const grid = document.getElementById('activities-grid');
@@ -1782,15 +2094,89 @@ function renderActivities() {
     const card = document.createElement('div');
     card.className = 'activity-card';
     card.id = 'act-' + i;
+    const slug = methodSlugs[a.name];
+    const learnBtn = slug
+      ? `<button class="activity-learn" onclick="event.stopPropagation();openMethod('${a.name}')">Read method guide →</button>`
+      : '';
     card.innerHTML = `
       <span class="activity-icon">${a.icon}</span>
       <div class="activity-nature">${a.nature}</div>
       <div class="activity-name">${a.name}</div>
       <div class="activity-desc">${a.desc}</div>
+      ${learnBtn}
     `;
     card.onclick = () => toggleActivity(i, card, a.name);
     grid.appendChild(card);
   });
+}
+
+// ── METHOD MODAL ──
+async function openMethod(name) {
+  const slug = methodSlugs[name];
+  if (!slug) return;
+  const overlay = document.getElementById('methodModal');
+  const content = document.getElementById('modalContent');
+  content.innerHTML = '<div class="modal-loading">Loading method guide…</div>';
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  try {
+    const res = await fetch(`methods/${slug}.md`);
+    if (!res.ok) throw new Error('not found');
+    const md = await res.text();
+    content.innerHTML = `<div class="md-body">${marked.parse(md)}</div>`;
+  } catch (e) {
+    content.innerHTML = `<div class="modal-loading">Could not load method guide for "${name}".</div>`;
+  }
+}
+
+function closeModal() {
+  document.getElementById('methodModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOnOverlay(e) {
+  if (e.target === document.getElementById('methodModal')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ── GTM NAVIGATION ──
+function goToGTM(idx) {
+  state.currentGTM = idx;
+  document.querySelectorAll('[id^="gtm-panel-"]').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('[id^="gtm-nav-"]').forEach(n => n.classList.remove('active'));
+  const panel = document.getElementById('gtm-panel-' + idx);
+  const nav = document.getElementById('gtm-nav-' + idx);
+  if (panel) panel.classList.add('active');
+  if (nav) nav.classList.add('active');
+  for (let i = 0; i <= 5; i++) {
+    const dot = document.getElementById('gtm-dot-' + i);
+    if (!dot) continue;
+    dot.className = 'nav-dot';
+    if (i < idx) dot.classList.add('done');
+    if (i === idx) dot.classList.add('active');
+  }
+}
+
+// ── GTM EXPORT ──
+const GTM_PANELS = [
+  { id: 0, name: 'Soil Conditions',    entries: ['gtm-entries-0a','gtm-entries-0b'] },
+  { id: 1, name: 'Actor Agreements',   entries: ['gtm-entries-1a','gtm-entries-1b'] },
+  { id: 2, name: 'Root Infrastructure',entries: ['gtm-entries-2a','gtm-entries-2b'] },
+  { id: 3, name: 'Germination Plan',   entries: ['gtm-entries-3a','gtm-entries-3b'] },
+  { id: 4, name: 'Signal Network',     entries: ['gtm-entries-4a','gtm-entries-4b'] },
+  { id: 5, name: 'Scale Threshold',    entries: ['gtm-entries-5a','gtm-entries-5b'] },
+];
+
+function exportGTMPanel(idx) {
+  const concept = document.getElementById('conceptInput').value || 'Untitled';
+  const p = GTM_PANELS[idx];
+  let out = `SERVICE DESIGN LAB — GO-TO-FIELD\nConcept: ${concept}\n${'─'.repeat(48)}\n\n── ${p.name.toUpperCase()} ──\n`;
+  p.entries.forEach(eid => {
+    const inputs = document.querySelectorAll(`#${eid} .entry-input`);
+    [...inputs].forEach((el, i) => { if (el.value.trim()) out += `  ${i+1}. ${el.value.trim()}\n`; });
+  });
+  download(out, `SDLab-GTF-${p.name.replace(/\s+/g,'-')}-${concept.replace(/\s+/g,'-')}.txt`);
 }
 
 function toggleActivity(i, card, name) {
