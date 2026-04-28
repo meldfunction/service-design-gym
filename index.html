@@ -86,10 +86,11 @@
 
   .header-right {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.4rem;
     align-items: center;
     flex-wrap: wrap;
     position: relative;
+    max-width: 100%;
   }
 
   .mode-btn {
@@ -925,7 +926,11 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    header { padding: 1.5rem; }
+    header { padding: 1.25rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .header-right { overflow-x: auto; flex-wrap: nowrap; width: 100%; padding-bottom: 0.25rem; -webkit-overflow-scrolling: touch; }
+    .header-right::-webkit-scrollbar { height: 2px; }
+    .header-right::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); }
+    .mode-btn { flex-shrink: 0; }
     .concept-bar { padding: 0.75rem 1.5rem; gap: 0.75rem; }
     .concept-bar label { display: none; }
     main { padding-left: 1rem; padding-right: 1rem; padding-bottom: 3rem; }
@@ -946,17 +951,22 @@
     .activities-grid { grid-template-columns: 1fr 1fr; }
     footer { padding: 2rem 1.5rem; margin-top: 3rem; }
     .footer-inner { grid-template-columns: 1fr; gap: 1.25rem; }
-    .footer-links { justify-content: flex-start; }
+    .footer-links { justify-content: flex-start; flex-wrap: wrap; }
     .footer-bottom { flex-direction: column; align-items: flex-start; }
     .cycle-diagram svg { width: 320px; height: 320px; }
   }
 
+  @media (max-width: 768px) {
+    .jmap-cells { grid-template-columns: 1fr 1fr; }
+    .jmap-phase-header { grid-template-columns: 80px repeat(2, 1fr); }
+  }
   @media (max-width: 480px) {
-    .header-right { gap: 0.35rem; }
     .mode-btn { padding: 0.38rem 0.6rem; font-size: 0.58rem; }
     .activities-grid { grid-template-columns: 1fr; }
     .concept-input { font-size: 0.92rem; }
     .generate-btn { font-size: 0.62rem; padding: 0.42rem 0.8rem; }
+    .timeline-phase-grid { grid-template-columns: 1fr; }
+    .jmap-cells { grid-template-columns: 1fr; }
   }
   /* ── INTRO VIEW ── */
   .intro-hero {
@@ -1345,19 +1355,6 @@
     text-align: center;
   }
 
-  @media (max-width: 768px) {
-    .intro-hero { grid-template-columns: 1fr; gap: 2rem; }
-    .timeline-phase-grid { grid-template-columns: 1fr 1fr; }
-    .canvas-layout { grid-template-columns: 1fr; }
-    .canvas-diagram { position: static; }
-    .jmap-cells { grid-template-columns: 1fr 1fr; }
-    .jmap-phase-header { grid-template-columns: 80px repeat(2, 1fr); }
-  }
-  @media (max-width: 480px) {
-    .timeline-phase-grid { grid-template-columns: 1fr; }
-    .jmap-cells { grid-template-columns: 1fr; }
-  }
-
   /* ── METHOD MODAL ── */
   .modal-overlay {
     display: none;
@@ -1739,7 +1736,7 @@
           <div class="timeline-stage-tag">Emulate — insights, HMWs</div>
         </div>
       </div>
-      <div class="timeline-phase" onclick="setView('workspace');goToStage(3)">
+      <div class="timeline-phase" onclick="jumpToWorkspace(3)">
         <div class="timeline-phase-icon">⚗️</div>
         <div class="timeline-phase-label">Phase 3</div>
         <div class="timeline-phase-name">Develop &amp; Test</div>
@@ -2969,7 +2966,7 @@
   <hr class="footer-divider">
   <div class="footer-bottom">
     <div class="footer-copy">© 2025 Service Design Lab. Built for practitioners.</div>
-    <div class="footer-method">Framework: <span>Observe → Pattern → Emulate → Prototype → Adapt → Propagate → Go-to-Field</span></div>
+    <div class="footer-method">Framework: <span>Observe → Pattern → Emulate → Prototype → Adapt → Propagate → Go-to-Field → Business Design → CX → Ops</span></div>
   </div>
 </footer>
 
@@ -2983,6 +2980,31 @@ const state = {
   currentView: 'journey',
   selectedActivities: []
 };
+
+// ── CANVAS FIELD MAPS ──
+const BIZ_FIELDS = [
+  { id: 'biz-value',         key: 'value',         label: 'Value Organism' },
+  { id: 'biz-segments',      key: 'segments',      label: 'Habitat Segments' },
+  { id: 'biz-partners',      key: 'partners',      label: 'Mutualist Partners' },
+  { id: 'biz-activities',    key: 'activities',    label: 'Core Capabilities' },
+  { id: 'biz-resources',     key: 'resources',     label: 'Root Resources' },
+  { id: 'biz-channels',      key: 'channels',      label: 'Dispersal Channels' },
+  { id: 'biz-relationships', key: 'relationships', label: 'Symbiotic Bonds' },
+  { id: 'biz-costs',         key: 'costs',         label: 'Energy Costs' },
+  { id: 'biz-revenue',       key: 'revenue',       label: 'Energy Returns' },
+];
+
+const CX_FIELDS = [
+  { id: 'cx-staff',      key: 'staff',      label: 'Staff Ecosystem' },
+  { id: 'cx-process',    key: 'process',    label: 'Process Metabolism' },
+  { id: 'cx-signals',    key: 'signals',    label: 'Distress Signals' },
+  { id: 'cx-adapt',      key: 'adapt',      label: 'Adaptive Capacity' },
+  { id: 'cx-recovery',   key: 'recovery',   label: 'Service Recovery' },
+  { id: 'cx-succession', key: 'succession', label: 'Succession Plan' },
+];
+
+const JMAP_PHASES = ['approach','entry','core','stress','return'];
+const JMAP_ROWS   = ['actions','feelings','friction','backstage','signal'];
 
 // Stage map for export
 const STAGES = [
@@ -3256,29 +3278,39 @@ function renderSummary() {
   const concept = document.getElementById('conceptInput').value || 'No concept set';
   document.getElementById('summary-concept-tag').textContent = concept;
 
-  // Progress SVG
-  const filled = STAGES.filter(s => {
-    if (s.entries.length === 0) return state.selectedActivities.length > 0;
-    return s.entries.some(eid => {
-      const inputs = document.querySelectorAll(`#${eid} .entry-input`);
-      return [...inputs].some(i => i.value.trim());
-    });
-  }).length;
-  const pct = Math.round((filled / 6) * 100);
-  const circumference = 2 * Math.PI * 30;
-  const dash = (pct / 100) * circumference;
+  // Count filled across ALL 10 lifecycle areas
+  const checks = [
+    () => hasContent('entries-0'),
+    () => hasContent('entries-1') || hasContent('entries-2'),
+    () => hasContent('entries-3') || hasContent('entries-4') || !!document.querySelectorAll('#hmw-cards textarea')[0]?.value.trim(),
+    () => hasContent('entries-5'),
+    () => hasContent('entries-6'),
+    () => state.selectedActivities.length > 0,
+    () => hasGTMContent(),
+    () => !!(document.getElementById('biz-value')?.value.trim()),
+    () => !!(document.getElementById('cx-staff')?.value.trim() || document.getElementById('jmap-0-0')?.value.trim()),
+  ];
+  const total  = checks.length;
+  const filled = checks.filter(fn => fn()).length;
+  const pct    = Math.round((filled / total) * 100);
+  const C      = 2 * Math.PI * 30;
+  const dash   = (pct / 100) * C;
+
   document.getElementById('summary-progress').innerHTML = `
-    <div style="display:flex;align-items:center;gap:1.25rem;margin-bottom:0.5rem;">
-      <svg width="80" height="80" viewBox="0 0 80 80">
-        <circle cx="40" cy="40" r="30" fill="none" stroke="#cdc8b8" stroke-width="4"/>
-        <circle cx="40" cy="40" r="30" fill="none" stroke="#3d5c35" stroke-width="4"
-          stroke-dasharray="${dash} ${circumference}" stroke-dashoffset="${circumference * 0.25}"
-          stroke-linecap="round" transform="rotate(-90 40 40)"/>
-        <text x="40" y="44" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="18" fill="#2d2a24">${pct}%</text>
+    <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap;">
+      <svg width="90" height="90" viewBox="0 0 90 90">
+        <circle cx="45" cy="45" r="34" fill="none" stroke="#cdc8b8" stroke-width="5"/>
+        <circle cx="45" cy="45" r="34" fill="none" stroke="#3d5c35" stroke-width="5"
+          stroke-dasharray="${(pct/100)*(2*Math.PI*34).toFixed(1)} ${(2*Math.PI*34).toFixed(1)}"
+          stroke-linecap="round" transform="rotate(-90 45 45)"/>
+        <text x="45" y="50" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="20" fill="#2d2a24">${pct}%</text>
       </svg>
       <div>
-        <div style="font-family:'DM Serif Display',serif;font-size:1.1rem;">${filled} of 6 stages have content</div>
-        <div style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:0.25rem;">Journey progress</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:1.2rem;margin-bottom:0.25rem;">${filled} of ${total} lifecycle areas complete</div>
+        <div style="font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;">Research · Field · Business · CX · Ops</div>
+        <div style="display:flex;gap:0.4rem;margin-top:0.6rem;flex-wrap:wrap;">
+          ${checks.map((fn,i) => `<div style="width:22px;height:6px;border-radius:2px;background:${fn() ? '#3d5c35' : '#cdc8b8'};title='${i+1}'"></div>`).join('')}
+        </div>
       </div>
     </div>
   `;
@@ -3286,12 +3318,10 @@ function renderSummary() {
   const grid = document.getElementById('summary-grid');
   grid.innerHTML = '';
 
-  // Stage 0: Observe
+  // ── Research phases ──
   addSummaryCard(grid, '01 / Observe', 'Field Notes', 'entries-0');
-  // Stage 1: Pattern
   addSummaryCard(grid, '02 / Pattern', 'Observations', 'entries-1');
   addSummaryCard(grid, '02 / Pattern', 'Themes', 'entries-2');
-  // Stage 2: Emulate
   addSummaryCard(grid, '03 / Emulate', 'Insights', 'entries-3');
   addSummaryCard(grid, '03 / Emulate', 'Problem Statements', 'entries-4');
 
@@ -3310,12 +3340,10 @@ function renderSummary() {
   `;
   grid.appendChild(hmwCard);
 
-  // Stage 3: Prototype
   addSummaryCard(grid, '04 / Prototype', 'Service Concepts', 'entries-5');
-  // Stage 4: Adapt
   addSummaryCard(grid, '05 / Adapt', 'Test Plans', 'entries-6');
 
-  // Stage 5: Propagate
+  // Propagate
   const actCard = document.createElement('div');
   actCard.className = 'summary-card';
   actCard.innerHTML = `
@@ -3328,6 +3356,64 @@ function renderSummary() {
     }</div>
   `;
   grid.appendChild(actCard);
+
+  // ── Go-to-Field ──
+  const gtfCard = document.createElement('div');
+  gtfCard.className = 'summary-card';
+  const gtfItems = [];
+  GTM_PANELS.forEach(p => {
+    p.entries.forEach(eid => {
+      document.querySelectorAll(`#${eid} .entry-input`).forEach(el => {
+        if (el.value.trim()) gtfItems.push(el.value.trim());
+      });
+    });
+  });
+  gtfCard.innerHTML = `
+    <div class="summary-card-tag">Go-to-Field</div>
+    <div class="summary-card-title">Field Plan</div>
+    <div class="summary-items">${
+      gtfItems.length
+        ? gtfItems.map(i => `<div class="summary-item">${i}</div>`).join('')
+        : '<div class="summary-empty">No field plan yet</div>'
+    }</div>
+  `;
+  grid.appendChild(gtfCard);
+
+  // ── Business Design ──
+  const bizCard = document.createElement('div');
+  bizCard.className = 'summary-card';
+  const bizItems = BIZ_FIELDS.map(f => {
+    const v = document.getElementById(f.id)?.value?.trim();
+    return v ? `<div class="summary-item"><strong style="font-size:0.7rem;text-transform:uppercase;font-family:'DM Mono',monospace;color:var(--moss)">${f.label}</strong><br>${v}</div>` : '';
+  }).filter(Boolean);
+  bizCard.innerHTML = `
+    <div class="summary-card-tag">Business Design — Metabolic Strategy</div>
+    <div class="summary-card-title">Business Canvas</div>
+    <div class="summary-items">${bizItems.length ? bizItems.join('') : '<div class="summary-empty">Canvas not filled yet</div>'}</div>
+  `;
+  grid.appendChild(bizCard);
+
+  // ── CX / Ops ──
+  const cxCard = document.createElement('div');
+  cxCard.className = 'summary-card';
+  const cxItems = CX_FIELDS.map(f => {
+    const v = document.getElementById(f.id)?.value?.trim();
+    return v ? `<div class="summary-item"><strong style="font-size:0.7rem;text-transform:uppercase;font-family:'DM Mono',monospace;color:var(--moss)">${f.label}</strong><br>${v}</div>` : '';
+  }).filter(Boolean);
+  cxCard.innerHTML = `
+    <div class="summary-card-tag">Habitat Design + Colony Health</div>
+    <div class="summary-card-title">CX + Ops</div>
+    <div class="summary-items">${cxItems.length ? cxItems.join('') : '<div class="summary-empty">CX canvas not filled yet</div>'}</div>
+  `;
+  grid.appendChild(cxCard);
+}
+
+// helpers
+function hasContent(eid) {
+  return [...(document.querySelectorAll(`#${eid} .entry-input`) || [])].some(i => i.value.trim());
+}
+function hasGTMContent() {
+  return GTM_PANELS.some(p => p.entries.some(eid => hasContent(eid)));
 }
 
 function addSummaryCard(grid, tag, title, containerId) {
@@ -3409,7 +3495,51 @@ function exportSummary() {
 }
 
 function exportAll() {
-  exportSummary();
+  const concept = document.getElementById('conceptInput').value || 'Untitled';
+  let out = `SERVICE DESIGN LAB — COMPLETE EXPORT\nConcept: ${concept}\nDate: ${new Date().toLocaleDateString()}\n${'═'.repeat(52)}\n\n`;
+
+  // Research phases
+  out += '1. RESEARCH & DEFINE\n' + '─'.repeat(40) + '\n';
+  for (let i = 0; i <= 5; i++) out += getStageText(i);
+
+  // GTM
+  out += '\n\n2. GO-TO-FIELD\n' + '─'.repeat(40) + '\n';
+  GTM_PANELS.forEach(p => {
+    out += `\n── ${p.name.toUpperCase()} ──\n`;
+    p.entries.forEach(eid => {
+      document.querySelectorAll(`#${eid} .entry-input`).forEach((el, i) => {
+        if (el.value.trim()) out += `  ${i+1}. ${el.value.trim()}\n`;
+      });
+    });
+  });
+
+  // Business Design
+  out += '\n\n3. BUSINESS DESIGN — METABOLIC STRATEGY\n' + '─'.repeat(40) + '\n';
+  BIZ_FIELDS.forEach(f => {
+    const v = document.getElementById(f.id)?.value?.trim();
+    if (v) out += `\n${f.label.toUpperCase()}\n${v}\n`;
+  });
+
+  // CX + Journey map
+  out += '\n\n4. HABITAT DESIGN — CX JOURNEY MAP\n' + '─'.repeat(40) + '\n';
+  const phaseNames = ['Approach','Entry','Core Use','Stress Test','Return'];
+  const rowNames   = ['What they do','How it feels','Friction','Backstage','Health signal'];
+  JMAP_PHASES.forEach((ph, pi) => {
+    out += `\n── ${phaseNames[pi]} ──\n`;
+    JMAP_ROWS.forEach((row, ri) => {
+      const v = document.getElementById(`jmap-${ri}-${pi}`)?.value?.trim();
+      if (v) out += `  ${rowNames[ri]}: ${v}\n`;
+    });
+  });
+
+  // Ops
+  out += '\n\n5. COLONY HEALTH — SERVICE OPS\n' + '─'.repeat(40) + '\n';
+  CX_FIELDS.forEach(f => {
+    const v = document.getElementById(f.id)?.value?.trim();
+    if (v) out += `\n${f.label.toUpperCase()}\n${v}\n`;
+  });
+
+  download(out, `SDLab-Complete-${concept.replace(/\s+/g,'-')}-${Date.now()}.txt`);
 }
 
 function download(text, filename) {
@@ -3422,18 +3552,57 @@ function download(text, filename) {
 
 // ── RESET ──
 function resetAll() {
-  if (!confirm('Reset all content? This cannot be undone.')) return;
+  if (!confirm('Reset all content across all stages? This cannot be undone.')) return;
+
+  // Concept
   document.getElementById('conceptInput').value = '';
+
+  // Research entries
   ['entries-0','entries-1','entries-2','entries-3','entries-4','entries-5','entries-6'].forEach(id => {
     const c = document.getElementById(id);
     if (c) c.innerHTML = '';
   });
   document.getElementById('hmw-cards').innerHTML = '';
+
+  // Activities
   state.selectedActivities = [];
   document.querySelectorAll('.activity-card').forEach(c => c.classList.remove('selected'));
   updateSelectedActivities();
+
+  // GTM entries
+  ['gtm-entries-0a','gtm-entries-0b','gtm-entries-1a','gtm-entries-1b',
+   'gtm-entries-2a','gtm-entries-2b','gtm-entries-3a','gtm-entries-3b',
+   'gtm-entries-4a','gtm-entries-4b','gtm-entries-5a','gtm-entries-5b'].forEach(id => {
+    const c = document.getElementById(id);
+    if (c) c.innerHTML = '';
+  });
+
+  // Business Design canvas
+  BIZ_FIELDS.forEach(f => {
+    const el = document.getElementById(f.id);
+    if (el) { el.value = ''; el.classList.remove('ai-suggested'); }
+  });
+
+  // CX / Ops fields
+  CX_FIELDS.forEach(f => {
+    const el = document.getElementById(f.id);
+    if (el) { el.value = ''; el.classList.remove('ai-suggested'); }
+  });
+
+  // Journey map
+  JMAP_PHASES.forEach((ph, pi) => {
+    JMAP_ROWS.forEach((row, ri) => {
+      const el = document.getElementById(`jmap-${ri}-${pi}`);
+      if (el) el.value = '';
+    });
+  });
+
+  // Re-init with empty entries
   ['entries-0','entries-1','entries-2','entries-3','entries-4','entries-5','entries-6'].forEach(id => addEntry(id));
   addHMW();
+  ['gtm-entries-0a','gtm-entries-0b','gtm-entries-1a','gtm-entries-1b',
+   'gtm-entries-2a','gtm-entries-2b','gtm-entries-3a','gtm-entries-3b',
+   'gtm-entries-4a','gtm-entries-4b','gtm-entries-5a','gtm-entries-5b'].forEach(id => addEntry(id));
 }
 
 // ── AI GENERATION ──
@@ -3563,30 +3732,6 @@ Rules:
 }
 
 // ── CANVAS AI GENERATION ──
-const BIZ_FIELDS = [
-  { id: 'biz-value',         key: 'value',         label: 'Value Organism' },
-  { id: 'biz-segments',      key: 'segments',      label: 'Habitat Segments' },
-  { id: 'biz-partners',      key: 'partners',      label: 'Mutualist Partners' },
-  { id: 'biz-activities',    key: 'activities',    label: 'Core Capabilities' },
-  { id: 'biz-resources',     key: 'resources',     label: 'Root Resources' },
-  { id: 'biz-channels',      key: 'channels',      label: 'Dispersal Channels' },
-  { id: 'biz-relationships', key: 'relationships', label: 'Symbiotic Bonds' },
-  { id: 'biz-costs',         key: 'costs',         label: 'Energy Costs' },
-  { id: 'biz-revenue',       key: 'revenue',       label: 'Energy Returns' },
-];
-
-const CX_FIELDS = [
-  { id: 'cx-staff',      key: 'staff',      label: 'Staff Ecosystem' },
-  { id: 'cx-process',    key: 'process',    label: 'Process Metabolism' },
-  { id: 'cx-signals',    key: 'signals',    label: 'Distress Signals' },
-  { id: 'cx-adapt',      key: 'adapt',      label: 'Adaptive Capacity' },
-  { id: 'cx-recovery',   key: 'recovery',   label: 'Service Recovery' },
-  { id: 'cx-succession', key: 'succession', label: 'Succession Plan' },
-];
-
-const JMAP_PHASES = ['approach','entry','core','stress','return'];
-const JMAP_ROWS   = ['actions','feelings','friction','backstage','signal'];
-
 async function generateCanvas(type) {
   const concept = document.getElementById('conceptInput').value.trim();
   if (!concept) { alert('Enter a working concept in the bar at the top first.'); return; }
