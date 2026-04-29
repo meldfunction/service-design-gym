@@ -1816,6 +1816,7 @@
     <button class="mode-btn" onclick="setView('gtm')">⟶ Field</button>
     <button class="mode-btn" onclick="setView('bizdesign')">◈ Business</button>
     <button class="mode-btn" onclick="setView('cx')">❋ CX</button>
+    <button class="mode-btn" onclick="setView('commons')">⌾ Commons</button>
     <button class="mode-btn" onclick="setView('summary')">⊞ Summary</button>
   </div>
 </header>
@@ -1947,11 +1948,24 @@
         <div class="intro-body">
           <p>Most design frameworks are linear: research → define → ideate → deliver. But living systems don't work that way. They observe continuously, find recurring patterns, emulate what works, run small experiments, read feedback signals, propagate what takes root, and then cycle back — because conditions always change.</p>
           <p style="margin-top:0.75rem;">This tool guides you through the full lifecycle: from the naturalist's first field notes through to market deployment, customer experience, and long-term ecosystem health. At every stage it names both the <strong style="color:var(--moss)">biomimicry logic</strong> and the <span style="font-family:'DM Mono',monospace;font-size:0.8em;background:var(--parchment);padding:0.1rem 0.3rem;border:1px solid var(--border)">legacy SD/BD/CX equivalent</span> so you can move between languages fluently.</p>
+          <p style="margin-top:0.75rem;">The practitioner's role here is <strong>accompanist, not architect</strong> — you are helping a system find its own next form, not installing a solution. This matters because the same framework works for service design, community-led product development, and organisational change. The biology is the same. The questions are the same. What changes is who you are accompanying and what kind of threshold they are crossing.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:1rem;">
+            <div style="border:1px solid var(--border);border-top:3px solid var(--moss);border-radius:3px;padding:0.75rem;">
+              <div style="font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--moss);margin-bottom:0.35rem;">Formation track</div>
+              <div style="font-size:0.8rem;line-height:1.55;color:var(--stone);">Develop your <em>way of being</em> as a practitioner — inquiry discipline, pattern recognition, comfort with not-knowing. The framework as a practice, not a process.</div>
+            </div>
+            <div style="border:1px solid var(--border);border-top:3px solid var(--amber);border-radius:3px;padding:0.75rem;">
+              <div style="font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:0.35rem;">Method fluency track</div>
+              <div style="font-size:0.8rem;line-height:1.55;color:var(--stone);">Build command of specific tools — research methods, canvas structures, facilitation moves — so you can reach for the right instrument without thinking about it.</div>
+            </div>
+          </div>
         </div>
         <div class="intro-cta">
           <button class="cta-primary" onclick="setView('timeline')">See the full lifecycle →</button>
           <button class="cta-secondary" onclick="setView('workspace')">Jump to workspace</button>
+          <button class="cta-secondary" onclick="setMode('product')" id="productModeBtn" title="Switch to Community-Led Product Design framing">⬡ Product mode</button>
         </div>
+        <div id="modeIndicator" style="display:none;margin-top:0.5rem;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;color:var(--amber);"></div>
       </div>
       <div class="intro-principles">
         <div style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Core Principles</div>
@@ -1990,6 +2004,13 @@
           <div class="intro-principle-legacy">Legacy: Business design / CX strategy / service ops</div>
           <div style="font-size:0.78rem;color:var(--muted);margin-top:0.4rem;line-height:1.55;">A service is not a product. It is a relationship between an organism and its habitat. The business model, the customer experience, and the operational infrastructure are all part of the same living system.</div>
         </div>
+
+        <div class="intro-principle" style="border-top:2px solid var(--moss);margin-top:0.5rem;padding-top:0.75rem;">
+          <div class="intro-principle-label" style="color:var(--moss)">Principle 06</div>
+          <div class="intro-principle-nature">Return to the commons — plant where it can keep growing</div>
+          <div class="intro-principle-legacy">Legacy: Sustainability / commons governance / knowledge transfer</div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-top:0.4rem;line-height:1.55;">The endpoint of good design is not market capture — it is ecosystem enrichment. Ask where your work can seed knowledge, build shared infrastructure, or enable others to carry the pattern forward without you.</div>
+        </div>
       </div>
     </div>
 
@@ -2027,7 +2048,20 @@
           <div class="intro-step-title">Cycle back</div>
           <div class="intro-step-desc">Living systems don't stop at delivery. New field signals should feed back into your Observe stage. Use the Timeline to track where you are.</div>
         </div>
+        <div class="intro-step" style="border-top:2px solid var(--moss);">
+          <div class="intro-step-num" style="background:var(--moss);">10</div>
+          <div class="intro-step-title">Return to the commons</div>
+          <div class="intro-step-desc">After deployment: where does this learning belong? Open-source a method, seed a community of practice, publish findings, or hand the infrastructure to those it serves. <button onclick="setView('commons')" style="background:none;border:none;color:var(--moss);font-family:inherit;font-size:0.82rem;cursor:pointer;text-decoration:underline;padding:0;">Phase 10 →</button></div>
+        </div>
       </div>
+    </div>
+    <!-- Limi-HQ docs link -->
+    <div style="margin-top:2rem;padding:1rem 1.5rem;background:var(--parchment);border:1px solid var(--border);border-left:3px solid var(--moss);border-radius:3px;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+      <div style="flex:1;min-width:200px;">
+        <div style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--moss);margin-bottom:0.25rem;">Field Guide</div>
+        <div style="font-size:0.88rem;line-height:1.5;color:var(--soil);">New to service design or this framework? Read the <strong>Limicelia Service Design 101</strong> — the principles, vocabulary, and why this model works differently from conventional consulting.</div>
+      </div>
+      <a href="https://meldfunction.github.io/limi-hq/index.html" target="_blank" rel="noopener" style="display:inline-block;background:var(--moss);color:var(--paper);font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.08em;padding:0.5rem 1rem;border-radius:2px;text-decoration:none;white-space:nowrap;">Open Field Guide →</a>
     </div>
   </div>
 
@@ -3486,6 +3520,93 @@
     </div>
   </div>
 
+  <!-- ══ PHASE 10: COMMONS RETURN ══ -->
+  <div class="view" id="view-commons">
+    <div style="max-width:860px;margin:0 auto;padding:2rem 0 4rem;">
+
+      <div style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--moss);margin-bottom:0.5rem;">Phase 10</div>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:3rem;letter-spacing:0.04em;line-height:1;margin-bottom:0.5rem;">Commons Return</h2>
+      <div style="font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--stone);margin-bottom:0.25rem;font-style:italic;">Where to plant what you've learned</div>
+      <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--muted);margin-bottom:2rem;">Legacy: Sustainability planning / knowledge commons / ecosystem stewardship</div>
+
+      <div style="background:var(--parchment);border-left:3px solid var(--moss);padding:1rem 1.25rem;margin-bottom:2rem;font-size:0.88rem;line-height:1.65;color:var(--stone);">
+        In living ecosystems, organisms don't just consume — they contribute. A forest adds soil. A river shapes its banks. Fungi create networks others inherit. Phase 10 asks: once your service is running, what does it give back to the ecosystem that made it possible? Where can the learning live independently of you?
+      </div>
+
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.05em;margin-bottom:1rem;color:var(--bark);">Three Planting Models</h3>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2.5rem;">
+        <div style="border:1px solid var(--border);border-top:3px solid var(--moss);border-radius:3px;padding:1rem;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.05em;color:var(--moss);margin-bottom:0.35rem;">Open Knowledge</div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:0.6rem;">What you publish</div>
+          <ul style="font-size:0.8rem;line-height:1.65;color:var(--stone);padding-left:1.1rem;">
+            <li>Method guides released openly</li>
+            <li>Research findings published</li>
+            <li>Case studies contributed to field</li>
+            <li>Tools built for reuse</li>
+            <li>Data returned to community</li>
+          </ul>
+          <div style="margin-top:0.75rem;font-size:0.78rem;color:var(--muted);font-style:italic;">Carries the pattern forward in form.</div>
+        </div>
+        <div style="border:1px solid var(--border);border-top:3px solid var(--amber);border-radius:3px;padding:1rem;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.05em;color:var(--amber);margin-bottom:0.35rem;">Community of Practice</div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:0.6rem;">Who you gather</div>
+          <ul style="font-size:0.8rem;line-height:1.65;color:var(--stone);padding-left:1.1rem;">
+            <li>Peer learning circles for practitioners</li>
+            <li>Shared frameworks and vocabulary</li>
+            <li>Cohort programs seeded by learning</li>
+            <li>Network of practitioners using the model</li>
+            <li>Mentorship infrastructure</li>
+          </ul>
+          <div style="margin-top:0.75rem;font-size:0.78rem;color:var(--muted);font-style:italic;">Carries the pattern forward in people.</div>
+        </div>
+        <div style="border:1px solid var(--border);border-top:3px solid var(--clay);border-radius:3px;padding:1rem;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.05em;color:var(--clay);margin-bottom:0.35rem;">Governed Infrastructure</div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:0.6rem;">What you hand over</div>
+          <ul style="font-size:0.8rem;line-height:1.65;color:var(--stone);padding-left:1.1rem;">
+            <li>Service transferred to community ownership</li>
+            <li>Cooperative governance model adopted</li>
+            <li>Shared platform or protocol maintained collectively</li>
+            <li>Commons fund or grant mechanism</li>
+            <li>Exit designed as transition, not abandonment</li>
+          </ul>
+          <div style="margin-top:0.75rem;font-size:0.78rem;color:var(--muted);font-style:italic;">Carries the pattern forward in structure.</div>
+        </div>
+      </div>
+
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.05em;margin-bottom:1rem;color:var(--bark);">Commons Return Questions</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.65rem;margin-bottom:2.5rem;">
+        <div style="background:rgba(61,92,53,0.07);border-left:3px solid var(--moss);padding:0.65rem 0.85rem;border-radius:2px;font-size:0.83rem;line-height:1.55;color:var(--soil);">Who else could use this model — and what would they need to take it without you?</div>
+        <div style="background:rgba(61,92,53,0.07);border-left:3px solid var(--moss);padding:0.65rem 0.85rem;border-radius:2px;font-size:0.83rem;line-height:1.55;color:var(--soil);">What knowledge is currently locked inside this project that the field needs?</div>
+        <div style="background:rgba(196,124,26,0.08);border-left:3px solid var(--amber);padding:0.65rem 0.85rem;border-radius:2px;font-size:0.83rem;line-height:1.55;color:var(--soil);">If you stepped back in two years, what infrastructure would make this self-sustaining?</div>
+        <div style="background:rgba(196,124,26,0.08);border-left:3px solid var(--amber);padding:0.65rem 0.85rem;border-radius:2px;font-size:0.83rem;line-height:1.55;color:var(--soil);">What community or network should be stewarding this — and are they ready?</div>
+        <div style="background:rgba(158,74,42,0.07);border-left:3px solid var(--clay);padding:0.65rem 0.85rem;border-radius:2px;font-size:0.83rem;line-height:1.55;color:var(--soil);">What would it mean for this project to succeed so completely that it no longer needs its originators?</div>
+        <div style="background:rgba(158,74,42,0.07);border-left:3px solid var(--clay);padding:0.65rem 0.85rem;border-radius:2px;font-size:0.83rem;line-height:1.55;color:var(--soil);">How do you design exit as an act of care rather than departure?</div>
+      </div>
+
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.05em;margin-bottom:0.75rem;color:var(--bark);">Your Commons Plan</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.5rem;">
+        <div>
+          <label style="font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--moss);display:block;margin-bottom:0.3rem;">What will you open?</label>
+          <textarea rows="4" placeholder="Methods, tools, data, research findings, frameworks…" style="width:100%;background:var(--parchment);border:1px solid var(--border);padding:0.5rem 0.65rem;font-family:'Instrument Sans',sans-serif;font-size:0.85rem;line-height:1.5;border-radius:2px;resize:vertical;" oninput="saveCommonsField('open',this.value)" id="commons-open"></textarea>
+        </div>
+        <div>
+          <label style="font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:0.3rem;">Who will you gather?</label>
+          <textarea rows="4" placeholder="Peer circle, cohort, community of practice, network…" style="width:100%;background:var(--parchment);border:1px solid var(--border);padding:0.5rem 0.65rem;font-family:'Instrument Sans',sans-serif;font-size:0.85rem;line-height:1.5;border-radius:2px;resize:vertical;" oninput="saveCommonsField('gather',this.value)" id="commons-gather"></textarea>
+        </div>
+        <div>
+          <label style="font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--clay);display:block;margin-bottom:0.3rem;">What will you hand over?</label>
+          <textarea rows="4" placeholder="Governance, infrastructure, platform, fund…" style="width:100%;background:var(--parchment);border:1px solid var(--border);padding:0.5rem 0.65rem;font-family:'Instrument Sans',sans-serif;font-size:0.85rem;line-height:1.5;border-radius:2px;resize:vertical;" oninput="saveCommonsField('handover',this.value)" id="commons-handover"></textarea>
+        </div>
+        <div>
+          <label style="font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--stone);display:block;margin-bottom:0.3rem;">By when / milestones</label>
+          <textarea rows="4" placeholder="Transition timeline, readiness conditions, handover milestones…" style="width:100%;background:var(--parchment);border:1px solid var(--border);padding:0.5rem 0.65rem;font-family:'Instrument Sans',sans-serif;font-size:0.85rem;line-height:1.5;border-radius:2px;resize:vertical;" oninput="saveCommonsField('timeline',this.value)" id="commons-timeline"></textarea>
+        </div>
+      </div>
+      <button onclick="exportCommons()" style="background:var(--moss);color:var(--paper);border:none;font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.08em;padding:0.55rem 1.25rem;cursor:pointer;border-radius:2px;">↓ Export Commons Plan</button>
+    </div>
+  </div>
+
   <!-- ══ SUMMARY VIEW ══ -->
   <div class="view" id="view-summary">
     <div class="example-header" style="flex-wrap:wrap; gap:0.75rem;">
@@ -3820,6 +3941,115 @@ const activities = [
   { icon: '🧠', nature: 'Distributed sensing', name: 'Signal Network', desc: 'Design the nervous system: who senses what, where signals flow, what responds. Turn noise into intelligence.' },
 ];
 
+// ── PRODUCT MODE ──
+const PRODUCT_OVERRIDES = {
+  intro: {
+    headline: 'Community-Led<br>Product<br><span>Design</span>',
+    lead: 'Products built with communities — not for them — are fundamentally different. This framework adapts the living systems model for participatory, community-governed product development.',
+    track1: { label: 'Formation track', text: 'Develop your capacity for genuine co-creation — understanding power dynamics, building trust before design, holding space for community agency throughout.' },
+    track2: { label: 'Method fluency', text: 'Master participatory design methods: community governance structures, co-design facilitation, decision-making that keeps authority with the community.' },
+  },
+  stageNames: ['Sense','Interpret','Re-frame','Build together','Test with','Release','Govern','Sustain','Commons Return'],
+  panelTags: {
+    0: 'Product: Community sensing — listen before you define',
+    1: 'Product: Collective synthesis — what does the community see?',
+    2: 'Product: Shared framing — co-define the problem space',
+    3: 'Product: Participatory prototyping — build together',
+    4: 'Product: Community testing — learn with, not from',
+    5: 'Product: Release & governance hand-off',
+  }
+};
+
+let currentMode = 'service';
+
+function setMode(mode) {
+  currentMode = mode;
+  const indicator = document.getElementById('modeIndicator');
+  const btn       = document.getElementById('productModeBtn');
+  if (mode === 'product') {
+    indicator.style.display = 'block';
+    indicator.textContent   = '⬡ Community-Led Product Design mode active — click again to return to Service mode';
+    btn.textContent         = '✦ Service mode';
+    btn.setAttribute('onclick', "setMode('service')");
+    // Update panel tags
+    Object.entries(PRODUCT_OVERRIDES.panelTags).forEach(([idx, tag]) => {
+      const p = document.querySelector(`#panel-${idx} .panel-tag`);
+      if (p) { p._origTag = p._origTag || p.textContent; p.textContent = tag; }
+    });
+    // Update HMW placeholder
+    document.querySelectorAll('#hmw-cards .entry-input').forEach(el => {
+      el._origPH = el._origPH || el.placeholder;
+      el.placeholder = '…enable [community / who] to [outcome they defined] without [barrier they named]?';
+    });
+  } else {
+    indicator.style.display = 'none';
+    btn.textContent         = '⬡ Product mode';
+    btn.setAttribute('onclick', "setMode('product')");
+    Object.entries(PRODUCT_OVERRIDES.panelTags).forEach(([idx]) => {
+      const p = document.querySelector(`#panel-${idx} .panel-tag`);
+      if (p && p._origTag) p.textContent = p._origTag;
+    });
+    document.querySelectorAll('#hmw-cards .entry-input').forEach(el => {
+      if (el._origPH) el.placeholder = el._origPH;
+    });
+  }
+  localStorage.setItem('sdlab-mode', mode);
+}
+
+function initMode() {
+  const saved = localStorage.getItem('sdlab-mode');
+  if (saved === 'product') setMode('product');
+}
+
+// ── COMMONS PLAN ──
+function saveCommonsField(key, val) {
+  const saved = JSON.parse(localStorage.getItem('sdlab-commons') || '{}');
+  saved[key] = val;
+  localStorage.setItem('sdlab-commons', JSON.stringify(saved));
+}
+
+function loadCommonsFields() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('sdlab-commons') || '{}');
+    ['open','gather','handover','timeline'].forEach(k => {
+      const el = document.getElementById('commons-' + k);
+      if (el && saved[k]) el.value = saved[k];
+    });
+  } catch(e) {}
+}
+
+function exportCommons() {
+  const saved = JSON.parse(localStorage.getItem('sdlab-commons') || '{}');
+  const eco   = JSON.parse(localStorage.getItem('sdlab-ecology') || '{}');
+  const lines = [
+    `# Commons Return Plan — ${state.concept || 'Untitled'}`,
+    `Exported: ${new Date().toLocaleString()}`,
+    '',
+    eco.who ? `**Problem Ecology / WHO**: ${eco.who}` : '',
+    '',
+    '## Three Planting Models',
+    '',
+    '### Open Knowledge — What you will publish',
+    saved.open || '(not yet defined)',
+    '',
+    '### Community of Practice — Who you will gather',
+    saved.gather || '(not yet defined)',
+    '',
+    '### Governed Infrastructure — What you will hand over',
+    saved.handover || '(not yet defined)',
+    '',
+    '### Milestones & Timeline',
+    saved.timeline || '(not yet defined)',
+  ].filter(l => l !== '');
+  const blob = new Blob([lines.join('\n')], { type: 'text/markdown' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = `commons-plan-${Date.now()}.md`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 // ── INIT ──
 document.addEventListener('DOMContentLoaded', () => {
   ['entries-0','entries-1','entries-2','entries-3','entries-4','entries-5','entries-6'].forEach(id => addEntry(id));
@@ -3833,6 +4063,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initEcology();
   loadLog();
   syncLogStage();
+  // Product mode + Commons plan
+  initMode();
+  loadCommonsFields();
 });
 
 // ── VIEW CONTROL ──
@@ -3840,7 +4073,7 @@ function setView(v) {
   document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
   document.getElementById('view-' + v).classList.add('active');
   document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-  const map = { intro:0, timeline:1, journey:2, workspace:3, gtm:4, bizdesign:5, cx:6, summary:7 };
+  const map = { intro:0, timeline:1, journey:2, workspace:3, gtm:4, bizdesign:5, cx:6, commons:7, summary:8 };
   if (map[v] !== undefined) document.querySelectorAll('.mode-btn')[map[v]].classList.add('active');
   state.currentView = v;
   if (v === 'summary') renderSummary();
@@ -3912,14 +4145,18 @@ function addHMW() {
   card.className = 'hmw-card';
   card.id = id;
   card.innerHTML = `
+    <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.45rem;">
+      <span style="font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap;">Audience</span>
+      <input type="text" placeholder="Who specifically is this question for? (one real person / role)" style="flex:1;border:none;border-bottom:1px solid var(--border);background:transparent;font-family:'Instrument Sans',sans-serif;font-size:0.85rem;padding:0.15rem 0;color:var(--soil);outline:none;" />
+    </div>
     <div class="hmw-prefix">How might we… </div>
-    <textarea class="entry-input" rows="2" placeholder="…design [service] so that [who] can [outcome] without [obstacle]?" style="font-family:'DM Serif Display',serif;font-size:1.05rem;border:none;border-bottom:1px solid var(--border);padding:0.25rem 0;background:transparent;"></textarea>
+    <textarea class="entry-input" rows="2" placeholder="…design [service] so that [audience above] can [outcome] without [obstacle]?" style="font-family:'DM Serif Display',serif;font-size:1.05rem;border:none;border-bottom:1px solid var(--border);padding:0.25rem 0;background:transparent;"></textarea>
     <div class="hmw-quality">
+      <div class="quality-check" onclick="this.classList.toggle('checked')">✓ Audience named</div>
       <div class="quality-check" onclick="this.classList.toggle('checked')">✓ Solution-neutral</div>
       <div class="quality-check" onclick="this.classList.toggle('checked')">✓ Positive framing</div>
       <div class="quality-check" onclick="this.classList.toggle('checked')">✓ Insight-based</div>
       <div class="quality-check" onclick="this.classList.toggle('checked')">✓ Right scope</div>
-      <div class="quality-check" onclick="this.classList.toggle('checked')">✓ Generative</div>
     </div>
     <button class="remove-btn" style="float:right;margin-top:-1rem" onclick="document.getElementById('${id}').remove()">× remove</button>
   `;
