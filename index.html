@@ -1832,7 +1832,13 @@
       btn.textContent = '⬡ Sign in to push bets';
       btn.style.color = 'var(--amber-light)';
       btn.onclick = () => signInWithPopup(auth, new GoogleAuthProvider())
-        .catch(e => console.warn('Sign-in cancelled:', e.message));
+        .catch(e => {
+          console.warn('Sign-in cancelled:', e.message);
+          if (e.code === 'auth/requests-from-referer-are-blocked') {
+            window.showToast && window.showToast(
+              'OAuth domain not yet authorized — add meldfunction.github.io to GCP OAuth client.', false);
+          }
+        });
     }
   });
 </script>
